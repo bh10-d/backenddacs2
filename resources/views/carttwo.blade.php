@@ -31,10 +31,7 @@
     <form action="">
         @csrf
         <tbody>
-            @php
-            echo print_r(Session::get('cart'))
-
-            @endphp
+            
 
             @php $total = 0 @endphp
             @if(Session::get('cart'))
@@ -114,11 +111,12 @@
         console.log('sub-total: ', subtotal);
         console.log('price: ', price);
         $.ajax({
-            url: "{{ url('/show-cart-ajax') }}",
-            method: "get",
+            url: "{{ url('/update-cart-ajax') }}",
+            method: "post",
             data: {
                 _token: _token,
                 'id': $(this).parents("tr").attr("data-id"),
+                'qty': qty
             },
             success: function(response) {
                 test.html(subtotal);
@@ -148,6 +146,7 @@
             data: {
                 _token: _token,
                 'id': $(this).parents("tr").attr("data-id"),
+                'qty': qty
             },
             success: function(response) {
                 test.html(subtotal);

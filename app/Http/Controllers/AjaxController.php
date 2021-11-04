@@ -82,75 +82,28 @@ class AjaxController extends Controller
         $cart = Session::get('cart');
         $is_available = 0;
         $quantity = 0;
-        $count = 1;
+        
 
-
-        if ($cart==true) {
-            // for($i=0;$i<count($cart);$i++){
-            //     if ($cart[$i]['product_id'] == $data['cart_product_id']) {
-            //         $is_available++;
-            //         $quantity++;
-            //         $count = $cart[$i]['product_qty'];
-            //         $quantity += $count;
-            //     }
-            //     //
-            //     // if($is_available != 0){
-            //     if ($cart[$i]['product_id'] == $data['cart_product_id']) {
-            //         $cart[$i]['product_qty'] = $quantity;
-            //         $cart[$i]['test'] = $data['cart_product_id'];
-            //     }else { //$cart[$key]['product_id']!=$data['cart_product_id']
-            //         if(array_search($data['cart_product_id'],$cart)==null){
-            //             $cart[] = array(
-            //                 'session_id' => $session_id,
-            //                 'product_title' => $data['cart_product_title'],
-            //                 'product_id' => $data['cart_product_id'],
-            //                 'product_qty' => $data['cart_product_qty'],
-            //                 'product_price' => $data['cart_product_price'],
-            //                 'test' => 'if: so luong phan tu cua mang: ' . count($cart) + 1
-            //             );
-            //             Session::put('cart', $cart);
-            //         }
-            //     }
-            // }
-            foreach ($cart as $key => $val) {
-                if ($val['product_id'] == $data['cart_product_id']) {
+        if($cart == true){
+            foreach($cart as $key => $value){
+                if($data['cart_product_id'] == $value['product_id']){
                     $is_available++;
-                    $quantity++;
-                    $count = $cart[$key]['product_qty'];
-                    $quantity += $count;
-                    $cart[$key]['product_qty'] = $quantity;
-                    $cart[$key]['test'] = $data['cart_product_id'];
+                    $cart[$key]['product_qty']++;
                 }
-                
-                //
-                if($is_available == 0){
-                
-                    $cart[] = array(
-                        'session_id' => $session_id,
-                        'product_title' => $data['cart_product_title'],
-                        'product_id' => $data['cart_product_id'],
-                        'product_qty' => $data['cart_product_qty'],
-                        'product_price' => $data['cart_product_price'],
-                        'test' => 'if: so luong phan tu cua mang: ' . count($cart) + 1
-                    );
-                    Session::put('cart', $cart);
-                
-            }}
-            //
-            //
-            // if($is_available != 0){
-            //     $cart[] = array(
-            //         'session_id' => $session_id,
-            //         'product_title' => $data['cart_product_title'],
-            //         'product_id' => $data['cart_product_id'],
-            //         // 'product_image' => $data['cart_product_title'],
-            //         'product_qty' => $quantity,
-            //         'product_price' => $data['cart_product_price'],
-            //         'test'=>'if: so luong phan tu cua mang: '.count($cart)+1
-            //     );
-            //     Session::put('cart',$cart);
-            // }
-        } else {
+            }
+            if($is_available==0){
+                $cart[] = array(
+                    'session_id' => $session_id,
+                    'product_title' => $data['cart_product_title'],
+                    'product_id' => $data['cart_product_id'],
+                    // 'product_image' => $data['cart_product_title'],
+                    'product_qty' => $data['cart_product_qty'],
+                    'product_price' => $data['cart_product_price'],
+                    'test' => 'them product nhung la laan 2 tro di'
+                );
+            }
+
+        }else{
             $cart[] = array(
                 'session_id' => $session_id,
                 'product_title' => $data['cart_product_title'],
@@ -161,15 +114,6 @@ class AjaxController extends Controller
                 'test' => 'session nay cap nhat lai tu dau o else'
             );
         }
-        
-        // $cart[] = array(
-        //             'session_id' => $session_id,
-        //             'product_title' => $data['cart_product_title'],
-        //             'product_id' => $data['cart_product_id'],
-        //             // 'product_image' => $data['cart_product_title'],
-        //             'product_qty' => $data['cart_product_qty'],
-        //             'product_price' => $data['cart_product_price']
-        //         );
 
         Session::put('cart', $cart);
         // Session::forget('cart');
@@ -179,22 +123,17 @@ class AjaxController extends Controller
     {
         $data = $request->all();
         $cart = Session::get('cart');
-        // if($cart == true){
-        //     foreach($data['cart_product_qty'] as $key => $qty){
-        //         foreach($cart as $session => $val) {
-        //             if($val['session_id']==$key){
-        //                 $cart[$session]['product_qty'] = $qty;
-        //             }
-        //         }
+        $is_available_update = 0;
 
-        //     }
-        //     Session::put('cart',$cart);
-        // }
-        echo $data;
-        echo $cart;
+        foreach($cart as $key => $value){
+            if($data['id'] == $value['product_id']){
+                $is_available_update++;
+                $cart[$key]['product_qty'] = $data['qty'];
+            }
+        }
+        Session::put('cart',$cart);
+        Session::save();
 
-
-        return view('test');
     }
 
 
