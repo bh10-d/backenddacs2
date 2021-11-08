@@ -2,21 +2,16 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <link rel="stylesheet" href="{{asset('css/login.css')}}">
-    <link rel="shortcut icon" href="image/logo.png" type="image/x-icon">
-    <title>Tạp hóa công nghệ</title>
+    <link rel="stylesheet" href="{{asset('css/style1.css')}}">
 </head>
 
 <body>
     <div class="header__wrap"><!--edit-->
         <div class="header__wrap--p1"><!--edit-->
             <div class="header__wrap--p1e">
-                <a href="" class="header__logo"><img class="logo" src="image/logo.png" alt=""></a>
+                <a href="{{ url('/') }}" class="header__logo"><img class="logo" src="{{asset('image/logo.png')}}" alt="logo"></a>
                 <div class="header__search"><!--edit-->
                     <div class="header__search--list">
                         <div class="header__search-droplist">
@@ -40,10 +35,28 @@
                     <span>113 113</span>
                 </p>
                 <div class="header__account">
-                    <p><i class="far fa-user"></i> Tài khoản</p>
+                    <p>
+                        <i class="far fa-user"></i>
+                        @if(Auth::user()==null)
+                        {{ __('Tài khoản') }}
+                        @else
+                        <p>Xin chào: {{Auth::user()->username}}</p>
+                        @endif
+                    </p>
                     <div class="header__account--option">
-                        <a href="login.html">Đăng nhập</a>
-                        <a href="signup.html">Đăng kí</a>
+                        @guest
+                            <p><a style="text-decoration:none;font-weight: 500;" href="{{ route('login') }}">Đăng nhập</a></p>
+                            <p><a style="text-decoration:none;font-weight: 500;" href="{{ route('register') }}">Đăng kí</a></p>
+                        @else
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                {{ __('Đăng xuất') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        @endguest
                     </div>
                 </div>
                 <div class="header__cart">
@@ -54,7 +67,7 @@
                     <div class="header__cart--list">
                         <form action="">
                             <div class="header__cart--item">
-                                <img src="image/iphone.png" alt="">
+                                <img src="{{ asset('image/iphone.png') }}" alt="">
                                 <div class="item--info">
                                     <span class="item-name">iPhone 12 Pro Max(512GB)</span>
                                     <span class="item--price">35.990.000đ</span>
@@ -93,8 +106,13 @@
                         <div class="user__info--table">
                             <span><img src="image/logo.png" style="width:40px;height:40px;" alt="logo"></span>
                             <div style="display:block; width:240px; height:20px">
-                                <p>Xin chào: Lorem ipsum dolor sirendis fugiat sint quas provident.</p>
-                                <p>User 1</p>
+                            @guest
+                                <p><a style="text-decoration:none;font-weight: 500; color: white;" href="{{ route('login') }}">Đăng nhập</a></p>
+                                <p><a style="text-decoration:none;font-weight: 500; color: white;" href="{{ route('register') }}">Đăng kí</a></p>
+                            @else
+                                <p>Xin chào: {{Auth::user()->username}}</p>
+                                <p>Email: {{Auth::user()->email}}</p>
+                            @endguest
                             </div>
                         </div>
                     </div>
@@ -114,7 +132,19 @@
                                 <li><a href="#">Phụ kiện</a> </li>
                             </ul>
                         </span></li>
-                        <li><a href="#">Tài khoản</a></li>
+                        <!-- <li><a href="#">Tài khoản</a></li> -->
+                        <li>
+                            @if(Auth::user()!=null)
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                                document.getElementById('logout-form').submit();">
+                                {{ __('Đăng xuất') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            @endif
+                        </li>
                         <!-- <li><a href="#">Giỏ hàng</a></li> -->
                     </ul>
                 </div>
@@ -122,7 +152,7 @@
             </div>
         </div>
     </div>
-    <script src="script/script.js"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
 </body>
 
 </html>

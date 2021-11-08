@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjaxController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Homepage;
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +15,13 @@ use App\Http\Controllers\Homepage;
 |
 */
 
-// Route::get('/', function () {
-//     return view('home');
-// });
 
+
+/*
+/--------------------------------------------------------------------------
+/                                    HOMEPAGE
+/--------------------------------------------------------------------------
+*/
 Route::resource('/', 'HomepageController');
 
 Auth::routes();
@@ -35,9 +39,84 @@ Route::get('/add-to-cart/{id}', 'AjaxController@addToCart')->name('add.to.cart')
 Route::patch('/update-cart', [AjaxController::class, 'update'])->name('update.cart');
 Route::delete('/remove-from-cart', [AjaxController::class, 'remove'])->name('remove.from.cart');
 
-
 Route::post('/add-cart-ajax', 'AjaxController@add_cart_ajax');
 Route::post('/update-cart-ajax', 'AjaxController@update_cart_ajax')->name('update.cart.ajax');
 Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.ajax');
 
 // Route::get('/show-cart-ajax','AjaxController@show_cart_ajax');
+
+/*
+/--------------------------------------------------------------------------
+/                                 END HOMEPAGE
+/--------------------------------------------------------------------------
+*/
+
+/*
+/--------------------------------------------------------------------------
+/                                    LOGIN (by hieu)
+/--------------------------------------------------------------------------
+*/
+
+Route::get('login',function (){return view('admin.login');})->name('login');
+
+// Route::get('facebook/{social}','SocialController@redirectToProvider');
+// Route::get('check-facebook/{social}','SocialController@check');
+
+Route::get('/auth/redirect/{provider}', 'Auth\SocialController@redirect');
+Route::get('/callback/{provider}', 'Auth\SocialController@handle');
+/*
+/--------------------------------------------------------------------------
+/                                  END LOGIN
+/--------------------------------------------------------------------------
+*/
+
+/*
+/--------------------------------------------------------------------------
+/                                  ADMIN PAGE (by hieu)
+/--------------------------------------------------------------------------
+*/
+Route::get('admin',function(){ return view('admin.dashboard.dashboard');})->name('admin')->middleware(['auth','role:admin']);
+//                                    User
+Route::get('user', function() { return view('admin.user.user');})->name('user')->middleware(['auth','role:admin']);
+Route::get('user', 'AdminUserController@index')->name('user')->middleware(['auth','role:admin']);
+
+Route::get('user/fetch_data', 'AdminUserController@fetch_data');
+
+Route::get('staffshow',[
+    'uses'=>'AdminUserController@ShowStaff',
+    'as'=>'staffshow'
+]);
+
+Route::post('uploadstaff',[
+    'uses'=>'AdminUserController@UploadStaff',
+    'as'=>'uploadstaff'
+]);
+
+//                                    Chart
+Route::get('chart', function() { return view('admin.chart.chart');})->name('chart')->middleware(['auth','role:admin']);
+
+//                                  Product
+Route::get('product', function() { return view('admin.product.product');})->name('product')->middleware(['auth','role:admin']);
+Route::get('product', 'AdminProductController@index')->name('product')->middleware(['auth','role:admin']);
+
+Route::get('product/fetch_data', 'AdminProductController@fetch_data');
+
+Route::post('uploadproduct',[
+    'uses'=>'AdminProductController@UploadProduct',
+    'as'=>'uploadproduct'
+]);
+// chinh sua lien quan den upload anh
+Route::post('imagefile',[
+    'uses'=>'AdminProductController@GetImages',
+    'as'=>'imagefile'
+]);
+Route::post('upload','AdminProductController@Upload')->name('ckeditor.upload');
+// Route::resource('ckeditor','CkeditorController');
+Route::get('test/{id}','AdminProductController@test')->name('test');
+//                                  Oder
+Route::get('order', function() { return view('admin.order.order');})->name('order');
+/*
+/--------------------------------------------------------------------------
+/                                END ADMIN PAGE
+/--------------------------------------------------------------------------
+*/

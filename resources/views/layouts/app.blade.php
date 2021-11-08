@@ -17,7 +17,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     {{-- Styles --}}
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">// -->
 
     {{-- css of dung --}}
     <link rel="stylesheet" href="{{asset('css/style.css')}}">
@@ -32,16 +32,18 @@
     <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <link rel="stylesheet" href="{{asset('css/number.css')}}">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/paper/bootstrap.min.css" rel="stylesheet" type="text/css"> -->
     {{-- sweetalert --}}
     <link href="{{asset('css/sweetalert.css')}}">
 
     @yield('link')
     
+    {{-- css of hieu --}}
+    <link rel="stylesheet" href="{{asset('css/style1.css')}}">
+
 </head>
 <body>
-
-    <h1>Header</h1>
+    @include('header')
     @yield('body')
 
 <script type="text/javascript" src="{{asset('js/number.js')}}"></script>
@@ -84,6 +86,6 @@
     });
 
 </script>
-
+    @include('footer')
 </body>
 </html>

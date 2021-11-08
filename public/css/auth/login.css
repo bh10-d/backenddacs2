@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+/* body {
+    background-color: #fff;
+} */
+.login__page {
+    background-color: #fff;
+}
+
+.login__header--option {
+    font-size: 15px;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 20px 0px;
+    margin: 0 250px;
+}
+@media screen and (max-width: 1360px){
+    .login__header--option {
+        margin: 0 100px;
+    }
+}
+@media screen and (max-width: 550px){
+    .login__header--option {
+        margin: 0 40px;
+    }
+}
+.login__header--option a {
+    text-decoration: none;
+
+}
+.login__header--option span {
+    font-weight: 700;
+}
+.login__header--option a:first-child {
+    padding-right: 7px;
+    color: black;
+}
+
+.login__header--option a:last-child {
+    color: #e74c3c;
+    padding-left: 7px;
+}
+
+.login__signup__page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: #f1f1f1; */
+}
+
+.login__block {
+    display: block;
+    text-align: center;
+    width: 350px;
+    height: 430px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.login__block--signup {
+    width: 350px;
+    height: 630px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.login__block--title p:first-child{
+    padding-top: 20px;
+    font-size: 26px;
+    font-weight: 400;
+}
+
+.login__block--title p:last-child{
+    margin: 10px 0px;
+    font-size: 13px;
+}
+
+.link--a {
+    cursor: pointer;
+    text-decoration: none;
+    font-weight: 400;
+    color:#e74c3c
+}
+.link--a:hover {
+    color: black;
+}
+
+.forgot {
+    font-size: 15px;
+    color: black;
+}
+.forgot:hover {
+    color: #e74c3c;
+}
+
+.form--input {
+    font-size: 15px;
+    width: 290px;
+    padding: 12px;
+    margin: 10px 0px;
+    border-radius: 5px;
+    border: 0;
+    outline: none;
+    background-color: #f1f1f1;
+}
+
+.btn--danger {
+    cursor: pointer;
+    color: white;
+    background-color: #e74c3c;
+    border: 0;
+}
+
+.form--remem {
+    margin-bottom: 15px;
+}
+
+.btn-a{
+    text-decoration: none;
+    font-size: 13px;
+    color: white;
+    padding: 5px;
+}
+
+.login__block--footer {
+    margin-top: 20px;
+}
+.login__block--footer p {
+    font-size: 13px;
+}
+
+.google {
+    background-color: #dc3545;
+}
+.facebook {
+    background-color: #095bb3;
+}
+
+.show {
+    display: block;
+}
+.hidden {
+    display: none;
+}
