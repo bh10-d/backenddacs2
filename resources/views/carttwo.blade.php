@@ -31,7 +31,7 @@
     <form action="">
         @csrf
         <tbody>
-            
+
 
             @php $total = 0 @endphp
             @if(Session::get('cart'))
@@ -53,7 +53,7 @@
                 <td data-th="Title"> {{ $details['product_title'] }} </td>
                 <td id="price-cart" data-th="Price" class="price">{{ $details['product_price']}}</td>
                 <td data-th="Quantity">
-                    <input min="1" type="number" value="{{ $details['product_qty'] }}" class="form-control quantity update-cart" />{{--cho nay co value 1--}}
+                    <input min="1" max="100" type="number" value="{{ $details['product_qty'] }}" class="form-control quantity update-cart" />{{--cho nay co value 1--}}
                 </td>
                 <td data-th="Subcart" class="text-center sub-cart">{{$details['product_price'] * $details['product_qty']}}</td>
                 <td class="actions" data-th="">
@@ -69,6 +69,7 @@
 
 </table>
 <input type="button" value="Back" onclick="goBack()">
+<input type="button" value="Đi tới thanh toán" onclick="topurchase()"> 
 @endsection
 
 @section('script')
@@ -157,8 +158,13 @@
             }
         });
     });
-    function goBack(){
+
+    function goBack() {
         window.history.back();
+    }
+    
+    function topurchase(){
+        window.location.href = '/thanhtoan';
     }
 </script>
 

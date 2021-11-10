@@ -23,7 +23,7 @@ class ProductController extends Controller
         $get_detail = DB::table('imagetables')->join('products','products.id','=',
         'imagetables.id_product')->where('products.id',$product_id)->get();
 
-        return view('detail')->with('details',$get_detail);
+        return view('chitiet')->with('details',$get_detail);//detail
     }
 
     public static function cart_product(Request $request,$cart_id){

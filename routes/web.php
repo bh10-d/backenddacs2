@@ -44,6 +44,8 @@ Route::post('/update-cart-ajax', 'AjaxController@update_cart_ajax')->name('updat
 Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.ajax');
 
 // Route::get('/show-cart-ajax','AjaxController@show_cart_ajax');
+Route::post('/purchase','AjaxController@purchase');
+Route::get('/thanhtoan', function(){return view('thanhtoan');})->name('thanhtoan');
 
 /*
 /--------------------------------------------------------------------------
