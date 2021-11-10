@@ -143,6 +143,7 @@
             </div>
             <!-- </form> -->
             @endforeach
+            
         </section>
         <div class="sapo-product-reviews-module"></div>
     </div>
