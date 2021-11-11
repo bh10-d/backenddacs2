@@ -109,6 +109,9 @@
                 })
             })
         });
+        function cartbutton(){
+            window.location.href="{{ url('/cart')}}";
+        }
     </script>
     @include('footer')
 </body>

@@ -1,0 +1,70 @@
+.reviews_details_product {
+    margin: 10px 0 20px 0;
+    float: left;
+    display: block;
+    text-align: center
+}
+
+@media (max-width: 767px) {
+    .reviews_details_product {
+        width: 100%;
+        float: left;
+        padding-left: 0px
+    }
+}
+
+.reviews_details_product .sapo-product-reviews-star i {
+    color: #ef4339
+}
+
+.reviews_details_product .sapo-product-reviews-star i.star-off-png {
+    color: #cecece
+}
+
+.reviews_details_product .sapo-product-reviews-star i.star-off-png:before {
+    content: "\f005"
+}
+
+.reviews_details_product .sapo-product-review-scroll {
+    display: none
+}
+
+.reviews_details_product .bizweb-product-reviews-badge {
+    margin: 0px auto;
+    padding: 0px;
+    float: left;
+    line-height: normal;
+    padding: 15px 0 30px
+}
+
+.reviews_details_product .bizweb-product-reviews-badge div:nth-child(2) {
+    display: none
+}
+
+.reviews_details_product .bizweb-product-reviews-badge .bizweb-product-reviews-star i {
+    font-size: 15px
+}
+
+.reviews_details_product .bizweb-product-reviews-badge .bizweb-product-reviews-star .star-off-png:before {
+    content: "\f005";
+    color: #cecece
+}
+
+.reviews_details_product .bizweb-product-reviews-badge .bizweb-product-reviews-star .star-on-png:before {
+    content: "\f005";
+    color: #ef4339
+}
+
+.reviews_details_product .bizweb-product-reviews-badge .bizweb-product-reviews-star .star-half-png:before {
+    content: "\f005";
+    color: #ef4339
+}
+
+.reviews_details_product .bizweb-product-reviews-badge div img {
+    display: none
+}
+
+.reviews_details_product .bizweb-product-reviews-badge div p {
+    font-size: 13px;
+    color: #7b7b7b
+}

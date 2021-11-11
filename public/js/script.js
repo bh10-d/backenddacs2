@@ -27,20 +27,20 @@ function changetologin() {
 
 //quantity
 function quanityminus() {
-    let count = parseInt(document.querySelector(".quantity").value)
+    let count = parseInt(document.querySelector(".quantityy").value)
     if (count !== 0) {
         count--
-        document.querySelector(".quantity").value = count
+        document.querySelector(".quantityy").value = count
         document.querySelector(".cart--count span").innerHTML = count
     }
     console.log(count)
 }
 
 function quantityplus() {
-    let count = document.querySelector(".quantity").value
+    let count = document.querySelector(".quantityy").value
     count++
-    document.querySelector(".quantity").value = count
-    console.log('test: ' + document.querySelector(".quantity").value)
+    document.querySelector(".quantityy").value = count
+    console.log('test: ' + document.querySelector(".quantityy").value)
     document.querySelector(".cart--count span").innerHTML = count
 }
 

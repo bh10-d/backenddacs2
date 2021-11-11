@@ -1,11 +1,12 @@
-body,
+/* body,
 html {
     padding: 0 !important;
     padding: 0;
     margin: 0
-}
+} */
 
-article,
+
+/* article,
 aside,
 details,
 figcaption,
@@ -18,9 +19,10 @@ nav,
 section,
 summary {
     display: block
-}
+} */
 
-audio,
+
+/* audio,
 canvas,
 progress,
 video {
@@ -47,9 +49,10 @@ input[type=text] {
     margin: 0 0 19px;
     min-height: 40px;
     padding: 0 20px
-}
+} */
 
-a {
+
+/* a {
     color: #231f20
 }
 
@@ -65,9 +68,10 @@ a {
 .dropdown-menu>.active>a:focus,
 .dropdown-menu>.active>a:hover {
     background: 0 0
-}
+} */
 
-body,
+
+/* body,
 button,
 input,
 select,
@@ -77,19 +81,22 @@ textarea {
     color: #231f20;
     -webkit-font-smoothing: antialiased;
     -webkit-text-size-adjust: 100%
-}
+} */
 
-body {
+
+/* body {
     font-size: 14px;
     color: #231f20;
     overflow-x: hidden
-}
+} */
 
-header nav {
+
+/* header nav {
     font-family: "Roboto", sans-serif
-}
+} */
 
-h1,
+
+/* h1,
 h2,
 h3,
 h4,
@@ -98,9 +105,10 @@ h6 {
     font-family: "Roboto", sans-serif;
     line-height: 1.4;
     font-weight: inherit
-}
+} */
 
-p {
+
+/* p {
     margin: 0 0 15px 0
 }
 
@@ -134,7 +142,7 @@ table {
     margin-bottom: 1em;
     border-collapse: collapse;
     border-spacing: 0
-}
+} */
 
 .table-wrap {
     max-width: 100%;
@@ -142,7 +150,8 @@ table {
     -webkit-overflow-scrolling: touch
 }
 
-th {
+
+/* th {
     font-weight: 500
 }
 
@@ -152,23 +161,25 @@ th {
     padding: 15px;
     border: 1px solid #ebebeb;
     color: #1c1c1c
-}
+} */
 
 .text-link,
-a {
+
+/* a {
     color: #231f20;
     text-decoration: none;
     background: 0 0
-}
+} */
 
-button {
+
+/* button {
     overflow: visible
 }
 
 button[disabled],
 html input[disabled] {
     cursor: default
-}
+} */
 
 img {
     border: 0 none;
@@ -176,22 +187,26 @@ img {
     height: auto
 }
 
-svg:not(:root) {
+
+/* svg:not(:root) {
     overflow: hidden
-}
+} */
 
-form {
+
+/* form {
     margin-bottom: 30px
-}
+} */
 
-button,
+
+/* button,
 input,
 select,
 textarea {
     font-size: 1em
-}
+} */
 
-button,
+
+/* button,
 input[type=email],
 input[type=file],
 input[type=number],
@@ -203,63 +218,10 @@ input[type=text],
 textarea {
     -webkit-appearance: none;
     -moz-appearance: none
-}
+} */
 
-fieldset,
-input,
-select,
-textarea {
-    border-radius: 0;
-    max-width: 100%
-}
 
-legend {
-    border: 0;
-    padding: 0
-}
-
-optgroup {
-    font-weight: 700
-}
-
-input {
-    display: inline-block;
-    width: auto
-}
-
-button,
-input[type=submit] {
-    cursor: pointer
-}
-
-input[type=email],
-input[type=file],
-input[type=number],
-input[type=password],
-input[type=search],
-input[type=tel],
-input[type=text],
-select,
-textarea {
-    border: 1px solid #ebebeb;
-    padding: 0 110px 0 20px;
-    width: 100%;
-    max-width: 100%;
-    display: block
-}
-
-input[type=checkbox],
-input[type=radio] {
-    display: inline;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 40px;
-    position: absolute;
-    background: 0 0;
-    outline: 0;
-    opacity: 0
-}
+/*   */
 
 select {
     -webkit-appearance: none;
