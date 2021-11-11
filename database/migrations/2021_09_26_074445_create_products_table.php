@@ -20,6 +20,9 @@ class CreateProductsTable extends Migration
             $table->bigInteger('price');
             $table->integer('discount_price');
             $table->bigInteger('detail_products');
+            $table->bigInteger('category')->foreign('category')->references('id')->on('categorys')
+            ->onDelete('cascade');
+            
             $table->bigInteger('quantity');
             $table->timestamps();
             

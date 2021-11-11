@@ -14,7 +14,8 @@ class CreateImagetablesTable extends Migration
     public function up()
     {
         Schema::create('imagetables', function (Blueprint $table) {
-            $table->bigInteger('id_product')->foreign('id_product')->references('id')->on('products')->onDelete('cascade');
+        
+            $table->bigInteger('id_product')->foreign('id_product')->references('id')->on('admin_product_models')->onDelete('cascade');
             $table->string('image');
             $table->timestamps();
         });

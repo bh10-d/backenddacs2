@@ -67,6 +67,7 @@ class AdminProductController extends Controller
             for ($count = 0; $count < count($_FILES["file"]["name"]); $count++) {
                 $file_name = $_FILES["file"]["name"][$count];
                 $tmp_name = $_FILES["file"]['tmp_name'][$count];
+                
                 if($count==0){
                     $gopfile .= $file_name; 
                 }else{
@@ -75,7 +76,7 @@ class AdminProductController extends Controller
                 $location = 'image/'.$file_name;//asset('image/'.$file_name);//'image/' . $file_name;
                 move_uploaded_file($tmp_name, $location);
             }
-        }
+        }  
         $response = new Response();
         return $response->withCookie(cookie()->forever('image', $gopfile));   
     }
@@ -92,10 +93,27 @@ class AdminProductController extends Controller
         if ($category == 3) $category = 'phukien';
 
         $image = $request->cookie('image');
-        DB::insert('insert into admin_product_models (code, productname, productcate, image, description) values (?, ?, ?, ?, ?)', [$id, $name, $category, $image, $description]);
+
+        DB::insert('insert into admin_product_models (code, productname, productcate, description) values (?, ?, ?, ?)', [$id, $name, $category, $description]);
+    
+        // $id_product = DB::table('admin_product_models')->select('id')->where('code',[$id])->first();
+        $id_product = AdminProductModel::where('code', $id)->first();
+
+        $id_test = $id_product->id;
+
+        $all_img = explode("-", $image);
+        foreach($all_img as $img){
+            DB::table('imagetables')->insert(
+                ['id_product' => $id_test, 'image' => '/image/'.$img]
+            );
+        };
+
+
         $data = new AdminProductController();
         $response = new Response();
         $response->withCookie(cookie('image', null, 0));
         return $data->index();
+        // dd($id_product);
+        // return $id_product[0];
     }
 }
