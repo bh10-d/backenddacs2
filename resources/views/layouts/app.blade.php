@@ -8,14 +8,16 @@
     {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <!-- <title>{{ config('app.name', 'Ecoshop') }}</title> -->
+    <link rel="shortcut icon" href="{{ asset('image/logo.png') }}" type="image/pngx-icon">
+    <title>EcoShop</title>
 
     {{-- Scripts --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
 
     {{-- Fonts --}}
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <!-- <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet"> -->
 
     {{-- Styles --}}
     <!-- <link href="{{ asset('css/app.css') }}" rel="stylesheet">// -->
@@ -42,6 +44,7 @@
     {{-- css of hieu --}}
     <link rel="stylesheet" href="{{asset('css/style1.css')}}">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ asset('css/foot.css') }}">
 </head>
 
 <body>
@@ -59,6 +62,7 @@
             $(".add-to-cart").click(function() {
                 let id = $(this).data("id_product");
                 let cart_product_id = $('.cart_product_id_' + id).val();
+                let cart_product_image = $('.cart_product_image_' + id).val()//'hieu dang o day';//hieu-test
                 let cart_product_title = $('.cart_product_title_' + id).val();
                 let cart_product_price = $('.cart_product_price_' + id).val();
                 let cart_product_qty = $('.cart_product_qty_' + id).val();
@@ -71,6 +75,7 @@
                     data: {
                         cart_product_id: cart_product_id,
                         cart_product_title: cart_product_title,
+                        cart_product_image: cart_product_image,//hieutest
                         cart_product_price: cart_product_price,
                         cart_product_qty: cart_product_qty,
                         _token: _token
@@ -87,6 +92,7 @@
             $('.purchase').click(function() {
                 let id = $(this).data("id_product");
                 let cart_product_id = $('.cart_product_id_' + id).val();
+                let cart_product_image = $('.cart_product_image_' + id).val();//hieu-test
                 let cart_product_title = $('.cart_product_title_' + id).val();
                 let cart_product_price = $('.cart_product_price_' + id).val();
                 let cart_product_qty = $('.cart_product_qty_' + id).val();
@@ -98,6 +104,7 @@
                     data: {
                         cart_product_id: cart_product_id,
                         cart_product_title: cart_product_title,
+                        cart_product_image: cart_product_image,//hieutest
                         cart_product_price: cart_product_price,
                         cart_product_qty: cart_product_qty,
                         _token: _token
@@ -113,6 +120,7 @@
             window.location.href="{{ url('/cart')}}";
         }
     </script>
+    <script src="{{ asset('js/convertnum.js') }}"></script>
     @include('footer')
 </body>
 

@@ -17,49 +17,51 @@
 
 <body>
     @include('admin.sidebar')
-    <section class="home-section">
-        <div class="text"><span><i class="far fa-folder-open"></i> Inventory</span></div>
-        <div class="block">
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="table-responsive" id="product">
-                        @include('admin.product.producttable')
-                        <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                            <thead>
-                                <tr>
-                                    <th>Mã sản phẩm</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Thể loại</th>
-                                    <th>Giá</th>
-                                    <th>Mô tả</th>
-                                    <th>Xem chi tiết</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>IPXS</td>
-                                    <td>IPhone Xsmax</td>
-                                    <td>Điện thoại</td>
-                                    <td>15.000.000</td>
-                                    <td>buiduchieudangban</td>
-                                    <td><a href="#"><i class="far fa-eye"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>IP12PM</td>
-                                    <td>IPhone 12 Promax</td>
-                                    <td>Điện thoại</td>
-                                    <td>25.000.000</td>
-                                    <td>buiduchieudangban</td>
-                                    <td><a href="#"><i class="far fa-eye"></i></a></td>
-                                </tr>
-                            </tbody>
-                        </table> -->
+    <!-- <div id="product"> -->
+        <section class="home-section">
+            <div class="text"><span><i class="far fa-folder-open"></i> Inventory</span></div>
+            <div class="block">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="table-responsive" id="product">{{-- id="product"--}}
+                            @include('admin.product.producttable')
+                            <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>Mã sản phẩm</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Thể loại</th>
+                                        <th>Giá</th>
+                                        <th>Mô tả</th>
+                                        <th>Xem chi tiết</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>IPXS</td>
+                                        <td>IPhone Xsmax</td>
+                                        <td>Điện thoại</td>
+                                        <td>15.000.000</td>
+                                        <td>buiduchieudangban</td>
+                                        <td><a href="#"><i class="far fa-eye"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>IP12PM</td>
+                                        <td>IPhone 12 Promax</td>
+                                        <td>Điện thoại</td>
+                                        <td>25.000.000</td>
+                                        <td>buiduchieudangban</td>
+                                        <td><a href="#"><i class="far fa-eye"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table> -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-    @include("admin.product.uploadproduct")
+        </section>
+        @include("admin.product.uploadproduct")
+    <!-- </div> -->
     <script type="text/javascript">
         CKEDITOR.replace('editor', {
             filebrowserUploadUrl: "{{ route('ckeditor.upload',['_token'=> csrf_token()]) }}",
