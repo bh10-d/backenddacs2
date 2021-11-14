@@ -173,7 +173,7 @@
             <li>Sản phẩm</li>
             <li>Tin tức</li>
             <li>Liên hệ</li>
-            <li>Xem tất cả</li>
+            <li><a href="{{ URL::to('/search') }}">Xem tất cả</a></li>
         </ul>
 
     </div>
@@ -183,7 +183,7 @@
         <div class="card-cate">
             <div class="container-img">
                 <img src="{{asset('image/ipad-pro.jpg')}}" alt="Avatar" style="width:100%">
-            </div>2
+            </div>
 
             <div class="container">
 

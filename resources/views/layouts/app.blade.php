@@ -47,8 +47,9 @@
 <body>
     @include('header')
     @yield('body')
-    <script type="text/javascript" src="{{asset('js/number.js')}}"></script>
 
+    
+    <script type="text/javascript" src="{{asset('js/number.js')}}"></script>
     @yield('script')
 
     <script src="{{asset('js/sweetalert.min.js')}}"></script>

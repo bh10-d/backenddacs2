@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminProductModel;
 use App\Models\Products;
 // use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Session;
@@ -135,17 +136,65 @@ class AjaxController extends Controller
         Session::save();
 
     }
+    public function search(Request $request){
+        return view('show_all');
+    }
 
+    public function search_ajax(Request $request){
+        $data = $request->all();
+        
+        
+        if($data['query']){
+            $products = Products::where('title','like','%'.$data['query'].'%')->get();
+            $output = '<div style="width:90% !important;margin: auto; display: flex !important; flex-direction:row !important;">';
+            
+            
+                foreach($products as $key => $value){
+                    // $output .=  $value->title;
+                    
+                    $output .=  
+                        '<div style="width: 250px !important; border: 1px solid #000 !important;">
+                            <div style="width: 100%;">
+                                <img style="width:100%; height: auto;" 
+                                src="image/ipad-pro.jpg" alt="Avatar">
+                            </div>
+                            
+                            <h4><a href="{{URL::to('.'/detail-product/$value->id'.')}}">' . $value->title . '</a></h4> 
+                            <p>' . $value->price . 'd</p> 
+                        </div>'; 
+                    
+                }
+            }
+        $output .= '</div>';
+        echo $output;
+    }
 
-    public function show_cart_ajax(Request $request)
+    public function show_all_products(Request $request)
     {
         $data = $request->all();
-        $cart = Session::get('cart');
+        $products = Products::all();
+        
+        $output = '<div style="width:90% !important;margin: auto; display: flex !important; flex-direction:row !important;">';
+        foreach($products as $product) {
+            $output .=  
+                        '<div style="width: 250px !important; border: 1px solid #000 !important;">
+                            <div style="width: 100%;">
+                                <img style="width:100%; height: auto;" 
+                                src="image/ipad-pro.jpg" alt="Avatar">
+                            </div>
+                            
+                            <h4><a href="{{URL::to('.'/detail-product/$value->id'.')}}">' . $product->title . '</a></h4> 
+                            <p>' . $product->price . 'd</p> 
+                        </div>'; 
+        }
 
-        print_r($data);
-        echo "<br>";
-        print_r($cart);
+        $output .= '</div>';
+        echo $output;
+
     }
+    
+
+
 
     public function purchase(Request $request){
         // $data = $request->all();

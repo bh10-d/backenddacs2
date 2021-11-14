@@ -22,6 +22,8 @@ use App\Http\Controllers\Homepage;
 /                                    HOMEPAGE
 /--------------------------------------------------------------------------
 */
+
+
 Route::resource('/', 'HomepageController');
 
 Auth::routes();
@@ -46,6 +48,15 @@ Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.
 // Route::get('/show-cart-ajax','AjaxController@show_cart_ajax');
 Route::post('/purchase','AjaxController@purchase');
 Route::get('/thanhtoan', function(){return view('thanhtoan');})->name('thanhtoan');
+
+
+//route search
+Route::get('/search', 'AjaxController@search');
+Route::post('/search-ajax', 'AjaxController@search_ajax');
+Route::post('/show-all', 'AjaxController@show_all_products');
+
+
+
 
 /*
 /--------------------------------------------------------------------------
