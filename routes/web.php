@@ -47,7 +47,7 @@ Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.
 
 // Route::get('/show-cart-ajax','AjaxController@show_cart_ajax');
 Route::post('/purchase','AjaxController@purchase');
-Route::get('/thanhtoan', function(){return view('thanhtoan');})->name('thanhtoan');
+Route::get('/thanhtoan', function(){return view('payment.thanhtoanv2');})->name('thanhtoan');
 
 
 //route search
@@ -85,7 +85,7 @@ Route::get('/callback/{provider}', 'Auth\SocialController@handle');
 
 /*
 /--------------------------------------------------------------------------
-/                                  ADMIN PAGE (by hieu)
+/                            ADMIN PAGE (by hieu)
 /--------------------------------------------------------------------------
 */
 Route::get('admin',function(){ return view('admin.dashboard.dashboard');})->name('admin')->middleware(['auth','role:admin']);

@@ -136,8 +136,8 @@ h4 {
     cursor: pointer;
     height: 100%;
     padding: 0px 10px 0px 10px;
-    border-radius: 0px 5px 5px 0px;
-    outline: none;
+    /* border-radius: 0px 5px 5px 0px; */
+    border-radius: 0 !important;
     border: none;
     color: #fff;
     background-color: #b8332c;

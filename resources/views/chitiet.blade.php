@@ -30,16 +30,7 @@
             </div>
         </section>
         <section class="">{{--product details-main--}}
-            @foreach ($details as $d)
-            <!-- <form> -->
-
-            <!-- <div class="hidden">
-                <div class="inventory_quantity hidden">
-                    <span class="a-stock">
-                        Còn hàng
-                    </span>
-                </div>
-            </div> -->
+            {{--@foreach ($details as $d)--}}
             <div class="container">
                 <div class="bg_product">{{--clearfix--}}
                     <div class="section">{{--wrap-padding-15 wp_product_main clearfix--}}
@@ -47,7 +38,7 @@
                             <div class="row ">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="title_p">
-                                        <h1 class="title-product">{{ $d->title }}</h1>
+                                        <h1 class="title-product">{{ $details[0]->title }}</h1>
                                         <!-- <div class="reviews_details_product ">
                                             <div class="sapo-product-reviews-badge sapo-product-reviews-badge-detail" data-id="18703977"></div>
                                         </div> -->
@@ -59,7 +50,9 @@
                                                     <div class="slider slider-for">
                                                         <a href="" title="Click để xem">
                                                             <!-- <img src="" class="lazyload img-responsive mx-auto d-block"> -->
-                                                            {{ $d->image }}
+                                                            @foreach($details as $img)
+                                                                {{ $img->image }}
+                                                            @endforeach
                                                         </a>
                                                     </div>
                                                 </div>
@@ -76,17 +69,17 @@
                                             <form class="form_background form-inline margin-bottom-0">{{-- enctype="multipart/form-data" id="add-to-cart-form" action="/cart/add" method="post" --}}
                                                 {{--khong phan su mien vao--}}
                                                 @csrf
-                                                <input type="hidden" value="{{$d->id}}" class="cart_product_id_{{$d->id}}">
-                                                <input type="hidden" value="{{$d->title}}" class="cart_product_title_{{$d->id}}">
-                                                <input type="hidden" value="{{$d->price}}" class="cart_product_price_{{$d->id}}">
-                                                <input type="hidden" value="{{$d->image}}" class="cart_product_image_{{$d->id}}">
-                                                <input type="hidden" value="1" class="cart_product_qty_{{$d->id}}">
+                                                <input type="hidden" value="{{$details[0]->id}}" class="cart_product_id_{{$details[0]->id}}">
+                                                <input type="hidden" value="{{$details[0]->title}}" class="cart_product_title_{{$details[0]->id}}">
+                                                <input type="hidden" value="{{$details[0]->price}}" class="cart_product_price_{{$details[0]->id}}">
+                                                <input type="hidden" value="{{$details[0]->image}}" class="cart_product_image_{{$details[0]->id}}">
+                                                <input type="hidden" value="1" class="cart_product_qty_{{$details[0]->id}}">
                                                 {{--khong phan su mien vao--}}
                                                 <div class="fw w_100">
                                                     <div class="price-box">
 
                                                         <span class="special-price">
-                                                            <span class="price product-price">{{ $d->price }}₫</span>
+                                                            <span class="price product-price price-custom-hieu">{{ $details[0]->price }}</span><span class="product-price">₫</span>
                                                         </span>
                                                         <!-- <span class="old-price" itemprop="priceSpecification" itemscope="" itemtype="http://schema.org/priceSpecification">
                                                             Giá thị trường:
@@ -126,8 +119,8 @@
                                                             </div>
                                                         </div>
                                                         <div class="btn-mua button_actions">
-                                                            <button type="submit" class=" btn btn_base normal_button add-to-cart" name="add-to-cart" data-id_product="{{$d->id}}">Thêm vào giỏ hàng</button>
-                                                            <button type="submit" class=" btn btn_base fast purchase" name="purchase" data-id_product="{{$d->id}}">
+                                                            <button type="submit" class=" btn btn_base normal_button add-to-cart" name="add-to-cart" data-id_product="{{$details[0]->id}}">Thêm vào giỏ hàng</button>
+                                                            <button type="submit" class=" btn btn_base fast purchase" name="purchase" data-id_product="{{$details[0]->id}}">
                                                                 <span class="txt-main text_1">Mua ngay</span>
                                                             </button>
                                                         </div>
@@ -143,7 +136,7 @@
                 </div>
             </div>
             <!-- </form> -->
-            @endforeach
+            {{--@endforeach--}}
             {{--ahsgd--}}
             <div class="container">
                 <div class="bg_products">{{--clearfix--}}

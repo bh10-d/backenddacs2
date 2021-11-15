@@ -44,7 +44,7 @@
             <tr class="tr-select" data-id="{{ $details['product_id'] }}">
                 <td data-th="Product">
                     <div class="row">
-                        <div class="col-sm-3 hidden-xs"><img src="" width="100" height="100" class="img-responsive" /></div>
+                        <div class="col-sm-3 hidden-xs"><img src="" width="100" height="100" class="img-responsive" />{{ $details['product_image'] }}</div>
                         <div class="col-sm-9">
                             <h4 class="nomargin"> </h4>
                         </div>
@@ -57,7 +57,7 @@
                 </td>
                 <td data-th="Subcart" class="text-center sub-cart">{{$details['product_price'] * $details['product_qty']}}</td>
                 <td class="actions" data-th="">
-                    {{--<button id="remove-from-cart" class="btn btn-danger btn-sm btn-test" value="{{$id}}"><i class="fa fa-trash-o"></i></button>--}}
+                   {{--<button id="remove-from-cart" class="btn btn-danger btn-sm btn-test" value="{{$id}}"><i class="fas fa-trash-alt"></i></button>--}}{{-- class cua i fa fa-trash-o--}}
                 </td>
             </tr>
 
@@ -69,7 +69,7 @@
 
 </table>
 <input type="button" value="Back" onclick="goBack()">
-<input type="button" value="Đi tới thanh toán" onclick="topurchase()"> 
+<input type="button" value="Đi tới thanh toán" onclick="topurchase()">
 @endsection
 
 @section('script')
@@ -101,16 +101,22 @@
     $(".update-cart").change(function() {
         let id_chan = $(this).parents("tr").attr("data-id");
         let price = $(this).parents("tr").find(".price").text();
+        let price_hidden = $(this).parents("tr").find(".price_hidden").text();
         let qty = $(this).parents("tr").find(".quantity").val();
-
         let _token = $('input[name="_token"]').val();
-
         let test = $("tr[data-id='" + $(this).parents("tr").attr("data-id") + "']>.sub-cart");
-
+        let lua = $('.hieu-test');
+        let tach = '';
+        // for (var i = 0; i < price.length; i++) {
+        //     if (price[i] !== ',') {
+        //         tach += price[i];
+        //     }
+        // }
         let subtotal = price * qty;
 
         console.log('sub-total: ', subtotal);
         console.log('price: ', price);
+        console.log('price_hidden: ', price_hidden);
         $.ajax({
             url: "{{ url('/update-cart-ajax') }}",
             method: "post",
@@ -121,7 +127,7 @@
             },
             success: function(response) {
                 test.html(subtotal);
-
+                lua.html(qty);
                 console.log('quantity: ', qty);
             },
             error: function() {
@@ -134,6 +140,7 @@
         let price = $(this).parents("tr").find(".price").text();
         let qty = $(this).parents("tr").find(".quantity").val();
         let test = $("tr[data-id='" + $(this).parents("tr").attr("data-id") + "']>.sub-cart");
+        let lua = $('.hieu-test');
         let _token = $('input[name="_token"]').val();
         let subtotal = price * qty;
 
@@ -151,6 +158,7 @@
             },
             success: function(response) {
                 test.html(subtotal);
+                lua.html(qty);
                 console.log('quantity: ', qty);
             },
             error: function() {
@@ -162,8 +170,8 @@
     function goBack() {
         window.history.back();
     }
-    
-    function topurchase(){
+
+    function topurchase() {
         window.location.href = '/thanhtoan';
     }
 </script>

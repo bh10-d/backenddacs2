@@ -77,7 +77,16 @@
 			<span class="wrap">
 				<span class="order-summary-toggle__inner">
 					<span class="order-summary-toggle__text expandable">
-						Đơn hàng (1 sản phẩm)
+						<!-- Đơn hàng (1 sản phẩm) -->
+                        @if (Session::get('cart'))
+                        @php $product=0 @endphp
+                        @php $list=0 @endphp
+                        @foreach (Session::get('cart') as $id => $details)
+                        @php $product = $details['product_qty'] @endphp
+                        @php $list+=$product @endphp
+                        @endforeach
+                            Đơn hàng ({{ $list }} sản phẩm)
+                        @endif
 					</span>
                     <!-- <span class="">
 						Đơn hàng (1 sản phẩm)
@@ -127,8 +136,8 @@
                                     </div>
                                     <div class="section__content">
                                         <div class="fieldset">
-                                            <div class="field " data-bind-class="{'field--show-floating-label': email}">
-                                                <div class="field__input-wrapper">
+                                            <div class="field">
+                                                <div class="field__input-wrapper field--show-floating-label">
                                                     <label for="email" class="field__label">
                                                     @if(Auth::user()==null)
                                                         Email
@@ -139,29 +148,29 @@
                                                     <input name="email" id="email" type="email" class="field__input" data-bind="email" value="">
                                                 </div>
                                             </div>
-                                            <div class="field " data-bind-class="{'field--show-floating-label': billing.name}">
-                                                <div class="field__input-wrapper">
-                                                    <label for="billingName" class="field__label">Họ và tên</label>
-                                                    <input name="billingName" id="billingName" type="text" class="field__input" data-bind="billing.name" value="">
+                                            <div class="field">
+                                                <div class="field__input-wrapper field--show-floating-label">
+                                                    <label for="billingName" class="field__label ">Họ và tên</label>
+                                                    <input name="billingName" id="billingName" type="text" class="field__input " value="">
                                                 </div>
                                             </div>
-                                            <div class="field " data-bind-class="{'field--show-floating-label': billing.phone}">
-                                                <div class="field__input-wrapper">
+                                            <div class="field">
+                                                <div class="field__input-wrapper field--show-floating-label">
                                                     <label for="billingPhone" class="field__label">
 														Số điện thoại (tùy chọn)
 													</label>
-                                                    <input name="billingPhone" id="billingPhone" type="tel" class="field__input" data-bind="billing.phone" value="">
+                                                    <input name="billingPhone" id="billingPhone" type="tel" class="field__input" value="">
                                                 </div>
                                             </div>
-                                            <div class="field " data-bind-class="{'field--show-floating-label': billing.address}">
-                                                <div class="field__input-wrapper">
+                                            <div class="field">
+                                                <div class="field__input-wrapper field--show-floating-label">
                                                     <label for="billingAddress" class="field__label">
 														Địa chỉ (tùy chọn)
 													</label>
-                                                    <input name="billingAddress" id="billingAddress" type="text" class="field__input" data-bind="billing.address" value="">
+                                                    <input name="billingAddress" id="billingAddress" type="text" class="field__input" value="">
                                                 </div>
                                             </div>
-                                            <div class="field field--show-floating-label ">
+                                            <!-- <div class="field field--show-floating-label ">
                                                 <div class="field__input-wrapper field__input-wrapper--select2">
                                                     <label for="billingProvince" class="field__label">Tỉnh thành</label>
                                                     <select name="billingProvince" id="billingProvince" size="1" type="text" class="field__input field__input--select" data-bind="billing.province" value="1" data-address-type="province" data-address-zone="billing">
@@ -188,14 +197,14 @@
 														<option value="1"></option>
 													</select>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </section>
                                 <div class="fieldset">
                                     <h3 class="visually-hidden">Ghi chú</h3>
                                     <div class="field " data-bind-class="{'field--show-floating-label': note}">
-                                        <div class="field__input-wrapper">
+                                        <div class="field__input-wrapper field--show-floating-label">
                                             <label for="note" class="field__label">
 												Ghi chú (tùy chọn)
 											</label>
@@ -315,7 +324,8 @@
                                                 <td class="product__image">
                                                     <div class="product-thumbnail">
                                                         <div class="product-thumbnail__wrapper" data-tg-static>
-                                                            <img src="//bizweb.dktcdn.net/thumb/thumb/100/397/652/products/636683033477213503-xiaomi-mi8-xanh-1.jpg?v=1595835092797" alt="" class="product-thumbnail__image">
+                                                            <!-- <img src="//bizweb.dktcdn.net/thumb/thumb/100/397/652/products/636683033477213503-xiaomi-mi8-xanh-1.jpg?v=1595835092797" alt="" class="product-thumbnail__image"> -->
+                                                            {{ $details['product_image'] }}
                                                         </div>
                                                         <span class="product-thumbnail__quantity">{{--1--}}{{ $details['product_qty'] }}</span>
                                                     </div>
