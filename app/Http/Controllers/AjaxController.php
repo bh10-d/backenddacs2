@@ -139,7 +139,8 @@ class AjaxController extends Controller
 
     }
     public function search(Request $request){
-        return view('show_all');
+        $products = AdminProductModel::all();
+        return view('show_all')->with('products',$products);
     }
 
     public function search_ajax(Request $request){
@@ -147,11 +148,13 @@ class AjaxController extends Controller
         
         
         if($data['query']){
-            $products = Products::where('title','like','%'.$data['query'].'%')->get();
-            $output = '<div style="width:90% !important;margin: auto; display: flex !important; flex-direction:row !important;">';
+            $products = AdminProductModel::where('productname','like','%'.$data['query'].'%');
+            $output = '<div style="width:90% !important;margin:80px auto; display: flex !important; flex-direction:row !important; flex-wrap: wrap !important;" >';
             
+            if($products->exists()) {
+
             
-                foreach($products as $key => $value){
+                foreach($products->get() as $key => $value){
                     // $output .=  $value->title;
                     
                     $output .=  
@@ -161,12 +164,15 @@ class AjaxController extends Controller
                                 src="image/ipad-pro.jpg" alt="Avatar">
                             </div>
                             
-                            <h4><a href="{{URL::to('.'/detail-product/$value->id'.')}}">' . $value->title . '</a></h4> 
+                            <h4><a href="{{URL::to('.'/detail-product/$value->id'.')}}">' . $value->productname . '</a></h4> 
                             <p>' . $value->price . 'd</p> 
                         </div>'; 
                     
                 }
+            }else{
+                $output .= "<p>deo thay ket qua mo het</p>";
             }
+        }
         $output .= '</div>';
         echo $output;
     }
@@ -174,9 +180,9 @@ class AjaxController extends Controller
     public function show_all_products(Request $request)
     {
         $data = $request->all();
-        $products = Products::all();
+        $products = AdminProductModel::all();
         
-        $output = '<div style="width:90% !important;margin: auto; display: flex !important; flex-direction:row !important;">';
+        $output = '<div style="width:90% !important;margin:80px auto; display: flex !important; flex-direction:row !important; flex-wrap:wrap !important">';
         foreach($products as $product) {
             $output .=  
                         '<div style="width: 250px !important; border: 1px solid #000 !important;">
@@ -185,7 +191,7 @@ class AjaxController extends Controller
                                 src="image/ipad-pro.jpg" alt="Avatar">
                             </div>
                             
-                            <h4><a href="{{URL::to('.'/detail-product/$value->id'.')}}">' . $product->title . '</a></h4> 
+                            <h4><a href="{{URL::to('.'/detail-product/$value->id'.')}}">' . $product->productname . '</a></h4> 
                             <p>' . $product->price . 'd</p> 
                         </div>'; 
         }
@@ -193,9 +199,5 @@ class AjaxController extends Controller
         $output .= '</div>';
         echo $output;
 
-    }
-
-
-
-    
+    }  
 }

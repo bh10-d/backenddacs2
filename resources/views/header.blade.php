@@ -17,8 +17,14 @@
                             <a href="#">Phụ kiện</a>
                         </div>
                     </div>
-                    <input type="text" placeholder="> Nhập sản phẩm">
-                    <button type="submit" class="btn"><i class="fas fa-search"></i></button>
+                    <form action="" method="post">
+                        @csrf
+                        <input id="search-input" type="text" placeholder="> Nhập sản phẩm">
+                        <button type="submit" class="btn"><i class="fas fa-search"></i></button>
+
+
+                    </form>
+                    
                 </div>
             </div>
             <p class="header__hotline">
