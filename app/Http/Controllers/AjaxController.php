@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminProductModel;
 use App\Models\Products;
 // use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Session;
@@ -137,15 +138,66 @@ class AjaxController extends Controller
         Session::save();
 
     }
+    public function search(Request $request){
+        $products = AdminProductModel::all();
+        return view('show_all')->with('products',$products);
+    }
 
+    public function search_ajax(Request $request){
+        $data = $request->all();
+        
+        
+        if($data['query']){
+            $products = AdminProductModel::where('productname','like','%'.$data['query'].'%');
+            $output = '<div style="width:90% !important;margin:80px auto; display: flex !important; flex-direction:row !important; flex-wrap: wrap !important;" >';
+            
+            if($products->exists()) {
 
-    public function show_cart_ajax(Request $request)
+            
+                foreach($products->get() as $key => $value){
+                    // $output .=  $value->title;
+                    
+                    $output .=  
+                        '<div style="width: 250px !important; border: 1px solid #000 !important;">
+                            <div style="width: 100%;">
+                                <img style="width:100%; height: auto;" 
+                                src="image/ipad-pro.jpg" alt="Avatar">
+                            </div>
+                            
+                            <h4><a href="{{URL::to('.'/detail-product/$value->id'.')}}">' . $value->productname . '</a></h4> 
+                            <p>' . $value->price . 'd</p> 
+                        </div>'; 
+                    
+                }
+            }else{
+                $output .= "<p>deo thay ket qua mo het</p>";
+            }
+        }
+        $output .= '</div>';
+        echo $output;
+    }
+
+    public function show_all_products(Request $request)
     {
         $data = $request->all();
-        $cart = Session::get('cart');
+        $products = AdminProductModel::all();
+        
+        $output = '<div style="width:90% !important;margin:80px auto; display: flex !important; flex-direction:row !important; flex-wrap:wrap !important">';
+        foreach($products as $product) {
+            $output .=  
+                        '<div style="width: 250px !important; border: 1px solid #000 !important;">
+                            <div style="width: 100%;">
+                                <img style="width:100%; height: auto;" 
+                                src="image/ipad-pro.jpg" alt="Avatar">
+                            </div>
+                            
+                            <h4><a href="{{URL::to('.'/detail-product/$value->id'.')}}">' . $product->productname . '</a></h4> 
+                            <p>' . $product->price . 'd</p> 
+                        </div>'; 
+        }
 
-        print_r($data);
-        echo "<br>";
-        print_r($cart);
-    }
+        $output .= '</div>';
+        echo $output;
+
+    }  
 }
