@@ -13,7 +13,7 @@ function changetosignup() {
     document.querySelector(".login__block--signup").classList.remove("hidden")
     document.querySelector(".login__block").classList.add("hidden")
     document.querySelector("title").innerHTML = "Đăng ký"
-    document.querySelector(".redirect").href = "signup.html"
+    document.querySelector(".redirect").href = '/register'
     document.querySelector(".redirect").innerHTML = "Đăng ký"
 }
 
@@ -21,7 +21,7 @@ function changetologin() {
     document.querySelector(".login__block--signup").classList.add("hidden")
     document.querySelector(".login__block").classList.remove("hidden")
     document.querySelector("title").innerHTML = "Đăng nhập"
-    document.querySelector(".redirect").href = "login.html"
+    document.querySelector(".redirect").href = '/login'
     document.querySelector(".redirect").innerHTML = "Đăng nhập"
 }
 

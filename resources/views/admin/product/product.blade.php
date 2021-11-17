@@ -38,13 +38,13 @@
                             @foreach($product as $m)
                             <tr class="abc" style="display: none">
                                 <td>{{$m->code}}</td>
-                                <td>{{$m->productname}}</td>
-                                <td>{{$m->productcate}}</td>
-                                <td>giá quên tạo cột rồi</td>
-                                <td>{{$m->description}}</td>
-                                <td>{{$m->id}}</td>
-                            </tr>
-                            @endforeach
+                        <td>{{$m->productname}}</td>
+                        <td>{{$m->productcate}}</td>
+                        <td>giá quên tạo cột rồi</td>
+                        <td>{{$m->description}}</td>
+                        <td>{{$m->id}}</td>
+                        </tr>
+                        @endforeach
                         </table>--}}
                     </div>
                     <div id="demo"></div>
@@ -54,16 +54,17 @@
     </section>
     @include("admin.product.uploadproduct")
     <!-- </div> -->
-    <!-- <script src="{{ asset('js/admin/pagination.js') }}"></script>
-    <script src="{{ asset('js/admin/product/pagiproductadmin.js') }}"></script> -->
+    <script src="{{ asset('js/admin/pagination.js') }}"></script>
+    <!-- <script src="{{ asset('js/admin/product/pagiproductadmin.js') }}"></script> -->
     <script type="text/javascript">
         CKEDITOR.replace('editor', {
             filebrowserUploadUrl: "{{ route('ckeditor.upload',['_token'=> csrf_token()]) }}",
             filebrowserUploadMethod: 'form'
         });
+
         //ajax upload product
         $(document).ready(function() {
-            function product(){
+            function product() {
                 $.ajax({
                     url: "{{route('producttable')}}",
                     method: "get",
@@ -141,10 +142,9 @@
                         "description": $("#editor").val(),
                     },
                     success: function(data) {
-                        
-                        product();
+                        product(); // co the thay the cho $('#product').html(data);
                         console.log('submission was successful.');
-                        console.log(data);
+                        // console.log(data);
                     },
                     error: function(data) {
                         console.log('an error occurred.');

@@ -68,13 +68,13 @@ h4 {
 .header__search--listt {
     /* chinh sua */
     display: flex;
-    height: 35px;
+    height: 34px;
     align-items: center;
 }
 
 .header__search-droplist {
     display: block;
-    width: 17.54%;
+    width: 17.15%;
     /*17.64*/
 }
 
@@ -96,7 +96,7 @@ h4 {
 .drop {
     display: none;
     position: absolute;
-    margin-top: 7px;
+    margin-top: 6px;
     /*9px*/
     background-color: #f9f9f9;
     min-width: 160px;
@@ -124,13 +124,30 @@ h4 {
     display: block;
 } */
 
-.header__search input {
-    /* chinh sua */
+.header__search--listt form {
+    display: flex;
+    height: 100%;
+    width: 80%;
+}
+
+
+/* .header__search--listt>form>input,
+button {
+    height: 100%;
+} */
+
+.header__search--listt>form>input {
+    padding: 0px 0px 0px 10px;
+    width: 100%;
+}
+
+
+/* .header__search input {
     padding: 0px 0px 0px 10px;
     width: 80%;
     height: 100%;
     outline: none;
-}
+} */
 
 .btn {
     cursor: pointer;

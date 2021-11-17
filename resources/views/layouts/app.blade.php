@@ -121,7 +121,9 @@
             window.location.href="{{ url('/cart')}}";
         }
     </script>
+    
     <script src="{{ asset('js/convertnum.js') }}"></script>
+    <script src="{{ asset('js/script.js') }}"></script>
     @include('footer')
 </body>
 

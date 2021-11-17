@@ -6,7 +6,7 @@
             <a href="{{ url('/') }}" class="header__logo"><img class="logo" src="{{asset('image/logo.png')}}" alt="logo"></a>
             <div class="header__search">
                 <!--edit-->
-                <div class="header__search--listt">
+                <div class="header__search--listt">{{--cai nay co height--}}
                     <div class="header__search-droplist">
                         <a onclick="select();" class="select-hieu">Chọn danh mục <i class="fas fa-chevron-circle-down"></i></a>
                         <div class="drop">
@@ -21,8 +21,6 @@
                         @csrf
                         <input id="search-input" type="text" placeholder="> Nhập sản phẩm">
                         <button type="submit" class="btn"><i class="fas fa-search"></i></button>
-
-
                     </form>
                     
                 </div>
