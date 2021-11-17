@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/pagination.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
@@ -18,50 +19,43 @@
 <body>
     @include('admin.sidebar')
     <!-- <div id="product"> -->
-        <section class="home-section">
-            <div class="text"><span><i class="far fa-folder-open"></i> Inventory</span></div>
-            <div class="block">
-                <div class="card mb-3">
-                    <div class="card-body">
-                        <div class="table-responsive" id="product">{{-- id="product"--}}
-                            @include('admin.product.producttable')
-                            <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                <thead>
-                                    <tr>
-                                        <th>Mã sản phẩm</th>
-                                        <th>Tên sản phẩm</th>
-                                        <th>Thể loại</th>
-                                        <th>Giá</th>
-                                        <th>Mô tả</th>
-                                        <th>Xem chi tiết</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>IPXS</td>
-                                        <td>IPhone Xsmax</td>
-                                        <td>Điện thoại</td>
-                                        <td>15.000.000</td>
-                                        <td>buiduchieudangban</td>
-                                        <td><a href="#"><i class="far fa-eye"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>IP12PM</td>
-                                        <td>IPhone 12 Promax</td>
-                                        <td>Điện thoại</td>
-                                        <td>25.000.000</td>
-                                        <td>buiduchieudangban</td>
-                                        <td><a href="#"><i class="far fa-eye"></i></a></td>
-                                    </tr>
-                                </tbody>
-                            </table> -->
-                        </div>
+    <section class="home-section">
+        <div class="text"><span><i class="far fa-folder-open"></i> Inventory</span></div>
+        <div class="block">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="table-responsive" id="product">{{-- id="product"--}}
+                        {{--@include('admin.product.producttable')--}}
+                        {{--<table class="table table-bordered" id="datatest" width="100%" cellspacing="0">
+                            <tr class="abc1" style="display:none">
+                                <th>Mã sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Thể loại</th>
+                                <th>Giá</th>
+                                <th>Mô tả</th>
+                                <th>Xem chi tiết</th>
+                            </tr>
+                            @foreach($product as $m)
+                            <tr class="abc" style="display: none">
+                                <td>{{$m->code}}</td>
+                                <td>{{$m->productname}}</td>
+                                <td>{{$m->productcate}}</td>
+                                <td>giá quên tạo cột rồi</td>
+                                <td>{{$m->description}}</td>
+                                <td>{{$m->id}}</td>
+                            </tr>
+                            @endforeach
+                        </table>--}}
                     </div>
+                    <div id="demo"></div>
                 </div>
             </div>
-        </section>
-        @include("admin.product.uploadproduct")
+        </div>
+    </section>
+    @include("admin.product.uploadproduct")
     <!-- </div> -->
+    <!-- <script src="{{ asset('js/admin/pagination.js') }}"></script>
+    <script src="{{ asset('js/admin/product/pagiproductadmin.js') }}"></script> -->
     <script type="text/javascript">
         CKEDITOR.replace('editor', {
             filebrowserUploadUrl: "{{ route('ckeditor.upload',['_token'=> csrf_token()]) }}",
@@ -69,20 +63,17 @@
         });
         //ajax upload product
         $(document).ready(function() {
-            $(document).on('click', '.pagination a', function(event) {
-                event.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                fetch_data(page);
-            });
-
-            function fetch_data(page) {
+            function product(){
                 $.ajax({
-                    url: "/product/fetch_data?page=" + page,
+                    url: "{{route('producttable')}}",
+                    method: "get",
                     success: function(data) {
                         $('#product').html(data);
+                        // console.log(data);
                     }
                 });
-            }
+            };
+            product();
             // ajax upload anh len 
             var testdata = '';
             $('#pimg').change(function() { // change
@@ -150,7 +141,8 @@
                         "description": $("#editor").val(),
                     },
                     success: function(data) {
-                        $('#product').html(data); //#datatest
+                        
+                        product();
                         console.log('submission was successful.');
                         console.log(data);
                     },
@@ -165,7 +157,7 @@
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/admin/admin.js') }}"></script>
     <script src="{{ asset('js/validator.js') }}"></script>
 </body>
 

@@ -11,19 +11,26 @@ class AdminProductController extends Controller
 {
     public function index()
     {
-        // return view('admin.user');
-        $data = AdminProductModel::paginate(5);
-        return view('admin.product.product', compact('data'));
+        $product = AdminProductModel::get();
+        return view('admin/product.product')->with('product', $product);
+        // return view('admin.product.product');
+        // $data = AdminProductModel::paginate(5);
+        // return view('admin.product.product', compact('data'));
+    }
+
+    public function afterindex(){
+        $product = AdminProductModel::get();
+        return view('admin/product.producttable')->with('product', $product);
     }
 
 
-    function fetch_data(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = AdminProductModel::paginate(5);
-            return view('admin.product.producttable', compact('data'))->render();
-        }
-    }
+    // function fetch_data(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = AdminProductModel::paginate(5);
+    //         return view('admin.product.producttable', compact('data'))->render();
+    //     }
+    // }
 
     public function Upload(Request $request)
     {
@@ -112,7 +119,7 @@ class AdminProductController extends Controller
         $data = new AdminProductController();
         $response = new Response();
         $response->withCookie(cookie('image', null, 0));
-        return $data->index();
+        return $data->afterindex();
         // dd($id_product);
         // return $id_product[0];
     }

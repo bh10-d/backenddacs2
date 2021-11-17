@@ -30,11 +30,18 @@
             <div class="header__account">
                 <p>
                     <i class="far fa-user"></i>
-                    @if(Auth::user()==null)
-                    {{ __('Tài khoản') }}
+                    <!-- @if(Auth::user()==null)
+                        {{ __('Tài khoản') }}
                     @else
-                <p>Xin chào: {{Auth::user()->username}}</p>
-                @endif
+                        <p>Xin chào: {{Auth::user()->username}}</p>
+                    @endif -->
+                    @if(Route::has('login'))
+                        @auth 
+                            <p>Xin chào: {{Auth::user()->username}}</p>
+                        @else
+                            {{ __('Tài khoản') }}
+                        @endauth
+                    @endif
                 </p>
                 <div class="header__account--option">
                     @guest

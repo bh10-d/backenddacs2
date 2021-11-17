@@ -91,12 +91,15 @@
                         </div>
                         <div class="form-group">
                             <!-- <label for="pcate">Tỉnh/Thành phố:</label> -->
-                            <select class="form-control" name="pcate" id="pcate">
+                            <!-- <select class="form-control" name="pcate" id="pcate">
                                 <option value="1">Tỉnh/Thành phố</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
+                            </select> -->
+                            <select class="form-control" name="calc_shipping_provinces" required="">
+                                <option value="">Tỉnh / Thành phố</option>
                             </select>
                             <!-- <input type="text" class="form-control" id="pcate" placeholder="Enter category" name="pcate" required> -->
                             <div class="valid-feedback">Valid.</div>
@@ -104,19 +107,23 @@
                         </div>
                         <div class="form-group">
                             <!-- <label for="pcate">Quận/Huyện:</label> -->
-                            <select class="form-control" name="pcate" id="pcate">
+                            <!-- <select class="form-control" name="pcate" id="pcate">
                                 <option value="1">Quận/Huyện</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
                                 <option value="4">4</option>
                                 <option value="5">5</option>
+                            </select> -->
+                            <select class="form-control" name="calc_shipping_district" required="">
+                                <option value="">Quận / Huyện</option>
                             </select>
                             <!-- <input type="text" class="form-control" id="pcate" placeholder="Enter category" name="pcate" required> -->
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
-                        <div class="form-group">
-                            <!-- <label for="pcate">Phường/Xã:</label> -->
+                        <input class="billing_address_1" name="" type="hidden" value="">
+                        <input class="billing_address_2" name="" type="hidden" value="">
+                        <!-- <div class="form-group">
                             <select class="form-control" name="pcate" id="pcate">
                                 <option value="1">Phường/Xã</option>
                                 <option value="2">2</option>
@@ -124,10 +131,9 @@
                                 <option value="4">4</option>
                                 <option value="5">5</option>
                             </select>
-                            <!-- <input type="text" class="form-control" id="pcate" placeholder="Enter category" name="pcate" required> -->
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
-                        </div>
+                        </div> -->
                         <div class="form-group">
                             <select class="form-control" name="pcate" id="pcate">
                                 <option value="1">Phương thức thanh toán</option>
@@ -148,5 +154,79 @@
         </div>
     </div>
     <script src="{{asset('js/validator.js')}}"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
+    <script>
+        window.addEventListener('load', function() {
+                if (address_2 = localStorage.getItem('address_2_saved')) {
+                    $('select[name="calc_shipping_district"] option').each(function() {
+                        if ($(this).text() == address_2) {
+                            $(this).attr('selected', '')
+                        }
+                    })
+                    $('input.billing_address_2').attr('value', address_2)
+                }
+                if (district = localStorage.getItem('district')) {
+                    $('select[name="calc_shipping_district"]').html(district)
+                    $('select[name="calc_shipping_district"]').on('change', function() {
+                        var target = $(this).children('option:selected')
+                        target.attr('selected', '')
+                        $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+                        address_2 = target.text()
+                        $('input.billing_address_2').attr('value', address_2)
+                        district = $('select[name="calc_shipping_district"]').html()
+                        localStorage.setItem('district', district)
+                        localStorage.setItem('address_2_saved', address_2)
+                    })
+                }
+                $('select[name="calc_shipping_provinces"]').each(function() {
+                    var $this = $(this),
+                        stc = ''
+                    c.forEach(function(i, e) {
+                        e += +1
+                        stc += '<option value=' + e + '>' + i + '</option>'
+                        $this.html('<option value="">Tỉnh / Thành phố</option>' + stc)
+                        if (address_1 = localStorage.getItem('address_1_saved')) {
+                            $('select[name="calc_shipping_provinces"] option').each(function() {
+                                if ($(this).text() == address_1) {
+                                    $(this).attr('selected', '')
+                                }
+                            })
+                            $('input.billing_address_1').attr('value', address_1)
+                        }
+                        $this.on('change', function(i) {
+                            i = $this.children('option:selected').index() - 1
+                            var str = '',
+                                r = $this.val()
+                            if (r != '') {
+                                arr[i].forEach(function(el) {
+                                    str += '<option value="' + el + '">' + el + '</option>'
+                                    $('select[name="calc_shipping_district"]').html('<option value="">Quận / Huyện</option>' + str)
+                                })
+                                var address_1 = $this.children('option:selected').text()
+                                var district = $('select[name="calc_shipping_district"]').html()
+                                localStorage.setItem('address_1_saved', address_1)
+                                localStorage.setItem('district', district)
+                                $('select[name="calc_shipping_district"]').on('change', function() {
+                                    var target = $(this).children('option:selected')
+                                    target.attr('selected', '')
+                                    $('select[name="calc_shipping_district"] option').not(target).removeAttr('selected')
+                                    var address_2 = target.text()
+                                    $('input.billing_address_2').attr('value', address_2)
+                                    district = $('select[name="calc_shipping_district"]').html()
+                                    localStorage.setItem('district', district)
+                                    localStorage.setItem('address_2_saved', address_2)
+                                })
+                            } else {
+                                $('select[name="calc_shipping_district"]').html('<option value="">Quận / Huyện</option>')
+                                district = $('select[name="calc_shipping_district"]').html()
+                                localStorage.setItem('district', district)
+                                localStorage.removeItem('address_1_saved', address_1)
+                            }
+                        })
+                    })
+                })
+            })
+    </script>
 </body>
 </html>

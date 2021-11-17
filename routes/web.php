@@ -26,7 +26,7 @@ Route::resource('/', 'HomepageController');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/detail-product/{product_id}', 'ProductController@details_product');
 
 
@@ -59,7 +59,7 @@ Route::get('/thanhtoan', function(){return view('payment.thanhtoanv2');})->name(
 /--------------------------------------------------------------------------
 */
 
-Route::get('login',function (){return view('admin.login');})->name('login');
+// Route::get('login',function (){return view('admin.login');})->name('login');
 
 // Route::get('facebook/{social}','SocialController@redirectToProvider');
 // Route::get('check-facebook/{social}','SocialController@check');
@@ -101,7 +101,8 @@ Route::get('chart', function() { return view('admin.chart.chart');})->name('char
 Route::get('product', function() { return view('admin.product.product');})->name('product')->middleware(['auth','role:admin']);
 Route::get('product', 'AdminProductController@index')->name('product')->middleware(['auth','role:admin']);
 
-Route::get('product/fetch_data', 'AdminProductController@fetch_data');
+Route::get('producttable','AdminProductController@afterindex')->name('producttable')->middleware(['auth','role:admin']);
+// Route::get('product/fetch_data', 'AdminProductController@fetch_data');
 
 Route::post('uploadproduct',[
     'uses'=>'AdminProductController@UploadProduct',

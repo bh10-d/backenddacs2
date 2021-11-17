@@ -1,6 +1,6 @@
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
-        <tr>
+        <tr class="abc1" >{{--style="display:none;"--}}
             <th>Mã sản phẩm</th>
             <th>Tên sản phẩm</th>
             <th>Thể loại</th>
@@ -10,16 +10,17 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($data as $row)
-        <tr>
-            <td>{{ $row->code }}</td>
-            <td>{{ $row->productname }}</td>
-            <td>{{ $row->productcate }}</td>
-            <td>giá quên tạo cột r</td>
-            <td>{!! $row->description !!}</td>
-            <td><a href="{{route('test',$row->id)}}"><i class="far fa-eye"></i></a></td>
+        @foreach($product as $m)
+        <tr class="abc" >{{--style="display:none;"--}}
+            <td>{{$m->code}}</td>
+            <td>{{$m->productname}}</td>
+            <td>{{$m->productcate}}</td>
+            <td>giá quên tạo cột rồi</td>
+            <td>{!! $m->description !!}</td>
+            <td>{{$m->id}}</td>
         </tr>
         @endforeach
-        {!! $data->links() !!}
     </tbody>
 </table>
+<script src="{{ asset('js/admin/pagination.js') }}"></script>
+<script src="{{ asset('js/admin/product/pagiproductadmin.js') }}"></script>

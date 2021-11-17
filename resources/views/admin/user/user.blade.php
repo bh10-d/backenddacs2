@@ -158,7 +158,7 @@
         });
     </script>
     <script src="{{ asset('js/script.js') }}"></script>
-    <script src="{{ asset('js/admin.js') }}"></script>
+    <script src="{{ asset('js/admin/admin.js') }}"></script>
     <script src="{{ asset('js/validator.js') }}"></script>
 </body>
 
