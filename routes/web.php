@@ -46,9 +46,10 @@ Route::post('/update-cart-ajax', 'AjaxController@update_cart_ajax')->name('updat
 Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.ajax');
 
 // Route::get('/show-cart-ajax','AjaxController@show_cart_ajax');
+//thanh toán
 Route::post('/purchase','AjaxController@purchase');
 Route::get('/thanhtoan', function(){return view('payment.thanhtoanv2');})->name('thanhtoan');
-
+Route::get('/success', function(){return view('payment.success');})->name('success');
 
 //route search
 Route::get('/search', 'AjaxController@search');

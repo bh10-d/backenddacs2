@@ -78,6 +78,8 @@
                 dataSource: obj,
                 // className: 'paginationjs-theme-blue paginationjs-small',
                 pageSize: 5,
+                showGoInput: true,
+                showGoButton: true,
                 callback: function(data, pagination) {
                     var html = simpleTemplating(data);
                     $('#product').html(html); //#data-container
