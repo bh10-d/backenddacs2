@@ -130,8 +130,8 @@
                 lua.html(qty);
                 console.log('quantity: ', qty);
             },
-            error: function() {
-
+            error: function(response) {
+                console.log("error change:"+response)
             }
         });
     });
@@ -161,7 +161,7 @@
                 lua.html(qty);
                 console.log('quantity: ', qty);
             },
-            error: function() {
+            error: function(response) {
 
             }
         });

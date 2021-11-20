@@ -15,7 +15,7 @@
             <td>{{$m->code}}</td>
             <td>{{$m->productname}}</td>
             <td>{{$m->productcate}}</td>
-            <td>giá quên tạo cột rồi</td>
+            <td>{{ $m->price }}</td>
             <td>{!! $m->description !!}</td>
             <td>{{$m->id}}</td>
         </tr>

@@ -93,6 +93,7 @@ class AdminProductController extends Controller
         $id = $request->id;
         $name = $request->name;
         $category = $request->category;
+        $price = $request->price;
         $quantity = $request->quantity;
         $description = $request->description;
         if ($category == 1) $category = 'dienthoai';
@@ -101,7 +102,7 @@ class AdminProductController extends Controller
 
         $image = $request->cookie('image');
 
-        DB::insert('insert into admin_product_models (code, productname, productcate, description) values (?, ?, ?, ?)', [$id, $name, $category, $description]);
+        DB::insert('insert into admin_product_models (code, productname, productcate, price, quantity, description) values (?, ?, ?, ?, ?, ?)', [$id, $name, $category, $price, $quantity,$description]);
     
         // $id_product = DB::table('admin_product_models')->select('id')->where('code',[$id])->first();
         $id_product = AdminProductModel::where('code', $id)->first();

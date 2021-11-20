@@ -15,6 +15,8 @@ class AdminProductModel extends Model
         'productname',
         'productcate',
         'quantity',
+        'price',
+        'quantity',
         'description'
     ];
 }

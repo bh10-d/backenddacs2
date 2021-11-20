@@ -83,8 +83,11 @@
                     },
                     success: function(data) {
                         // $("#price-cart").html("ahihi");
-                        window.location.href = "{{url('/cart')}}"
+                        window.location.href = "{{URL::to('/cart')}}"
 
+                    },
+                    error: function(data) {
+                        console.log(data)
                     }
 
                 });

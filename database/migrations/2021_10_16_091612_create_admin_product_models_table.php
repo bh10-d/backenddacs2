@@ -18,7 +18,8 @@ class CreateAdminProductModelsTable extends Migration
             $table->string('code');
             $table->string('productname',100);
             $table->string('productcate',50);
-            
+            $table->bigInteger('price');
+            $table->bigInteger('quantity');
             $table->string('description');
             $table->timestamps();
         });

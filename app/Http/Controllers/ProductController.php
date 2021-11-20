@@ -18,16 +18,20 @@ class ProductController extends Controller
     {
         //
     }
+    
 
     public function details_product($product_id){
-        $get_detail = DB::table('imagetables')->join('products','products.id','=',
-        'imagetables.id_product')->where('products.id',$product_id)->get();
+        $get_detail = DB::table('imagetables')->join('admin_product_models','admin_product_models.id','=',
+        'imagetables.id_product')->where('admin_product_models.id',$product_id)->get();
 
-        return view('chitiet')->with('details',$get_detail);//detail
+        //them truy van
+        $get_detailNoJoin = DB::table('admin_product_models')->where('admin_product_models.id',$product_id)->get();
+        // test
+        return view('chitiet')->with('details',$get_detail)->with('detailsnojoin',$get_detailNoJoin);//detail
     }
 
     public static function cart_product(Request $request,$cart_id){
-        $product_ordered = DB::table('products')->where('id','=',$cart_id)->get();
+        $product_ordered = DB::table('admin_product_models')->where('id','=',$cart_id)->get();
     
         // return view('cart')->with('info_ordered',$product_ordered);
         // $minute = 7;

@@ -138,7 +138,9 @@
                         "_token": '{{csrf_token()}}',
                         "id": $("#code").val(),
                         "name": $("#pname").val(),
+                        "price": $("#pprice").val(),
                         "category": $("#pcate").val(),
+                        "quantity":$("#pquan").val(),
                         "description": $("#editor").val(),
                     },
                     success: function(data) {

@@ -30,6 +30,7 @@
             </div>
         </section>
         <section class="">{{--product details-main--}}
+            
             {{--@foreach ($details as $d)--}}
             <div class="container">
                 <div class="bg_product">{{--clearfix--}}
@@ -38,7 +39,7 @@
                             <div class="row ">
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="title_p">
-                                        <h1 class="title-product">{{ $details[0]->title }}</h1>
+                                        <h1 class="title-product">{{ $details[0]->productname }}</h1>
                                         <!-- <div class="reviews_details_product ">
                                             <div class="sapo-product-reviews-badge sapo-product-reviews-badge-detail" data-id="18703977"></div>
                                         </div> -->
@@ -65,12 +66,15 @@
                                                 </div> -->
                                             <!-- </div> -->
                                         </div>
+                                        @foreach($detailsnojoin as $data)
+                                                                     
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 details-pro">
-                                            <form class="form_background form-inline margin-bottom-0">{{-- enctype="multipart/form-data" id="add-to-cart-form" action="/cart/add" method="post" --}}
+                                            <form method="get" class="form_background form-inline margin-bottom-0">{{-- enctype="multipart/form-data" id="add-to-cart-form" action="/cart/add" method="post" --}}
                                                 {{--khong phan su mien vao--}}
                                                 @csrf
+                                                {{--thay doi title to productname--}}
                                                 <input type="hidden" value="{{$details[0]->id}}" class="cart_product_id_{{$details[0]->id}}">
-                                                <input type="hidden" value="{{$details[0]->title}}" class="cart_product_title_{{$details[0]->id}}">
+                                                <input type="hidden" value="{{$details[0]->productname}}" class="cart_product_title_{{$details[0]->id}}">
                                                 <input type="hidden" value="{{$details[0]->price}}" class="cart_product_price_{{$details[0]->id}}">
                                                 <input type="hidden" value="{{$details[0]->image}}" class="cart_product_image_{{$details[0]->id}}">
                                                 <input type="hidden" value="1" class="cart_product_qty_{{$details[0]->id}}">
@@ -79,7 +83,7 @@
                                                     <div class="price-box">
 
                                                         <span class="special-price">
-                                                            <span class="price product-price price-custom-hieu">{{ $details[0]->price }}</span><span class="product-price">₫</span>
+                                                            {{--<span class="price product-price price-custom-hieu">{{ $details[0]->price }}</span><span class="product-price">₫</span>--}}
                                                         </span>
                                                         <!-- <span class="old-price" itemprop="priceSpecification" itemscope="" itemtype="http://schema.org/priceSpecification">
                                                             Giá thị trường:
@@ -116,10 +120,12 @@
                                                                 <!-- <button class="btn_num num_1 button button_qty" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro ) &amp;&amp; qtypro &gt; 1 ) result.value--;return false;" type="button"><i class="fas fa-minus"></i></button>
                                                                 <input type="text" id="qtym" name="quantity" value="1" maxlength="3" class="form-control prd_quantity" onkeypress="if ( isNaN(this.value + String.fromCharCode(event.keyCode) )) return false;" onchange="if(this.value == 0)this.value=1;">
                                                                 <button class="btn_num num_2 button button_qty" onClick="var result = document.getElementById('qtym'); var qtypro = result.value; if( !isNaN( qtypro )) result.value++;return false;" type="button"><i class="fas fa-plus"></i></button> -->
+                                                                {{ $data->quantity }} 
+                                                            
                                                             </div>
                                                         </div>
                                                         <div class="btn-mua button_actions">
-                                                            <button type="submit" class=" btn btn_base normal_button add-to-cart" name="add-to-cart" data-id_product="{{$details[0]->id}}">Thêm vào giỏ hàng</button>
+                                                            <button type="submit" class=" btn btn_base normal_button add-to-cart" name="add-to-cart" data-id_product="{{$data->id}}">Thêm vào giỏ hàng</button>
                                                             <button type="submit" class=" btn btn_base fast purchase" name="purchase" data-id_product="{{$details[0]->id}}">
                                                                 <span class="txt-main text_1">Mua ngay</span>
                                                             </button>
@@ -128,6 +134,7 @@
                                                 </div>
                                             </form>
                                         </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>

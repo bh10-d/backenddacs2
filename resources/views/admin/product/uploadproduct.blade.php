@@ -32,11 +32,19 @@
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
                     <div class="form-group">
+                        <label for="pprice">Gia :</label>
+                        <input type="number" class="form-control" id="pprice" placeholder="Enter price" name="pprice" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+
+                    <div class="form-group">
                         <label for="pquan">Số lượng:</label>
                         <input type="number" class="form-control" id="pquan" placeholder="Enter quantity" name="pquan" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
+
                     <div class="form-group">
                         <label for="pimg">Hình ảnh:</label>
                         <input type="file" class="form-control-file border" id="pimg" placeholder="Enter image" name="pimg" multiple required>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AdminProductModel;
 use Illuminate\Http\Request;
 use App\Models\Products;
 
@@ -16,7 +17,7 @@ class HomepageController extends Controller
     {
         //
         
-        $allproduct = Products::all();
+        $allproduct = AdminProductModel::all();
         return view('homepage')->with('allproduct',$allproduct);
         
     }

@@ -187,7 +187,7 @@
 
             <div class="container">
 
-                <h4><a href="{{URL::to('/detail-product/'.$product->id)}}">{{$product->title}}</a></h4>
+                <h4><a href="{{URL::to('/detail-product/'.$product->id)}}">{{$product->productname}}</a></h4>
                 <p>{{$product->price}} d</p>
             </div>
         </div>
