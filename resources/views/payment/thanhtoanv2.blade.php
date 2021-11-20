@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <title>Thanh toan</title>
+    <title>Thanh toán</title>
 </head>
 
 <body>
@@ -66,7 +66,6 @@
             </div>
         </div>
         <div class="main__block--info">
-            <!-- <h1>thanh toan</h1> -->
             <div>
                 <div class="check--info">
                     <div>
@@ -75,7 +74,13 @@
                     <form action="" class="needs-validation" novalidate>
                         <div class="form-group">
                             <div class="form-label-group">
-                                <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="email" required>
+                                @if(Route::has('login'))
+                                    @auth
+                                    <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="email" value="{{Auth::user()->username}}"required>
+                                    @else
+                                    <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="email" required>
+                                    @endauth
+                                @endif
                                 <label for="username">Họ và Tên</label>
                                 <div class="valid-feedback">Có hiệu lực</div>
                                 <div class="invalid-feedback">Vui lòng điền vào trường này</div>
@@ -90,62 +95,65 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <!-- <label for="pcate">Tỉnh/Thành phố:</label> -->
-                            <!-- <select class="form-control" name="pcate" id="pcate">
-                                <option value="1">Tỉnh/Thành phố</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select> -->
                             <select class="form-control" name="calc_shipping_provinces" required="">
                                 <option value="">Tỉnh / Thành phố</option>
                             </select>
-                            <!-- <input type="text" class="form-control" id="pcate" placeholder="Enter category" name="pcate" required> -->
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <div class="form-group">
-                            <!-- <label for="pcate">Quận/Huyện:</label> -->
-                            <!-- <select class="form-control" name="pcate" id="pcate">
-                                <option value="1">Quận/Huyện</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select> -->
                             <select class="form-control" name="calc_shipping_district" required="">
                                 <option value="">Quận / Huyện</option>
                             </select>
-                            <!-- <input type="text" class="form-control" id="pcate" placeholder="Enter category" name="pcate" required> -->
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <input class="billing_address_1" name="" type="hidden" value="">
                         <input class="billing_address_2" name="" type="hidden" value="">
-                        <!-- <div class="form-group">
-                            <select class="form-control" name="pcate" id="pcate">
-                                <option value="1">Phường/Xã</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
-                        </div> -->
                         <div class="form-group">
-                            <select class="form-control" name="pcate" id="pcate">
-                                <option value="1">Phương thức thanh toán</option>
-                                <option value="2">COD</option>
-                                <option value="3">Thanh toán trực tuyến</option>
-                            </select>
+                        <div class="form-label-group">
+                                <input type="text" class="form-control" id="addressdetail" placeholder="Địa chỉ chi tiết" name="addressdetail" required>
+                                <label for="addressdetail">Địa chỉ chi tiết</label>
+                                <div class="valid-feedback">Có hiệu lực</div>
+                                <div class="invalid-feedback">Vui lòng điền vào trường này</div>
+                            </div>
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
+                        <div class="form-group">
+                            <div class="content-box">
+                                <div class="content-box__row">
+                                    <div class="radio-wrapper">
+                                        <div class="radio__input">
+                                            <input name="paymentMethod" id="paymentMethod-cod" type="radio" class="input-radio" data-bind="paymentMethod" value="470984">
+                                        </div>
+                                        <label for="paymentMethod-cod" class="radio__label d-link">
+                                            <span class="radio__label__primary">Thanh toán khi giao hàng (COD)</span>
+                                            <span class="radio__label__accessory"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="content-box__row">
+                                    <div class="radio-wrapper">
+                                        <div class="radio__input">
+                                            <input name="paymentMethod" id="paymentMethod-online" type="radio" class="input-radio" data-bind="paymentMethod" value="470984">
+                                        </div>
+                                        <label for="paymentMethod-online" class="radio__label link">
+                                            <span class="radio__label__primary">Thanh toán online</span>
+                                            <!-- <span class="radio__label__accessory"></span> -->
+                                            <ul class="submenu" id="test">
+                                                <li><a href="#">Thanh toán bằng momo</a></li>
+                                                <li><a href="#">Thanh toán bằng Vnpay</a></li>
+                                            </ul>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col text-center">
-                                <button type="submit" class="btn btn-success">Xác nhận đơn hàng</button>
+                                <!-- <button type="submit" class="btn btn-success">Xác nhận đơn hàng</button> -->
+                                <a href="{{ route('success') }}" class="btn btn-success">Xác nhận đơn hàng</a>
                             </div>
                         </div>
                     </form>
@@ -156,6 +164,19 @@
     <script src="{{asset('js/validator.js')}}"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
     <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
+    <script>
+        $(document).ready(function() {
+            $('.link').click(function() {
+                $('.submenu').slideToggle('slow').addClass("show");
+            });
+            $('.d-link').click(function() {
+                if ($('#test').hasClass('show')) {
+                    $('.submenu').slideToggle('slow').removeClass("show");
+                }
+                console.log($('#test').hasClass('show'));
+            });
+        })
+    </script>
     <script>
         window.addEventListener('load', function() {
                 if (address_2 = localStorage.getItem('address_2_saved')) {
