@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -24,10 +25,10 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Orders</th>
-                                    <th>Total</th>
+                                    <th>Tên</th>
+                                    <th>Số điện thoại</th>
+                                    <th>Chi tiết đơn hàng</th>
+                                    <th>Tổng tiền</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,30 +38,16 @@
                                     <td><a href="#"><i class="far fa-eye"></i></a></td>
                                     <td>$320,800</td>
                                 </tr>
+                                @if(isset($orders))
+                                @foreach($orders as $order)
                                 <tr>
-                                    <td>Garrett Winters</td>
-                                    <td>Accountant</td>
-                                    <td><a href="#"><i class="far fa-eye"></i></a></td>
-                                    <td>$170,750</td>
+                                    <td>{{$order->NameUser}}</td>
+                                    <td>0{{$order->PhoneUser}}</td>
+                                    <td><a href="{{$order->CodeOrder}}"><i class="far fa-eye"></i></a></td>
+                                    <td>{{$order->Price * $order->Quantity}}</td>
                                 </tr>
-                                <tr>
-                                    <td>Ashton Cox</td>
-                                    <td>Junior Technical Author</td>
-                                    <td><a href="#"><i class="far fa-eye"></i></a></td>
-                                    <td>$86,000</td>
-                                </tr>
-                                <tr>
-                                    <td>Cedric Kelly</td>
-                                    <td>Senior Javascript Developer</td>
-                                    <td><a href="#"><i class="far fa-eye"></i></a></td>
-                                    <td>$433,060</td>
-                                </tr>
-                                <tr>
-                                    <td>Airi Satou</td>
-                                    <td>Accountant</td>
-                                    <td><a href="#"><i class="far fa-eye"></i></a></td>
-                                    <td>$162,700</td>
-                                </tr>
+                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

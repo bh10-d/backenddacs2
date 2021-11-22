@@ -38,13 +38,13 @@
                             @foreach($product as $m)
                             <tr class="abc" style="display: none">
                                 <td>{{$m->code}}</td>
-                        <td>{{$m->productname}}</td>
-                        <td>{{$m->productcate}}</td>
-                        <td>giá quên tạo cột rồi</td>
-                        <td>{{$m->description}}</td>
-                        <td>{{$m->id}}</td>
-                        </tr>
-                        @endforeach
+                                <td>{{$m->productname}}</td>
+                                <td>{{$m->productcate}}</td>
+                                <td>giá quên tạo cột rồi</td>
+                                <td>{{$m->description}}</td>
+                                <td>{{$m->id}}</td>
+                            </tr>
+                            @endforeach
                         </table>--}}
                     </div>
                     <div id="demo"></div>
