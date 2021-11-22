@@ -14,7 +14,7 @@
         </div>
         <h1>Thành công</h1>
         <p>Bạn đã mua hàng thành công<br/> in hóa đơn
-            <a href="#">tại đây!</a>{{--chức năng in hóa đơn của dũng--}}
+            <a target="__blank" href="{{ URL::to('/bill') }}">tại đây!</a>{{--chức năng in hóa đơn của dũng--}}
         </p>
         <div class="info">
             <table cellspacing="0" cellpadding="0" border="0" width="100%">

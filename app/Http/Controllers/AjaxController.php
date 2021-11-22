@@ -7,7 +7,9 @@ use App\Models\Products;
 // use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session as FacadesSession;
+use PDF;
 
 class AjaxController extends Controller
 {
@@ -22,46 +24,8 @@ class AjaxController extends Controller
     {
 
         return view('carttwo');
-        // return view('test');
+
     }
-
-    // public function addToCart($id){
-    //     $product = Products::findOrFail($id);
-
-    //     $cart = session()->get('cart',[]);
-    //     // $cart = Cookie::queue('cart', [], 43200);
-    //     if(isset($cart[$id])){
-    //         $cart[$id]['quantity']++;
-
-    //     }else{
-    //         $cart[$id] = [
-    //             'title' => $product->name,
-    //             'price' => $product->price,
-    //             'quantity' => 1,
-    //             'discount_price' => $product->discount_price,
-    //             'detail_products' => $product->detail_products
-    //         ];
-    //     }
-    //     session()->put('cart',$cart);
-    //     // Cookie::queue('cart', $cart);
-
-
-    //     // echo Cookie::get('cart');
-    //     return view('cart');
-
-
-    // }
-
-    // public function update(Request $request){
-    //     if($request->id && $request->quantity){
-    //         $cart = session()->get('cart');
-    //         // $cart = Cookie::get('cart');
-    //         $cart[$request->id]["quantity"] = $request->quantity;
-    //         // Cookie::queue('cart', $cart, 43200);
-    //         session()->put('cart',$cart);
-    //         session()->flash('success', 'Cart updated successfully');
-    //     }
-    // }
 
     public function remove(Request $request){ //  ham nay can phai sua lai co bug
         if($request->id) {
@@ -199,5 +163,15 @@ class AjaxController extends Controller
         $output .= '</div>';
         echo $output;
 
-    }  
+    }
+
+
+    public function createPDF($id_product){
+        $pdf = App::make('dompdf.wrapper');
+        $pdf->loadHTML($this->contentPDF($id_product));
+        return $pdf->stream();
+    }
+    public function contentPDF($id_product){
+        
+    }
 }

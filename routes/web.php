@@ -56,6 +56,12 @@ Route::get('/search', 'AjaxController@search');
 Route::post('/search-ajax', 'AjaxController@search_ajax');
 Route::post('/show-all', 'AjaxController@show_all_products');
 
+
+//route pdf
+Route::get('/bill/{id}','AjaxController@createPDF');
+
+
+
 //test
 
 /*
