@@ -48,8 +48,9 @@ Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.
 // Route::get('/show-cart-ajax','AjaxController@show_cart_ajax');
 //thanh toán
 Route::post('/purchase','AjaxController@purchase');
-Route::get('/thanhtoan', function(){return view('payment.thanhtoanv2');})->name('thanhtoan');
-Route::get('/success', function(){return view('payment.success');})->name('success');
+Route::get('/thanhtoan', 'Pay\PaymentController@index')->name('thanhtoan');
+Route::get('/loadpayment','Pay\PaymentController@payment')->name('loadpayment');
+Route::get('/success', 'Pay\PaymentController@success')->name('success');
 
 //route search
 Route::get('/search', 'AjaxController@search');
@@ -115,7 +116,7 @@ Route::post('uploadstaff',[
 Route::get('chart', function() { return view('admin.chart.chart');})->name('chart')->middleware(['auth','role:admin']);
 
 //                                  Product
-Route::get('product', function() { return view('admin.product.product');})->name('product')->middleware(['auth','role:admin']);
+// Route::get('product', function() { return view('admin.product.product');})->name('product')->middleware(['auth','role:admin']);
 Route::get('product', 'AdminProductController@index')->name('product')->middleware(['auth','role:admin']);
 
 Route::get('producttable','AdminProductController@afterindex')->name('producttable')->middleware(['auth','role:admin']);
@@ -134,7 +135,8 @@ Route::post('upload','AdminProductController@Upload')->name('ckeditor.upload');
 // Route::resource('ckeditor','CkeditorController');
 Route::get('test/{id}','AdminProductController@test')->name('test');
 //                                  Oder
-Route::get('order', function() { return view('admin.order.order');})->name('order');
+// Route::get('order', function() { return view('admin.order.order');})->name('order')->middleware('auth','role:admin');
+Route::get('order', 'AdminOrderController@index')->name('order')->middleware('auth','role:admin');
 /*
 /--------------------------------------------------------------------------
 /                                END ADMIN PAGE
