@@ -312,7 +312,7 @@
                         }
                     });
                 }
-<<<<<<< HEAD
+
                 $.ajax({
                     type: "GET",
                     cache: false,
@@ -349,8 +349,7 @@
 
                 // Muon data lam pdf
                 
-=======
->>>>>>> 30ee56340f9810f20586d299d88be51faf95df31
+
             });
 
         });

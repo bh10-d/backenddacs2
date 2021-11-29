@@ -16,8 +16,13 @@
             <td>{{$m->productname}}</td>
             <td>{{$m->productcate}}</td>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <td>{{ $m->price }}</td>
             <td>{!! $m->description !!}</td>
+=======
+            <td>giá quên tạo cột rồi</td>
+            {{--<td>{!! $m->description !!}</td>--}}
+>>>>>>> 30ee56340f9810f20586d299d88be51faf95df31
 =======
             <td>giá quên tạo cột rồi</td>
             {{--<td>{!! $m->description !!}</td>--}}

@@ -12,15 +12,17 @@ use Illuminate\Support\Facades\Redirect;
 class PaymentController extends Controller
 {
     //
-    public function index(){
-        if(Session::get('cart')!=null){
+    public function index()
+    {
+        if (Session::get('cart') != null) {
             return view('payment.thanhtoanv2');
-        }else{
+        } else {
             return Redirect::to('/'); //Redirect::route('payment')
         }
     }
 
-    public function payment(Request $request){
+    public function payment(Request $request)
+    {
         $iduser = $request->iduser;
         $name = $request->username;
         $phone = $request->phoneuser;
@@ -75,13 +77,14 @@ class PaymentController extends Controller
         }
     }
 
-    public function success(){
+    public function success()
+    {
         $lastdata = Session::get('cart');
         Session::forget('cart');
         Session::save();
-        if(isset($lastdata)){
+        if (isset($lastdata)) {
             return view('payment.success')->with('data', $lastdata);
-        }else{
+        } else {
             return Redirect::to('/');
         }
     }

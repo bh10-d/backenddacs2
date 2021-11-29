@@ -1,5 +1,6 @@
 <section class="home-section">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <div class="text"><span onclick="showupload();"><i class="far fa-folder-open"></i> Upload Products</span></div>
         <div class="block pt-3 uploadpro hidden">
             <form action="{{ route('product') }}" class="needs-validation" id="myForm" novalidate>
@@ -51,6 +52,8 @@
                         <input type="file" class="form-control-file border" id="pimg" placeholder="Enter image" name="pimg" multiple required>
                         <span id="error_multiple_files"></span>
 =======
+=======
+>>>>>>> 30ee56340f9810f20586d299d88be51faf95df31
     <div class="text"><span onclick="showupload();"><i class="far fa-folder-open"></i> Upload Products</span></div>
     <div class="block pt-3 uploadpro hidden">
         <form action="{{ route('product') }}" class="needs-validation" id="myForm" novalidate>
@@ -60,6 +63,9 @@
                     <div class="form-group col-xl-2">
                         <label for="code">Mã sản phẩm:</label>
                         <input type="text" class="form-control" id="code" placeholder="Enter Code product" name="code" required>
+<<<<<<< HEAD
+>>>>>>> 30ee56340f9810f20586d299d88be51faf95df31
+=======
 >>>>>>> 30ee56340f9810f20586d299d88be51faf95df31
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>

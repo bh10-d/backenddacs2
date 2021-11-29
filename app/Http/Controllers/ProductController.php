@@ -21,6 +21,7 @@ class ProductController extends Controller
     
 
     public function details_product($product_id){
+<<<<<<< HEAD
         $get_detail = DB::table('imagetables')->join('admin_product_models','admin_product_models.id','=',
         'imagetables.id_product')->where('admin_product_models.id',$product_id)->get();
 
@@ -30,6 +31,12 @@ class ProductController extends Controller
         return view('chitiet')->with('details',$get_detail)->with('detailsnojoin',$get_detailNoJoin);//detail
 
     
+=======
+        $get_detail = DB::table('imagetables')->join('products','products.id','=',
+        'imagetables.id_product')->where('products.id',$product_id)->get();
+        // dd($get_detail);
+        return view('chitiet')->with('details',$get_detail);//detail
+>>>>>>> 30ee56340f9810f20586d299d88be51faf95df31
     }
 
     public static function cart_product(Request $request,$cart_id){
