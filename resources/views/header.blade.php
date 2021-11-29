@@ -17,10 +17,18 @@
                             <a href="#">Phụ kiện</a>
                         </div>
                     </div>
+
                     <form action="" method="post">
                         @csrf
-                        <input id="search-input" type="text" placeholder="> Nhập sản phẩm">
-                        <button type="submit" class="btn"><i class="fas fa-search"></i></button>
+                        {{--de anh hiu them div de boc input dropdown data search--}}
+                        <div>
+                            <input id="search-input" autocomplete="off" type="text" placeholder="> Nhập sản phẩm">
+                            <div id="search-block"></div>
+
+                        </div>
+                        
+                        
+                        {{--<button type="submit" class="btn"><i class="fas fa-search"></i></button>--}}
                     </form>
                     
                 </div>
@@ -177,3 +185,38 @@
         </div>
     </div>
 </div>
+
+@section('script')
+<script>
+    $('#search-input').keyup(function () {
+        let query = $(this).val();
+        if(query != "") {
+            let _token = $('input[name="_token"]').val();
+            
+            
+            $.ajax({
+                url:"{{ url('/search-block') }}",
+                method: "POST",
+                data: {query:query, _token:_token},
+                success: function(data) {
+                    
+                    // $('#search-block').fadeIn();
+                    $('#search-block').html(data);
+                    console.log(data);
+                },
+                error: function(response){
+                    console.log(response)
+                }
+
+
+            });
+        }else{
+            // $('#search-block').fadeOut();
+        }
+
+    });
+</script>
+
+
+
+@endsection

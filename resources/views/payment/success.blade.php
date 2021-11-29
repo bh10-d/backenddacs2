@@ -14,7 +14,7 @@
         </div>
         <h1>Thành công</h1>
         <p>Bạn đã mua hàng thành công<br/> in hóa đơn
-            <a target="__blank" href="{{ URL::to('/bill') }}">tại đây!</a>{{--chức năng in hóa đơn của dũng--}}
+            <a target="__blank" href="{{ URL::to('/render-bill') }}">tại đây!</a>{{--chức năng in hóa đơn của dũng--}}
         </p>
         <div class="info">
             @if(isset($data))

@@ -56,11 +56,11 @@ Route::get('/success', 'Pay\PaymentController@success')->name('success');
 Route::get('/search', 'AjaxController@search');
 Route::post('/search-ajax', 'AjaxController@search_ajax');
 Route::post('/show-all', 'AjaxController@show_all_products');
-
+Route::post('/search-block', 'AjaxController@search_dropdown');
 
 //route pdf
-Route::get('/bill/{id}','AjaxController@createPDF');
-
+// Route::get('/data-bill','AjaxController@contentPDF');
+Route::get('/render-bill','AjaxController@createPDF');
 
 
 //test

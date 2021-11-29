@@ -8,6 +8,7 @@ use App\Models\Products;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use PDF;
 
@@ -64,6 +65,7 @@ class AjaxController extends Controller
                     'product_id' => $data['cart_product_id'],
                     'product_image' => $data['cart_product_image'],//hieu-test
                     'product_qty' => $data['cart_product_qty'],
+                    'product_rest_qty' => $data['cart_qty_rest'],
                     'product_price' => $data['cart_product_price'],
                     'test' => 'them product nhung la laan 2 tro di'
                 );
@@ -76,6 +78,7 @@ class AjaxController extends Controller
                 'product_id' => $data['cart_product_id'],
                 'product_image' => $data['cart_product_image'],//hieu-test
                 'product_qty' => $data['cart_product_qty'],
+                'product_rest_qty' => $data['cart_qty_rest'],
                 'product_price' => $data['cart_product_price'],
                 'test' => 'session nay cap nhat lai tu dau o else'
             );
@@ -105,6 +108,30 @@ class AjaxController extends Controller
     public function search(Request $request){
         $products = AdminProductModel::all();
         return view('show_all')->with('products',$products);
+    }
+
+    public function search_dropdown(Request $request){
+        $data = $request->all();
+        
+        if($data['query']){
+            $products = AdminProductModel::where('productname','like','%'.$data['query'].'%');
+            $output = '<ul class="dropdown-menu" style="z-index:999999 !important; display:block !important; position:relative !important">';
+            if($products->exists()) {
+                foreach($products->get() as $key => $value){
+                    $output .= '<li style="z-index:99999999 !important;"><a href="'.'/detail-product/'.$value->id.'">'.$value->productname.'</a></li>';
+                    
+                };
+                $output .= '</ul>';
+            
+            }else{
+                $output = "";
+            }
+        
+        }else{
+            $output = "";
+        }
+
+        echo $output;
     }
 
     public function search_ajax(Request $request){
@@ -166,12 +193,61 @@ class AjaxController extends Controller
     }
 
 
-    public function createPDF($id_product){
+    public function createPDF(Request $request){
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->contentPDF($id_product));
+        $pdf->loadHTML($this->contentPDF($request));
         return $pdf->stream();
-    }
-    public function contentPDF($id_product){
         
+    }
+    public function contentPDF(Request $request){
+        // $output = "cam on ".Auth::user()->username."da mua hang";
+        $output = "<h2>camon</h2>
+        <p><b>cam on ban da dat hang</b></p>
+        <div style='width:80%; margin:40px auto; display:flex; flex-direction:column;'>
+            <p style='border: 1px solid #e3e3e3; margin:0;'>don hang #12727</p>";
+        //     <div style='border: 1px solid #e3e3e3; margin:10px 0;'>
+        //         <p>dkfjdkfjdfk1</p>
+    
+    
+        //     </div>
+    
+        //     <div style='border: 1px solid #e3e3e3; margin:10px 0;'>
+        //         <p>dkfjdkfjdfk2</p>
+    
+    
+        //     </div>
+    
+        //     <div style='border: 1px solid #e3e3e3; margin:0;'>
+        //         <p>dkfjdkfjdfk3</p>
+        //     </div>
+        // </div>
+    
+        // <div style='width:80%; margin:40px auto; display:flex; flex-direction:column;'>
+        //     <div>
+        //         <h3>dkfjdkfj1</h3>
+        //         <p>difjdijf1</p>
+        //         <p>fkdkfj3</p>
+        //         <p>dfkjdkfdjk</p>
+    
+        //     </div>
+        // </div>";
+        $getdatapdf=Session::get('datapdf');
+        if($getdatapdf){
+            foreach($getdatapdf as $k => $v){
+                // $output .= $v['city'].',';
+                $output .= "<div style='border: 1px solid #e3e3e3; padding:10px 0;'>
+                    <p style='padding:100px 0;'>".$v['product_title']."</p>
+    
+    
+                    </div>";
+            }
+        }
+        $output .= "</div>";
+        return $output;
+        
+
+
+
+
     }
 }

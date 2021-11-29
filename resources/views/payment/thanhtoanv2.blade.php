@@ -302,9 +302,16 @@
                         console.log(data);
                     }
                 });
+
+                // Muon data lam pdf
+                
             });
 
         });
+
+        
+        
+
     </script>
     <script src="{{asset('js/validator.js')}}"></script>
 </body>

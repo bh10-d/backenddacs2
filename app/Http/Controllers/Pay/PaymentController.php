@@ -31,6 +31,36 @@ class PaymentController extends Controller
         $idproduct = $request->idproduct;
         $totalproduct = $request->total;
         $address = $city.'/'.$district;
+        
+
+        // de anh hiu lay data de lam pdf
+        if(Session::get('cart')){
+            foreach(Session::get('cart') as $k => $v){
+                $datapdf[] = array(
+                            'iduser' => $iduser,
+                            'name' => $name,
+                            'phone' => $phone,
+                            'city' => $city,
+                            'district' => $district,
+                            'typepayment' => $typepayment,
+                            'session_id' => $v['session_id'],
+                            'product_title' => $v['product_title'],
+                            'product_id' => $v['product_id'],
+                            'product_image' => $v['product_image'],//hieu-test
+                            'product_qty' => $v['product_qty'],
+                            
+                            'product_price' => $v['product_price'],
+                            'test' => 'session trong data pdf'
+                        );
+
+            }
+        }
+        
+
+        Session::put("datapdf",$datapdf);
+        // de anh hiu data de lam pdf
+
+
         DB::insert('insert into payment (IdUser, NameUser, PhoneUser, AddressUser,TypePayment) values (?, ?, ?, ?, ?)', [$iduser, $name, $phone, $address,'cod']);
         $dataid = DB::table('payment')->orderBy('CodeOrder', 'desc')->limit(1)->get();
         

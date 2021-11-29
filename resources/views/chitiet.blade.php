@@ -40,9 +40,9 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="title_p">
                                         <h1 class="title-product">{{ $details[0]->productname }}</h1>
-                                        <!-- <div class="reviews_details_product ">
+                                        {{-- <div class="reviews_details_product ">
                                             <div class="sapo-product-reviews-badge sapo-product-reviews-badge-detail" data-id="18703977"></div>
-                                        </div> -->
+                                        </div> --}}
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">{{--product-detail-left product-images--}}
@@ -77,6 +77,8 @@
                                                 <input type="hidden" value="{{$details[0]->productname}}" class="cart_product_title_{{$details[0]->id}}">
                                                 <input type="hidden" value="{{$details[0]->price}}" class="cart_product_price_{{$details[0]->id}}">
                                                 <input type="hidden" value="{{$details[0]->image}}" class="cart_product_image_{{$details[0]->id}}">
+                                                <input type="hidden" value="{{$details[0]->quantity}}" class="cart_product_rest_quantity_{{$details[0]->id}}">
+
                                                 <input type="hidden" value="1" class="cart_product_qty_{{$details[0]->id}}">
                                                 {{--khong phan su mien vao--}}
                                                 <div class="fw w_100">

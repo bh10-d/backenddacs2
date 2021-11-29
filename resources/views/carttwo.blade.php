@@ -38,9 +38,14 @@
             @foreach(Session::get('cart') as $id => $details)
             @php $total = $details['product_price'] @endphp
 
-            <input data-id_cart="{{ $details['product_id'] }}" type="hidden" value="{{ $details['product_price'] }}" id="cart_two_product_price" class="cart_two_product_price_{{ $details['product_id'] }}">
+            
 
+
+            <input data-id_cart="{{ $details['product_id'] }}" type="hidden" value="{{ $details['product_price'] }}" id="cart_two_product_price" class="cart_two_product_price_{{ $details['product_id'] }}">
             {{-- $id --}}
+
+            
+
             <tr class="tr-select" data-id="{{ $details['product_id'] }}">
                 <td data-th="Product">
                     <div class="row">
@@ -51,7 +56,10 @@
                     </div>
                 </td>
                 <td data-th="Title"> {{ $details['product_title'] }} </td>
-                <td id="price-cart" data-th="Price" class="price">{{ $details['product_price']}}</td>
+                <td id="price-cart" data-th="Price" class="price">{{ $details['product_price'] }}</td>
+                
+                <input class="rest-qty" data-th="restQty" type="hidden" value="{{ $details['product_rest_qty'] }}">
+
                 <td data-th="Quantity">
                     <input min="1" max="100" type="number" value="{{ $details['product_qty'] }}" class="form-control quantity update-cart" />{{--cho nay co value 1--}}
                 </td>
@@ -101,6 +109,7 @@
     $(".update-cart").change(function() {
         let id_chan = $(this).parents("tr").attr("data-id");
         let price = $(this).parents("tr").find(".price").text();
+        let rest_qty = $(this).parents("tr").find(".rest-qty").val();
         let price_hidden = $(this).parents("tr").find(".price_hidden").text();
         let qty = $(this).parents("tr").find(".quantity").val();
         let _token = $('input[name="_token"]').val();
@@ -117,6 +126,24 @@
         console.log('sub-total: ', subtotal);
         console.log('price: ', price);
         console.log('price_hidden: ', price_hidden);
+
+
+        if( parseInt(qty,10) > parseInt(rest_qty,10) ){
+            if(confirm("chi con "+rest_qty)){
+                $(this).parents("tr").find(".quantity").val(1);
+                qty = $(this).parents("tr").find(".quantity").val();
+                
+            
+            }
+            else{
+                $(this).parents("tr").find(".quantity").val(1);
+                qty = $(this).parents("tr").find(".quantity").val();
+                
+            }
+            
+        }
+
+        
         $.ajax({
             url: "{{ url('/update-cart-ajax') }}",
             method: "post",
@@ -129,6 +156,7 @@
                 test.html(subtotal);
                 lua.html(qty);
                 console.log('quantity: ', qty);
+                console.log('rest_quan:',rest_qty);
             },
             error: function(response) {
                 console.log("error change:"+response)
@@ -136,18 +164,37 @@
         });
     });
 
+
     $(".update-cart").keyup(function() {
         let price = $(this).parents("tr").find(".price").text();
         let qty = $(this).parents("tr").find(".quantity").val();
+        let rest_qty = $(this).parents("tr").find(".rest-qty").val();
         let test = $("tr[data-id='" + $(this).parents("tr").attr("data-id") + "']>.sub-cart");
         let lua = $('.hieu-test');
         let _token = $('input[name="_token"]').val();
         let subtotal = price * qty;
 
-        console.log('sub-total: ', subtotal);
-        console.log('price: ', price);
-        test.html(subtotal);
 
+        // console.log('sub-total: ', subtotal);
+        // console.log('price: ', price);
+        test.html(subtotal);
+        let hieupro = 1;
+
+
+        if( parseInt(qty,10) > parseInt(rest_qty,10) ){
+            if(confirm("chi con "+rest_qty)){
+                $(this).parents("tr").find(".quantity").val(1);
+                qty = $(this).parents("tr").find(".quantity").val();
+                
+            
+            }
+            else{
+                $(this).parents("tr").find(".quantity").val(1);
+                qty = $(this).parents("tr").find(".quantity").val();
+                
+            }
+            
+        }
         $.ajax({
             url: "{{ route('update.cart.ajax') }}",
             method: "post",
@@ -160,11 +207,13 @@
                 test.html(subtotal);
                 lua.html(qty);
                 console.log('quantity: ', qty);
+                console.log('rest_qty:',rest_qty);
             },
             error: function(response) {
-
+                console.log(response)
             }
         });
+        
     });
 
     function goBack() {
