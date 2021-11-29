@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,6 +12,7 @@
     <link rel="shortcut icon" href="{{asset('image/logo.png')}}" type="image/x-icon">
     <title>Admin</title>
 </head>
+
 <body>
     @include('admin.sidebar')
     <section class="home-section">
@@ -24,10 +26,10 @@
                             <div class="card-body-icon">
                                 <i class="fas fa-fw fa-comments"></i>
                             </div>
-                            <div class="text-left">26 New Messages!</div>
+                            <div class="text-left">26 Tin nhắn mới!</div>
                         </div>
                         <a class="card-footer text-white clearfix small z-1" href="#">
-                            <span class="float-left">View Details</span>
+                            <span class="float-left">Xem chi tiết</span>
                             <span class="float-right"><i class="fas fa-angle-right"></i></span>
                         </a>
                     </div>
@@ -38,10 +40,10 @@
                             <div class="card-body-icon">
                                 <i class="fas fa-fw fa-list"></i>
                             </div>
-                            <div class="text-left">11 New Tasks!</div>
+                            <div class="text-left">11 Nhiệm vụ mới!</div>
                         </div>
                         <a class="card-footer text-white clearfix small z-1" href="#">
-                            <span class="float-left">View Details</span>
+                            <span class="float-left">Xem chi tiết</span>
                             <span class="float-right"><i class="fas fa-angle-right"></i></span>
                         </a>
                     </div>
@@ -52,10 +54,10 @@
                             <div class="card-body-icon">
                                 <i class="fas fa-fw fa-shopping-cart"></i>
                             </div>
-                            <div class="text-left">123 New Orders!</div>
+                            <div class="text-left">{{$order}} Đơn hàng mới!</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="#">
-                            <span class="float-left">View Details</span>
+                        <a class="card-footer text-white clearfix small z-1" href="{{url('/order')}}">
+                            <span class="float-left">Xem chi tiết</span>
                             <span class="float-right"><i class="fas fa-angle-right"></i></span>
                         </a>
                     </div>
@@ -66,10 +68,10 @@
                             <div class="card-body-icon">
                                 <i class="fas fa-fw fa-life-ring"></i>
                             </div>
-                            <div class="text-left">13 New Tickets!</div>
+                            <div class="text-left">13 Voucher mới!</div>
                         </div>
                         <a class="card-footer text-white clearfix small z-1" href="#">
-                            <span class="float-left">View Details</span>
+                            <span class="float-left">Xem chi tiết</span>
                             <span class="float-right"><i class="fas fa-angle-right"></i></span>
                         </a>
                     </div>
@@ -88,6 +90,55 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="{{ asset('js/admin/admin.js') }}"></script>
-    <script src="{{ asset('js/admin/chart_line.js') }}"></script>
+    <!-- <script src="{{ asset('js/admin/chart_line.js') }}"></script> -->
+    <script>
+        //line
+        const labels_line = [
+            'January',
+            'February',
+            'March',
+            'April',
+            'May',
+            'June',
+            'July',
+            'August',
+            'September',
+            'October',
+            'November',
+            'December'
+        ];
+        const data_line = {
+            labels: labels_line,
+            datasets: [{
+                label: 'Balance ( vnd)',// trieu vnd
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [<?php echo $price[1][0]->totalprice?>,
+                        <?php echo $price[2][0]->totalprice?>,
+                        <?php echo $price[3][0]->totalprice?>, 
+                        <?php echo $price[4][0]->totalprice?>, 
+                        <?php echo $price[5][0]->totalprice?>, 
+                        <?php echo $price[6][0]->totalprice?>, 
+                        <?php echo $price[7][0]->totalprice?>, 
+                        <?php echo $price[8][0]->totalprice?>, 
+                        <?php echo $price[9][0]->totalprice?>, 
+                        <?php echo $price[10][0]->totalprice?>, 
+                        <?php echo $price[11][0]->totalprice?>, 
+                        <?php echo $price[12][0]->totalprice?>],
+                fill: false,
+                tension: 0
+            }]
+        };
+        const config_line = {
+            type: 'line',
+            data: data_line,
+            options: {}
+        };
+        var chartline = new Chart(
+            document.getElementById('chart--line'),
+            config_line
+        );
+    </script>
 </body>
+
 </html>

@@ -124,4 +124,19 @@ class AdminProductController extends Controller
         // dd($id_product);
         // return $id_product[0];
     }
+
+
+    public function edit($product_id){
+        $data = DB::table('products')->where('id',$product_id)->get();
+        // dd($data);
+        return view('admin.product.editproduct')->with('data',$data);
+    }
+
+
+    public function delete($product_id){
+        DB::table('users')->where('id',$product_id)->delete();
+        $return = new AdminProductController();
+        return $return->index();
+    }
+
 }

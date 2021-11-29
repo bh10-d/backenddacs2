@@ -28,6 +28,8 @@ class ProductController extends Controller
         $get_detailNoJoin = DB::table('admin_product_models')->where('admin_product_models.id',$product_id)->get();
         // test
         return view('chitiet')->with('details',$get_detail)->with('detailsnojoin',$get_detailNoJoin);//detail
+
+    
     }
 
     public static function cart_product(Request $request,$cart_id){

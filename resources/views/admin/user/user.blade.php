@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/admin/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/admin/pagination.css') }}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -21,7 +22,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="table-responsive" id="user">
-                        @include('admin.user.usertable')
+                        {{--@include('admin.user.usertable')--}}
                         <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
@@ -53,6 +54,7 @@
                             </tbody>
                         </table> -->
                     </div>
+                    <div id="userr"></div>
                 </div>
             </div>
         </div>
@@ -63,7 +65,7 @@
             <div class="card mb-3">
                 <div class="card-body">
                     <div class="table-responsive" id="staff">
-                    @include('admin.user.stafftable')
+                    {{--@include('admin.user.stafftable')--}}
                         <!-- <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
@@ -99,38 +101,33 @@
                             </tbody>
                         </table> -->
                     </div>
+                    <div id="stafff"></div>
                 </div>
             </div>
         </div>
     </section>
     @include("admin.user.formstaff")
+    <script src="{{ asset('js/admin/pagination.js') }}"></script>
     <script>
         $(document).ready(function() {
-            $(document).on('click', '.pagination a', function(event) {
-                event.preventDefault();
-                var page = $(this).attr('href').split('page=')[1];
-                fetch_data(page);
-            });
-
-            function fetch_data(page) {
+            (function user() {
                 $.ajax({
-                    url: "/user/fetch_data?page=" + page,
+                    url: "{{route('usershow')}}",
+                    method: "get",
                     success: function(data) {
                         $('#user').html(data);
                     }
                 });
-            }
-            function staff() {} {
+            })();
+            (function staff() {
                 $.ajax({
                     url: "{{route('staffshow')}}",
                     method: "get",
                     success: function(data) {
                         $('#staff').html(data);
-                        console.log(data);
                     }
                 });
-            }
-            staff();
+            })();
             $('#myForm').submit(function(e) {
                 e.preventDefault();
                 $.ajax({

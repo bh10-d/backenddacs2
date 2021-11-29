@@ -16,6 +16,8 @@ class PaymentModel extends Model
         'PhoneUser',
         'AddressUser',
         'TypePayment',
+        'Time',
+        'Status',
     ];
     // public function order() {
     //     return $this->belongsTo('App\Pay\OrderListProductModel');

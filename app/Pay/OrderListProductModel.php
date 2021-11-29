@@ -12,7 +12,9 @@ class OrderListProductModel extends Model
     protected $fillable = [
         'CodeOrder',
         'IdProduct',
+        'NameProduct',
         'Quantity',
-        'Price'
+        'Price',
+        'Time'
     ];
 }

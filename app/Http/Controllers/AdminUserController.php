@@ -10,20 +10,25 @@ class AdminUserController extends Controller
 {
     public function index()
     {
-        // return view('admin.user');
-        $data = Staff::paginate(5);
-        return view('admin.user.user', compact('data'));
+        $user = Staff::get();
+        return view('admin.user.usertable')->with('user',$user);
+        // $data = Staff::paginate(5);
+        // return view('admin.user.user', compact('data'));
     }
 
 
-    function fetch_data(Request $request)
-    {
-        if ($request->ajax()) {
-            $data = Staff::paginate(5);
-            return view('admin.user.usertable', compact('data'))->render();
-        }
-    }
+    // function fetch_data(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $data = Staff::paginate(5);
+    //         return view('admin.user.usertable', compact('data'))->render();
+    //     }
+    // }
     
+    public function afterindex(){
+        $staff = Staff::get();
+        return view('admin.user.stafftable')->with('staff', $staff);
+    }
 
 
     public function Show()
@@ -122,6 +127,6 @@ class AdminUserController extends Controller
         $user = new Staff();
         DB::insert('insert into staff (username, password) values (?, ?)', [$username, $password]);
         $data = new AdminUserController();
-        return $data->index();
+        return $data->afterindex();
     }
 }
