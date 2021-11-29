@@ -100,7 +100,7 @@
                                 @auth
                                 <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="name" value="{{Auth::user()->username}}" disabled required>
                                 @else
-                                <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="name" disabled required>
+                                <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="name" required>
                                 @endauth
                                 @endif
                                 <label for="username">Họ và Tên</label>
