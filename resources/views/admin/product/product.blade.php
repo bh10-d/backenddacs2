@@ -154,8 +154,17 @@
             });
         });
         //end ajax upload product
+        function edit(data) {
+            var element = data.getAttribute("data-id");
+            console.log(element);
+            window.location.href = `{{url('/editproduct/${element}')}}`;
+        }
+        function deletef(data) {
+            var element = data.getAttribute("data-id");
+            console.log(element);
+            window.location.href = `{{url('/editproduct/${element}')}}`;
+        }
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="{{ asset('js/admin/admin.js') }}"></script>
     <script src="{{ asset('js/validator.js') }}"></script>

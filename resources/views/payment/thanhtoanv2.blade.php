@@ -19,7 +19,6 @@
 <body>
     <div class="main" id="hieu-test">
         <div class="main__block--show">
-            <!-- <h1>hien thi mat hang can thanh toan</h1> -->
             <div class="show__product">
                 <p>Thông tin đơn hàng</p>
                 <div>
@@ -71,7 +70,27 @@
             <div>
                 <div class="check--info">
                     <div>
-                        <p>Thông tin thanh toán</p>
+                        @if(Route::has('login'))
+                        @auth
+                        <div class="row">
+                            <div class="col-7">
+                                <p class="text-left title-order">Thông tin thanh toán</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-right pt-2">Xin chào: {{Auth::user()->username}}</p>
+                            </div>
+                        </div>
+                        @else
+                        <div class="row">
+                            <div class="col-7">
+                                <p class="text-left title-order">Thông tin thanh toán</p>
+                            </div>
+                            <div class="col-5">
+                                <p class="text-right pt-2"><a href="{{route('login')}}"><i class="far fa-user"></i>Đăng nhập</a></p>
+                            </div>
+                        </div>
+                        @endauth
+                        @endif
                     </div>
                     <form class="needs-validation" id="hieu-form" novalidate>
                         @csrf
@@ -79,9 +98,9 @@
                             <div class="form-label-group">
                                 @if(Route::has('login'))
                                 @auth
-                                <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="email" value="{{Auth::user()->username}}" required>
+                                <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="name" value="{{Auth::user()->username}}" disabled required>
                                 @else
-                                <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="email" required>
+                                <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="name" disabled required>
                                 @endauth
                                 @endif
                                 <label for="username">Họ và Tên</label>
@@ -100,23 +119,17 @@
                             <div class="form-label-group">
                                 <input type="text" class="form-control" id="phoneuser" placeholder="Số điện thoại" name="phoneuser" required>
                                 <label for="phoneuser">Số điện thoại</label>
-                                <div class="valid-feedback">Có hiệu lực</div>
-                                <div class="invalid-feedback">Vui lòng điền vào trường này</div>
                             </div>
                         </div>
                         <div class="form-group">
                             <select class="form-control" name="calc_shipping_provinces" required>
                                 <option value="">Tỉnh / Thành phố</option>
                             </select>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <div class="form-group">
                             <select class="form-control" name="calc_shipping_district" required>
                                 <option value="">Quận / Huyện</option>
                             </select>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <input class="billing_address_1" name="" id="city" type="hidden" value="">
                         <input class="billing_address_2" name="" id="district" type="hidden" value="">
@@ -124,33 +137,27 @@
                             <div class="form-label-group">
                                 <input type="text" class="form-control" id="addressdetail" placeholder="Địa chỉ chi tiết" name="addressdetail" required>
                                 <label for="addressdetail">Địa chỉ chi tiết</label>
-                                <div class="valid-feedback">Có hiệu lực</div>
-                                <div class="invalid-feedback">Vui lòng điền vào trường này</div>
                             </div>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <div class="form-group">
-                            <div class="content-box" required>
+                            <div class="content-box">
                                 <div class="content-box__row">
                                     <div class="radio-wrapper">
                                         <div class="radio__input">
-                                            <input name="paymentMethod" id="paymentMethod-cod" type="radio" class="input-radio">
+                                            <input name="paymentMethod" id="paymentMethod-cod" type="radio" class="input-radio" required>
                                         </div>
                                         <label for="paymentMethod-cod" class="radio__label d-link">
                                             <span class="radio__label__primary">Thanh toán khi giao hàng (COD)</span>
-                                            <span class="radio__label__accessory"></span>
                                         </label>
                                     </div>
                                 </div>
                                 <div class="content-box__row">
                                     <div class="radio-wrapper">
                                         <div class="radio__input">
-                                            <input name="paymentMethod" id="paymentMethod-online" type="radio" class="input-radio">
+                                            <input name="paymentMethod" id="paymentMethod-online" type="radio" class="input-radio" required>
                                         </div>
                                         <label for="paymentMethod-online" class="radio__label link">
                                             <span class="radio__label__primary">Thanh toán online</span>
-                                            <!-- <span class="radio__label__accessory"></span> -->
                                             <ul class="submenu" id="test">
                                                 <li><a href="#">Thanh toán bằng momo</a></li>
                                                 <li><a href="#">Thanh toán bằng Vnpay</a></li>
@@ -159,8 +166,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="valid-feedback">Valid.</div>
-                            <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <div class="row">
                             <div class="col text-center">
@@ -173,6 +178,8 @@
         </div>
     </div>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
     <script src='https://cdn.jsdelivr.net/gh/vietblogdao/js/districts.min.js'></script>
     <script>
         $(document).ready(function() {
@@ -261,52 +268,54 @@
     </script>
     <script>
         $(document).ready(function() {
-            $('#hieu-form').submit(function(e) {
-                let merge = document.getElementsByClassName('dataproduct');
-                let idproduct = [];
-                let quantity = [];
-                for(var i = 0; i < merge.length; i++) {
-                    idproduct.push(merge[i].getElementsByTagName('td')[0].innerHTML);
-                    quantity.push(merge[i].getElementsByTagName('td')[3].innerHTML);
+            $("#hieu-form").validate({
+                rules: {
+                    username: "required",
+                    phoneuser: "required",
+                    calc_shipping_provinces: "required",
+                    calc_shipping_district: "required",
+                    addressdetail: "required",
+                    paymentMethod: "required"
+                },
+                messages: {
+                    username: "Vui lòng nhập tên",
+                    phoneuser: "Vui lòng nhập số điện thoại",
+                    calc_shipping_provinces: "Vui lòng nhập Tỉnh/Thành phố",
+                    calc_shipping_district: "Vui lòng nhập Quận/Huyện",
+                    addressdetail: "Vui lòng nhập địa chỉ chi tiết",
+                    paymentMethod: "Vui lòng chọn phương thức thanh toán"
+                },
+                errorElement: "div",
+                submitHandler: function(form) {
+                    $.ajax({
+                        url: "{{route('loadpayment')}}",
+                        type: "GET",
+                        cache: false,
+                        data: {
+                            "_token": '{{csrf_token()}}',
+                            'iduser': $('#iduser').val(),
+                            'username': $('#username').val(),
+                            'phoneuser': $('#phoneuser').val(),
+                            'city': $('#city').val(),
+                            'district': $('#district').val(),
+                            'detail': $('#addressdetail').val(),
+                            // 'typepayment': $('.paymentMethod').val(),
+                            // 'idproduct': idproduct,
+                            // 'total': quantity
+                        },
+                        success: function(response) {
+                            window.location.href = "{{url('/success')}}";
+                        },
+                        error: function(data) {
+                            console.log('an error occurred.');
+                            console.log(data);
+                        }
+                    });
                 }
-                $.ajax({
-                    type: "GET",
-                    cache: false,
-                    url: "{{route('loadpayment')}}",
-                    data: {
-                        "_token": '{{csrf_token()}}',
-                        'iduser': $('#iduser').val(),
-                        'username': $('#username').val(),
-                        'phoneuser': $('#phoneuser').val(),
-                        'city': $('#city').val(),
-                        'district': $('#district').val(),
-                        'detail': $('#addressdetail').val(),
-                        'typepayment': $('.paymentMethod').val(),
-                        // 'idproduct': idproduct,
-                        // 'total': quantity
-                    },
-                    beforeSend: function() {
-                        $('#hieu-test').html('<div id="preloader" style="background-color:black;"><div id="loader"></div></div>');
-                    },
-                    success: function(data) {
-                        setTimeout(function() {
-                            // $('#hieu-test').html(data);
-                            window.location.href = "{{url('/success')}}"
-                        },1000);
-                        console.log(idproduct);
-                        console.log(quantity);
-                        // load_image_data();
-                    },
-                    error: function(data) {
-                        console.log('an error occurred.');
-                        console.log(data);
-                    }
-                });
             });
 
         });
     </script>
-    <script src="{{asset('js/validator.js')}}"></script>
 </body>
 
 </html>

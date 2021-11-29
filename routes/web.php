@@ -49,8 +49,8 @@ Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.
 //thanh toán
 Route::post('/purchase','AjaxController@purchase');
 Route::get('/thanhtoan', 'Pay\PaymentController@index')->name('thanhtoan');
-Route::get('/loadpayment','Pay\PaymentController@payment')->name('loadpayment');
-Route::get('/success', 'Pay\PaymentController@success')->name('success');
+Route::get('/loadpayment','Pay\PaymentController@payment')->name('loadpayment')->middleware('auth');
+Route::get('/success', 'Pay\PaymentController@success')->name('success')->middleware('auth');
 
 //route search
 Route::get('/search', 'AjaxController@search');
@@ -89,17 +89,19 @@ Route::get('/callback/{provider}', 'Auth\SocialController@handle');
 /                            ADMIN PAGE (by hieu)
 /--------------------------------------------------------------------------
 */
-Route::get('admin',function(){ return view('admin.dashboard.dashboard');})->name('admin')->middleware(['auth','role:admin']);
+// Route::get('admin',function(){ return view('admin.dashboard.dashboard');})->name('admin')->middleware(['auth','role:admin']);
+Route::get('admin','AdminDashboardController@index')->name('admin')->middleware(['auth','role:admin']);
 //                                    User
 Route::get('user', function() { return view('admin.user.user');})->name('user')->middleware(['auth','role:admin']);
-Route::get('user', 'AdminUserController@index')->name('user')->middleware(['auth','role:admin']);
+Route::get('usershow', 'AdminUserController@index')->name('usershow')->middleware(['auth','role:admin']);
 
-Route::get('user/fetch_data', 'AdminUserController@fetch_data');
+// Route::get('user/fetch_data', 'AdminUserController@fetch_data');
 
-Route::get('staffshow',[
-    'uses'=>'AdminUserController@ShowStaff',
-    'as'=>'staffshow'
-]);
+// Route::get('staffshow',[
+//     'uses'=>'AdminUserController@afterindex',
+//     'as'=>'staffshow'
+// ]);
+Route::get('staffshow','AdminUserController@afterindex')->name('staffshow')->middleware(['auth','role:admin']);
 
 Route::post('uploadstaff',[
     'uses'=>'AdminUserController@UploadStaff',
@@ -107,15 +109,13 @@ Route::post('uploadstaff',[
 ]);
 
 //                                    Chart
-Route::get('chart', function() { return view('admin.chart.chart');})->name('chart')->middleware(['auth','role:admin']);
-
+// Route::get('chart', function() { return view('admin.chart.chart');})->name('chart')->middleware(['auth','role:admin']);
+Route::get('chart', 'AdminChartController@index')->name('chart')->middleware('auth','role:admin');
 //                                  Product
 // Route::get('product', function() { return view('admin.product.product');})->name('product')->middleware(['auth','role:admin']);
 Route::get('product', 'AdminProductController@index')->name('product')->middleware(['auth','role:admin']);
-
 Route::get('producttable','AdminProductController@afterindex')->name('producttable')->middleware(['auth','role:admin']);
 // Route::get('product/fetch_data', 'AdminProductController@fetch_data');
-
 Route::post('uploadproduct',[
     'uses'=>'AdminProductController@UploadProduct',
     'as'=>'uploadproduct'
@@ -128,9 +128,14 @@ Route::post('imagefile',[
 Route::post('upload','AdminProductController@Upload')->name('ckeditor.upload');
 // Route::resource('ckeditor','CkeditorController');
 Route::get('test/{id}','AdminProductController@test')->name('test');
+Route::get('editproduct/{id}','AdminProductController@edit')->name('editproduct');
+Route::get('delete/{id}','AdminProductController@delete')->name('delete');
+
 //                                  Oder
-// Route::get('order', function() { return view('admin.order.order');})->name('order')->middleware('auth','role:admin');
-Route::get('order', 'AdminOrderController@index')->name('order')->middleware('auth','role:admin');
+Route::get('order', function() { return view('admin.order.order');})->name('order')->middleware('auth','role:admin');
+Route::get('ordershow', 'AdminOrderController@index')->name('ordershow')->middleware('auth','role:admin');
+Route::get('changestatus/{id}/{status}','AdminOrderController@status')->name('changestatus')->middleware('auth','role:admin');
+Route::get('delete/{id}','AdminOrderController@delete')->name('delete')->middleware('auth','role:admin');
 /*
 /--------------------------------------------------------------------------
 /                                END ADMIN PAGE

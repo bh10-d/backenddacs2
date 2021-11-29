@@ -16,8 +16,10 @@ class CreateOrderListProductModelsTable extends Migration
         Schema::create('order_list_product', function (Blueprint $table) {
             $table->integer('CodeOrder');
             $table->integer('IdProduct');
+            $table->string('NameProduct',100);
             $table->integer('Quantity');
             $table->string('Price',50);
+            $table->integer('Time');
         });
     }
 

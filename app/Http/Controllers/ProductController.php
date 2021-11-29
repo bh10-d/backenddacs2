@@ -22,7 +22,7 @@ class ProductController extends Controller
     public function details_product($product_id){
         $get_detail = DB::table('imagetables')->join('products','products.id','=',
         'imagetables.id_product')->where('products.id',$product_id)->get();
-
+        // dd($get_detail);
         return view('chitiet')->with('details',$get_detail);//detail
     }
 

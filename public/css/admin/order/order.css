@@ -1,0 +1,17 @@
+.showdetail {
+    display: none;
+}
+
+.label-show-details {
+    color: #0099FF;
+}
+
+table {
+    border: none !important;
+    outline: none !important;
+}
+
+.hieu-disable td {
+    border: none !important;
+    outline: none !important;
+}

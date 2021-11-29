@@ -5,7 +5,7 @@
             <th>Tên sản phẩm</th>
             <th>Thể loại</th>
             <th>Giá</th>
-            <th>Mô tả</th>
+            {{--<th>Mô tả</th>--}}
             <th>Xem chi tiết</th>
         </tr>
     </thead>
@@ -16,7 +16,7 @@
             <td>{{$m->productname}}</td>
             <td>{{$m->productcate}}</td>
             <td>giá quên tạo cột rồi</td>
-            <td>{!! $m->description !!}</td>
+            {{--<td>{!! $m->description !!}</td>--}}
             <td>{{$m->id}}</td>
         </tr>
         @endforeach
@@ -33,14 +33,14 @@
             namepro = arr[i][1].innerHTML;
             cate = arr[i][2].innerHTML;
             price = arr[i][3].innerHTML;
-            description = arr[i][4].innerHTML;
-            detail = arr[i][5].innerHTML;
+            // description = arr[i][4].innerHTML;
+            detail = arr[i][4].innerHTML;
             obj.push({
                 code,
                 namepro,
                 cate,
                 price,
-                description,
+                // description,
                 detail
             });
         }
@@ -54,7 +54,7 @@
                 <th>Tên sản phẩm</th>
                 <th>Thể loại</th>
                 <th>Giá</th>
-                <th>Mô tả</th>
+                <th>Chỉnh sửa sản phẩm</th>
                 <th>Xem chi tiết</th>  
             </tr>`;
             $.each(data, function(index, data) {
@@ -65,8 +65,8 @@
                 html += `<td>${data.namepro}</td>`;
                 html += `<td>${data.cate}</td>`;
                 html += `<td>${data.price}</td>`;
-                html += `<td>${data.description}</td>`;
-                html += `<td><a href="test/${data.detail}"><i class="far fa-eye"></i></a></td>`;
+                html += `<td><button onclick="edit(this)" data-id="${data.detail}" class="btn btn-outline-info">Chỉnh sửa</button> | <button onclick="deletef(this)" data-id="${data.detail}" class="btn btn-outline-danger">Xóa</button></td>`;
+                html += `<td><a href="detail-product/${data.detail}"><i class="far fa-eye"></i></a></td>`;
                 html += `</tr>`;
             });
             html += '</table>';
@@ -89,3 +89,6 @@
         launcher();
     })
 </script>
+
+<!-- phien ban cu -->
+<!-- <a href="{{url('editproduct/${data.detail}')}}"><i class="fas fa-pencil-alt"></i></a> | <a href="{{url('delete/${data.detail}')}}"><i class="fas fa-trash"></i></a> -->

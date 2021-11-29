@@ -21,6 +21,8 @@ class CreatePaymentModelsTable extends Migration
             $table->bigInteger('PhoneUser');
             $table->string('AddressUser',100);
             $table->string('TypePayment',20);
+            $table->integer('Time');
+            $table->string('Status',50);
         });
     }
     
