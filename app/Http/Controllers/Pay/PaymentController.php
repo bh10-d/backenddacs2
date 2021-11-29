@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
 use App\Pay\PaymentModel;
 use Illuminate\Support\Facades\Redirect;
 
@@ -56,6 +57,8 @@ class PaymentController extends Controller
                         );
 
             }
+        }else{
+            return Redirect::to('/login');
         }
         
 

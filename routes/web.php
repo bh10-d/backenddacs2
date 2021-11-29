@@ -49,8 +49,8 @@ Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.
 //thanh toán
 Route::post('/purchase','AjaxController@purchase');
 Route::get('/thanhtoan', 'Pay\PaymentController@index')->name('thanhtoan');
-Route::get('/loadpayment','Pay\PaymentController@payment')->name('loadpayment')->middleware('auth');
-Route::get('/success', 'Pay\PaymentController@success')->name('success')->middleware('auth');
+Route::get('/loadpayment','Pay\PaymentController@payment')->name('loadpayment');
+Route::get('/success', 'Pay\PaymentController@success')->name('success');
 
 //route search
 Route::get('/search', 'AjaxController@search');

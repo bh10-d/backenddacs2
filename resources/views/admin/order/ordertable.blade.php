@@ -64,8 +64,8 @@
                 @else
                 <p class="text-info">{{$order->Status}}</p>
                 @endif
-                <p>chú thích: nếu bấm nút chấp nhận thì sẽ hiện đã chấp nhận không thì ngược lại</p>
-                <p>và mặc định khi khách vừa mua hàng xong thì trạng thái sẽ là đang xử lý</p>
+                <!-- <p>chú thích: nếu bấm nút chấp nhận thì sẽ hiện đã chấp nhận không thì ngược lại</p>
+                <p>và mặc định khi khách vừa mua hàng xong thì trạng thái sẽ là đang xử lý</p> -->
             </td>
         </tr>
         @endforeach

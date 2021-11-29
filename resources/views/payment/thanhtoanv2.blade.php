@@ -100,7 +100,7 @@
                                 @auth
                                 <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="name" value="{{Auth::user()->username}}" disabled required>
                                 @else
-                                <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="name" disabled required>
+                                <input type="text" class="form-control" id="username" placeholder="Họ và Tên" name="name" required>
                                 @endauth
                                 @endif
                                 <label for="username">Họ và Tên</label>
@@ -312,42 +312,6 @@
                         }
                     });
                 }
-
-                $.ajax({
-                    type: "GET",
-                    cache: false,
-                    url: "{{route('loadpayment')}}",
-                    data: {
-                        "_token": '{{csrf_token()}}',
-                        'iduser': $('#iduser').val(),
-                        'username': $('#username').val(),
-                        'phoneuser': $('#phoneuser').val(),
-                        'city': $('#city').val(),
-                        'district': $('#district').val(),
-                        'detail': $('#addressdetail').val(),
-                        'typepayment': $('.paymentMethod').val(),
-                        // 'idproduct': idproduct,
-                        // 'total': quantity
-                    },
-                    beforeSend: function() {
-                        $('#hieu-test').html('<div id="preloader" style="background-color:black;"><div id="loader"></div></div>');
-                    },
-                    success: function(data) {
-                        setTimeout(function() {
-                            // $('#hieu-test').html(data);
-                            window.location.href = "{{url('/success')}}"
-                        },1000);
-                        console.log(idproduct);
-                        console.log(quantity);
-                        // load_image_data();
-                    },
-                    error: function(data) {
-                        console.log('an error occurred.');
-                        console.log(data);
-                    }
-                });
-
-                // Muon data lam pdf
                 
 
             });
