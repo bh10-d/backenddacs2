@@ -103,10 +103,13 @@ class AdminProductController extends Controller
         $image = $request->cookie('image');
 
         DB::insert('insert into admin_product_models (code, productname, productcate, price, quantity, description) values (?, ?, ?, ?, ?, ?)', [$id, $name, $category, $price, $quantity,$description]);
-    
+        
+        
+        
+        $dataid = DB::table('admin_product_models')->orderBy('id', 'desc')->limit(1)->get();
+        
         // $id_product = DB::table('admin_product_models')->select('id')->where('code',[$id])->first();
         $id_product = AdminProductModel::where('code', $id)->first();
-        $dataid = DB::table('payment')->orderBy('CodeOrder', 'desc')->limit(1)->get();
         $id_test = $dataid[0]->id;
 
         $all_img = explode("-", $image);

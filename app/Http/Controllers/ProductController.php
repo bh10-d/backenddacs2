@@ -24,10 +24,13 @@ class ProductController extends Controller
         $get_detail = DB::table('imagetables')->join('admin_product_models','admin_product_models.id','=',
         'imagetables.id_product')->where('admin_product_models.id',$product_id)->get();
 
+        $get_first_image = DB::table('imagetables')->join('admin_product_models','admin_product_models.id','=',
+        'imagetables.id_product')->where('admin_product_models.id',$product_id)->first();
+
         //them truy van
         $get_detailNoJoin = DB::table('admin_product_models')->where('admin_product_models.id',$product_id)->get();
         // test
-        return view('chitiet')->with('details',$get_detail)->with('detailsnojoin',$get_detailNoJoin);//detail
+        return view('chitiet')->with('details',$get_detail)->with('detailsnojoin',$get_detailNoJoin)->with('get_first_image',$get_first_image);//detail
 
     
     }

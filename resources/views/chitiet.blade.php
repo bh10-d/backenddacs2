@@ -11,11 +11,19 @@
     <link rel="stylesheet" href="{{asset('css/detail/chitiet7.css')}}">{{--tac dong den anh--}}
     <link rel="stylesheet" href="{{asset('css/detail/chitiet8.css')}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    
     <title>Document</title>
 </head>
 
 <body>
     @extends('layouts.app')
+    @section('link')
+        <link rel="stylesheet" href="{{asset('css/style-list-image.css')}}">
+
+    @endsection
+
+
     @section('body')
     <div class="opacity_menu"></div>
     <div class="bodywrap">
@@ -40,7 +48,7 @@
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="title_p">
                                         <h1 class="title-product">{{ $details[0]->productname }}</h1>
-                                        {{-- <div class="reviews_details_product ">
+                                        {{-- <div class="reviews_details_product">
                                             <div class="sapo-product-reviews-badge sapo-product-reviews-badge-detail" data-id="18703977"></div>
                                         </div> --}}
                                     </div>
@@ -48,14 +56,38 @@
                                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">{{--product-detail-left product-images--}}
                                             <!-- <div class="wrapbb">{{----}} -->
                                                 <div class="slider-big-video clearfix margin-bottom-20">
-                                                    <div class="slider slider-for">
-                                                        <a href="" title="Click để xem">
-                                                            <!-- <img src="" class="lazyload img-responsive mx-auto d-block"> -->
-                                                            @foreach($details as $img)
-                                                                {{ $img->image }}
-                                                            @endforeach
-                                                        </a>
+                                                <div class="container-all-image">
+                                                        
+                                                        <div class="image-container">
+
+                                                        @foreach($details as $img)
+                                                            @if($loop->first) 
+                                                                <div class="big-image">
+                                                                    <img src="{{$img->image}}" alt="">
+                                                                </div>
+                                                            @endif
+                                                        @endforeach
+                                                                <div class="small-images">
+                                                                    @foreach($details as $img)
+                                                                        <img src="{{$img->image}}" alt="">
+                                                                        
+                                                                    @endforeach
+                                                                </div>
+                                                            
+                                                        </div>
                                                     </div>
+                                                
+                                                    <div class="slider slider-for">
+                                                        {{--<a href="" title="Click để xem">--}}
+                                                            <!-- <img src="" class="lazyload img-responsive mx-auto d-block"> -->
+                                                       
+                                                        
+                                                            
+                                                        
+                                                        {{--</a>--}}
+                                                    
+                                                    </div>
+                                                    
                                                 </div>
                                                 <!-- <div class="slider-has-video">
                                                     <div class="slider slider-nav">
@@ -307,6 +339,28 @@
         </section>
     </div>
     @endsection
+
+
+    @section('script')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.small-images img').click(function() {
+                let image = $(this).attr('src');
+                $('.big-image img').attr('src',image);
+                // $('.small-images img').css("border", "1px solid red");
+            });
+        });
+
+
+    </script>
+
+
+    @endsection
+
+
+
 </body>
 
 </html>

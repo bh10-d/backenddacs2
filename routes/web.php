@@ -39,7 +39,7 @@ Route::get('/add-to-cart/{id}', 'AjaxController@addToCart')->name('add.to.cart')
 //     'as'=>'/add-to-cart/{id}'
 // ]);
 Route::patch('/update-cart', [AjaxController::class, 'update'])->name('update.cart');
-Route::delete('/remove-from-cart', [AjaxController::class, 'remove'])->name('remove.from.cart');
+Route::get('/remove-from-cart', [AjaxController::class, 'remove'])->name('remove.from.cart');
 
 Route::post('/add-cart-ajax', 'AjaxController@add_cart_ajax');
 Route::post('/update-cart-ajax', 'AjaxController@update_cart_ajax')->name('update.cart.ajax');

@@ -29,17 +29,26 @@ class AjaxController extends Controller
     }
 
     public function remove(Request $request){ //  ham nay can phai sua lai co bug
-        if($request['id']) {
-            // $cart = Cookie::get('cart');
+        if($request->id) {
             $cart = Session::get('cart');
-            if(isset($cart[$request['id']])) {
-                unset($cart[$request['id']]);
-                // Cookie::queue('cart', $cart,43200);
-                Session::put('cart',$cart);
+            
+            foreach($cart as $k=>$v){
+
+                
+                if($request->id == $v['product_id']){
+                    unset($cart[$k]);
+                }
             }
+            Session::put('cart',$cart);
             Session::flash('success', 'Product removed successfully');
         }
-
+            
+            // if(isset($cart[$request->id])) {
+            //     unset($cart[$request->id]); 
+            // }
+            
+        
+        // return $cart[0]['product_id']==$request->id;
     }
 
     public function add_cart_ajax(Request $request)
