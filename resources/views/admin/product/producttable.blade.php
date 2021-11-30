@@ -5,7 +5,6 @@
             <th>Tên sản phẩm</th>
             <th>Thể loại</th>
             <th>Giá</th>
-            {{--<th>Mô tả</th>--}}
             <th>Xem chi tiết</th>
         </tr>
     </thead>
@@ -15,18 +14,7 @@
             <td>{{$m->code}}</td>
             <td>{{$m->productname}}</td>
             <td>{{$m->productcate}}</td>
-<<<<<<< HEAD
-<<<<<<< HEAD
             <td>{{ $m->price }}</td>
-            <td>{!! $m->description !!}</td>
-=======
-            <td>giá quên tạo cột rồi</td>
-            {{--<td>{!! $m->description !!}</td>--}}
->>>>>>> 30ee56340f9810f20586d299d88be51faf95df31
-=======
-            <td>giá quên tạo cột rồi</td>
-            {{--<td>{!! $m->description !!}</td>--}}
->>>>>>> 30ee56340f9810f20586d299d88be51faf95df31
             <td>{{$m->id}}</td>
         </tr>
         @endforeach
@@ -44,14 +32,14 @@
             cate = arr[i][2].innerHTML;
             price = arr[i][3].innerHTML;
             // description = arr[i][4].innerHTML;
-            detail = arr[i][4].innerHTML;
+            id = arr[i][4].innerHTML;
             obj.push({
                 code,
                 namepro,
                 cate,
                 price,
                 // description,
-                detail
+                id
             });
         }
         // console.log(product);
@@ -75,8 +63,8 @@
                 html += `<td>${data.namepro}</td>`;
                 html += `<td>${data.cate}</td>`;
                 html += `<td>${data.price}</td>`;
-                html += `<td><button onclick="edit(this)" data-id="${data.detail}" class="btn btn-outline-info">Chỉnh sửa</button> | <button onclick="deletef(this)" data-id="${data.detail}" class="btn btn-outline-danger">Xóa</button></td>`;
-                html += `<td><a href="detail-product/${data.detail}"><i class="far fa-eye"></i></a></td>`;
+                html += `<td><button onclick="edit(this)" data-id="${data.id}" class="btn btn-outline-info">Chỉnh sửa</button> | <button onclick="deletef(this)" data-id="${data.id}" class="btn btn-outline-danger">Xóa</button></td>`;
+                html += `<td><a href="detail-product/${data.id}"><i class="far fa-eye"></i></a></td>`;
                 html += `</tr>`;
             });
             html += '</table>';

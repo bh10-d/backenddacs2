@@ -66,13 +66,14 @@ class PaymentController extends Controller
         // de anh hiu data de lam pdf
 
 
-        DB::insert('insert into payment (IdUser, NameUser, PhoneUser, AddressUser,TypePayment) values (?, ?, ?, ?, ?)', [$iduser, $name, $phone, $address,'cod']);
+        DB::insert('insert into payment (IdUser, NameUser, PhoneUser, AddressUser,TypePayment,Time,Status) values (?, ?, ?, ?, ?, ?, ?)', [$iduser, $name, $phone, $address,'cod',date('m'),'Đang xử lý']);
         $dataid = DB::table('payment')->orderBy('CodeOrder', 'desc')->limit(1)->get();
         
         if(Session::get('cart')!=null) {
             foreach(Session::get('cart') as $id => $details){
                 DB::table('order_list_product')->insert(
-                    ['CodeOrder' => $dataid[0]->CodeOrder, 'IdProduct' => $details['product_id'], 'Quantity' => $details['product_qty'], 'Price' => $details['product_price']]
+                    // ['CodeOrder' => $dataid[0]->CodeOrder, 'IdProduct' => $details['product_id'], 'Quantity' => $details['product_qty'], 'Price' => $details['product_price'],"Time"=>date('m')]
+                    ['CodeOrder' => $dataid[0]->CodeOrder, 'IdProduct' => $details['product_id'],'NameProduct' => $details['product_title'], 'Quantity' => $details['product_qty'], 'Price' => $details['product_price'],"Time"=>date('m')]
                 );
             };
         }else{

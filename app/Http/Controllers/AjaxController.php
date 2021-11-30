@@ -29,15 +29,15 @@ class AjaxController extends Controller
     }
 
     public function remove(Request $request){ //  ham nay can phai sua lai co bug
-        if($request->id) {
+        if($request['id']) {
             // $cart = Cookie::get('cart');
-            $cart = session()->get('cart');
-            if(isset($cart[$request->id])) {
-                unset($cart[$request->id]);
+            $cart = Session::get('cart');
+            if(isset($cart[$request['id']])) {
+                unset($cart[$request['id']]);
                 // Cookie::queue('cart', $cart,43200);
-                session()->put('cart',$cart);
+                Session::put('cart',$cart);
             }
-            session()->flash('success', 'Product removed successfully');
+            Session::flash('success', 'Product removed successfully');
         }
 
     }
@@ -194,7 +194,7 @@ class AjaxController extends Controller
 
 
     public function createPDF(Request $request){
-        $pdf = App::make('dompdf.wrapper');
+        $pdf = App::make('dompdf');
         $pdf->loadHTML($this->contentPDF($request));
         return $pdf->stream();
         

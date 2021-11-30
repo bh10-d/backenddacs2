@@ -65,7 +65,7 @@
                 </td>
                 <td data-th="Subcart" class="text-center sub-cart">{{$details['product_price'] * $details['product_qty']}}</td>
                 <td class="actions" data-th="">
-                   {{--<button id="remove-from-cart" class="btn btn-danger btn-sm btn-test" value="{{$id}}"><i class="fas fa-trash-alt"></i></button>--}}{{-- class cua i fa fa-trash-o--}}
+                   <button id="remove-from-cart" class="btn btn-danger btn-sm btn-test" value="{{$id}}"><i class="fas fa-trash-alt"></i></button>{{-- class cua i fa fa-trash-o--}}
                 </td>
             </tr>
 
@@ -98,8 +98,9 @@
                 success: function(response) {
                     $("tr[data-id='" + ele.parents("tr").attr("data-id") + "']").remove();
                 },
-                error: function() {
-
+                error: function(response) {
+                    console.log(response);
+                    console.log(response['id']);
                 }
             });
         }

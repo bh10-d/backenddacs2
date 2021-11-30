@@ -18,7 +18,7 @@ class CreateSocialModelsTable extends Migration
             $table->string('provider_user_id');
             $table->string('provider');
             $table->integer('user');
-            // $table->string('provider_pass',999999999);//loi
+            $table->longText('provider_pass',999999999);
             $table->timestamps();
         });
     }

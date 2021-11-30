@@ -106,8 +106,8 @@ class AdminProductController extends Controller
     
         // $id_product = DB::table('admin_product_models')->select('id')->where('code',[$id])->first();
         $id_product = AdminProductModel::where('code', $id)->first();
-
-        $id_test = $id_product->id;
+        $dataid = DB::table('payment')->orderBy('CodeOrder', 'desc')->limit(1)->get();
+        $id_test = $dataid[0]->id;
 
         $all_img = explode("-", $image);
         foreach($all_img as $img){
