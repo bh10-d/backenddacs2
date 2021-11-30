@@ -74,14 +74,14 @@ h4 {
 
 .header__search-droplist {
     display: block;
-    width: 17.15%;
+    width: 18%;/*17.3*/
     /*17.64*/
 }
 
 .header__search-droplist .select-hieu {
     cursor: pointer;
     max-width: 50px;
-    padding: 6.5px;
+    padding: 8.75px;/*6.5*/
     /*7.5px*/
     border-radius: 5px 0px 0px 5px;
     color: black !important;
@@ -125,20 +125,22 @@ h4 {
 } */
 
 .header__search--listt form {
-    display: flex;
+    display: block;
     height: 100%;
     width: 80%;
 }
 
-
-/* .header__search--listt>form>input,
-button {
+.header__search--listt form div{
+    display: block;
     height: 100%;
-} */
-
-.header__search--listt>form>input {
-    padding: 0px 0px 0px 10px;
     width: 100%;
+}
+
+.header__search--listt>form>div>input {
+    padding: 0px 0px 0px 10px;
+    height: 100%;
+    width: 100%;
+    border: none;
 }
 
 
@@ -149,16 +151,16 @@ button {
     outline: none;
 } */
 
-.btn {
+/* .btn {
     cursor: pointer;
     height: 100%;
     padding: 0px 10px 0px 10px;
-    /* border-radius: 0px 5px 5px 0px; */
+    
     border-radius: 0 !important;
     border: none;
     color: #fff;
     background-color: #b8332c;
-}
+} */
 
 .header__search .btn:active {
     background-color: #e74c3c;

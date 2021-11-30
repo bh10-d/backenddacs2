@@ -24,7 +24,6 @@
                         <div>
                             <input id="search-input" autocomplete="off" type="text" placeholder="> Nhập sản phẩm">
                             <div id="search-block"></div>
-
                         </div>
                         
                         

@@ -32,7 +32,7 @@
                                 <th>Tên sản phẩm</th>
                                 <th>Thể loại</th>
                                 <th>Giá</th>
-                                <th>Mô tả</th>
+                                {{--<th>Mô tả</th>--}}
                                 <th>Xem chi tiết</th>
                             </tr>
                             @foreach($product as $m)
@@ -41,7 +41,7 @@
                                 <td>{{$m->productname}}</td>
                                 <td>{{$m->productcate}}</td>
                                 <td>giá quên tạo cột rồi</td>
-                                <td>{{$m->description}}</td>
+                                {{--<td>{{$m->description}}</td>--}}
                                 <td>{{$m->id}}</td>
                             </tr>
                             @endforeach
