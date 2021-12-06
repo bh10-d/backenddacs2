@@ -164,7 +164,7 @@
         function deletef(data) {
             var element = data.getAttribute("data-id");
             console.log(element);
-            window.location.href = `{{url('/editproduct/${element}')}}`;
+            window.location.href = `{{url('/deletep/${element}')}}`;
         }
     </script>
     <script src="{{ asset('js/script.js') }}"></script>

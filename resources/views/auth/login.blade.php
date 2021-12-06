@@ -30,7 +30,7 @@
                     <div class="login__block--form">
                         <form class="login__form" action="{{route('login')}}" method="post">
                             @csrf
-                            <input class="form--input" type="text" name="username" placeholder="Email">
+                            <input class="form--input" type="text" name="username" placeholder="Tài khoản">
                             <input class="form--input" type="password" name="password" placeholder="Mật khẩu">
                             <button class="form--input btn--danger"type="submit">Đăng nhập</button>
                             <div class="form--remem">
@@ -56,12 +56,12 @@
                         <p>Đã có tài khoản, đăng nhập <a onclick="changetologin();" class="link--a">tại đây</a></h5>
                     </div>
                     <div class="login__block--form">
-                        <form class="login__form" action="">
-                            <input class="form--input" type="text" placeholder="Họ" name="">
-                            <input class="form--input" type="text" placeholder="Tên" name="">
-                            <input class="form--input" type="text" placeholder="Email" name="">
-                            <input class="form--input" type="text" placeholder="Số điện thoại" name="">
-                            <input class="form--input" type="text" placeholder="Mật khẩu" name="">
+                        <form class="login__form" method="POST" action="{{ route('register') }}">
+                            <input class="form--input" type="text" placeholder="Họ" name="firstname">
+                            <input class="form--input" type="text" placeholder="Tên" name="lastname">
+                            <input class="form--input" type="text" placeholder="Email" name="email">
+                            <input class="form--input" type="text" placeholder="Số điện thoại" name="number">
+                            <input class="form--input" type="text" placeholder="Mật khẩu" name="password">
                             <button class="form--input btn--danger"type="submit">Đăng ký</button>
                         </form>
                         <a href="#" class="link--a forgot">Quên mật khẩu</a>

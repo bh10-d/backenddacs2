@@ -124,11 +124,11 @@ class AjaxController extends Controller
         
         if($data['query']){
             $products = AdminProductModel::where('productname','like','%'.$data['query'].'%');
-            $output = '<ul class="dropdown-menu" style="z-index:999999 !important; display:block !important; position:relative !important">';
+            //class dropdown-menu cua ul
+            $output = '<ul class="" style="position: absolute; min-width: 640px; z-index:2; background-color: #fff">';
             if($products->exists()) {
                 foreach($products->get() as $key => $value){
-                    $output .= '<li style="z-index:99999999 !important;"><a href="'.'/detail-product/'.$value->id.'">'.$value->productname.'</a></li>';
-                    
+                    $output .= '<li><a class="btn text-left" style="width:100%" href="'.'/detail-product/'.$value->id.'">'.$value->productname.'</a></li>';
                 };
                 $output .= '</ul>';
             
@@ -152,8 +152,6 @@ class AjaxController extends Controller
             $output = '<div style="width:90% !important;margin:80px auto; display: flex !important; flex-direction:row !important; flex-wrap: wrap !important;" >';
             
             if($products->exists()) {
-
-            
                 foreach($products->get() as $key => $value){
                     // $output .=  $value->title;
                     

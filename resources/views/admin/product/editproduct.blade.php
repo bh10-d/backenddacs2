@@ -19,7 +19,7 @@
 <body>
     @include('admin.sidebar')
     <section class="home-section">
-        <div class="text"><span><i class="far fa-folder-open"></i> Upload Products</span></div>
+        <div class="text"><span><i class="far fa-folder-open"></i> Edit Products</span></div>
         <div class="block pt-3 uploadpro">
             <form action="{{ route('product') }}" class="needs-validation" id="myForm" novalidate>
                 @csrf
@@ -27,13 +27,13 @@
                     <div class="row">
                         <div class="form-group col-xl-2">
                             <label for="code">Mã sản phẩm:</label>
-                            <input type="text" class="form-control" id="code" placeholder="Enter Code product" name="code" value="" disabled required>
+                            <input type="text" class="form-control" id="code" placeholder="Enter Code product" name="code" value="{{$data[0]->code}}" disabled required>
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
                         <div class="form-group col-xl-10">
                             <label for="pname">Tên sản phẩm:</label>
-                            <input type="text" class="form-control" id="pname" placeholder="Enter name" name="pname" value="{{$data[0]->title}}" required>
+                            <input type="text" class="form-control" id="pname" placeholder="Enter name" name="pname" value="{{$data[0]->productname}}" required>
                             <div class="valid-feedback">Valid.</div>
                             <div class="invalid-feedback">Please fill out this field.</div>
                         </div>
@@ -48,6 +48,12 @@
                             <option value="5">5</option> -->
                         </select>
                         <!-- <input type="text" class="form-control" id="pcate" placeholder="Enter category" name="pcate" required> -->
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="pprice">Giá:</label>
+                        <input type="number" class="form-control" id="pprice" placeholder="Enter price" name="pprice" value="{{$data[0]->price}}" required>
                         <div class="valid-feedback">Valid.</div>
                         <div class="invalid-feedback">Please fill out this field.</div>
                     </div>
@@ -77,7 +83,37 @@
     <script>
         CKEDITOR.replace('editor', {
             filebrowserUploadUrl: "{{ route('ckeditor.upload',['_token'=> csrf_token()]) }}",
-            filebrowserUploadMethod: 'form'
+            filebrowserUploadMethod: 'form',
+        });
+        $('#myForm').submit(function(e) {
+            for (instance in CKEDITOR.instances) {
+                CKEDITOR.instances[instance].updateElement();
+            }
+            e.preventDefault();
+
+            $.ajax({
+                type: "POST",
+                cache: false,
+                url: "{{route('editproductaccept')}}",
+                data: {
+                    "_token": '{{csrf_token()}}',
+                    "id": $("#code").val(),
+                    "name": $("#pname").val(),
+                    "price": $("#pprice").val(),
+                    "category": $("#pcate").val(),
+                    "quantity":$("#pquan").val(),
+                    "description": $("#editor").val(),
+                },
+                success: function(data) {
+                    window.location.href = `{{url('/product')}}`;
+                    console.log('submission was successful.');
+                    // console.log(data);
+                },
+                error: function(data) {
+                    console.log('an error occurred.');
+                    console.log(data);
+                }
+            });
         });
     </script>
     <!-- <script src="{{ asset('js/script.js') }}"></script> -->

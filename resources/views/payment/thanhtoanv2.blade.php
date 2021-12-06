@@ -43,7 +43,7 @@
                                     <input type="text" hidden id="idproduct" value="{{$details['product_id']}}">
                                     <tr class="dataproduct">
                                         <td hidden>{{ $details['product_id'] }}</td>
-                                        <td><img class="img__show--info" src="" alt="{{$details['product_image']}}"></td>
+                                        <td><img class="img__show--info" src="{{$details['product_image']}}" alt="{{$details['product_image']}}"></td>
                                         <td>{{ $details['product_title'] }}</td>
                                         <td>{{ $details['product_qty'] }}</td>
                                         <td>{{ $details['product_price'] }}</td>
@@ -312,15 +312,8 @@
                         }
                     });
                 }
-                
-
             });
-
         });
-
-        
-        
-
     </script>
 </body>
 

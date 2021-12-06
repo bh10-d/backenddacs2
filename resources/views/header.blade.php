@@ -39,33 +39,30 @@
                 <span>113 113</span>
             </p>
             <div class="header__account">
-                <p>
+                <span>
                     <i class="far fa-user"></i>
-                    <!-- @if(Auth::user()==null)
-                        {{ __('Tài khoản') }}
-                    @else
-                        <p>Xin chào: {{Auth::user()->username}}</p>
-                    @endif -->
                     @if(Route::has('login'))
                         @auth 
-                            <p>Xin chào: {{Auth::user()->username}}</p>
+                            <span>Xin chào: {{Auth::user()->username}}</span>
                         @else
                             {{ __('Tài khoản') }}
                         @endauth
                     @endif
-                </p>
+                </span>
                 <div class="header__account--option">
                     @guest
                     <p><a style="text-decoration:none;font-weight: 500;" href="{{ route('login') }}">Đăng nhập</a></p>
                     <p><a style="text-decoration:none;font-weight: 500;" href="{{ route('register') }}">Đăng kí</a></p>
                     @else
+                    <a href="{{ route('thongtinnguoidung') }}">{{ __('Tài khoản của tôi')}}</a>
+                    <a href="{{ route('kiemtradonhang') }}">{{ __('Đơn mua')}}</a>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
                         {{ __('Đăng xuất') }}
                     </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    <!-- <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
-                    </form>
+                    </form> -->
                     @endguest
                 </div>
             </div>
@@ -94,18 +91,35 @@
                                 <span class="item-name">iPhone 12 Pro Max(512GB)</span>
                                 <span class="item--price">35.990.000đ</span>
                                 <div class="item--quantity">
-                                    <a class="btn item minus" onclick="quanityminus();">-</a>
+                                    <a class="btn--custom item minus" onclick="quanityminus();">-</a>
                                     <input type="text" class="quantityy" value="1">
-                                    <a class="btn item plus" onclick="quantityplus();">+</a>
+                                    <a class="btn--custom item plus" onclick="quantityplus();">+</a>
                                 </div>
                                 <!-- <span class="item--quantity" type="input"></span> -->
                             </div>
                         </div>
+                        <!-- test -->
+
+                        <div class="header__cart--item">
+                            <img src="{{ asset('image/iphone.png') }}" alt="">
+                            <div class="item--info">
+                                <span class="item-name">iPhone 12 Pro Max(512GB)</span>
+                                <span class="item--price">35.990.000đ</span>
+                                <div class="item--quantity">
+                                    <a class="btn--custom item minus" onclick="quanityminus();">-</a>
+                                    <input type="text" class="quantityy" value="1">
+                                    <a class="btn--custom item plus" onclick="quantityplus();">+</a>
+                                </div>
+                                <!-- <span class="item--quantity" type="input"></span> -->
+                            </div>
+                        </div>
+
+                        <!-- test -->
                         <div class="cart__list--pay">
                             <div>
                                 <span>Tổng cộng:</span><span>35.990.000 đ</span>
                             </div>
-                            <button class="btn pay" type="submit"><i class="fas fa-shopping-bag"></i> Tới giỏ hàng và thanh toán</button>
+                            <button class="btn btn-outline-danger mt-2 pay" type="submit"><i class="fas fa-shopping-bag"></i> Tới giỏ hàng và thanh toán</button>
                         </div>
                     </form>
                 </div>

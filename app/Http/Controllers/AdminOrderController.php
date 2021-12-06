@@ -22,20 +22,21 @@ class AdminOrderController extends Controller
             foreach ($order as $d) {
                 $data[] = $d->CodeOrder;
             }
-            for ($i = 1; $i <= count($data); $i++) {
-                $list = DB::select('select sum(Price * Quantity) as totalprice from order_list_product where CodeOrder=' . $i);
-                $product = DB::select('select * from order_list_product where CodeOrder=' . $i);
+            for ($i = 0; $i < count($data); $i++) {
+                $list = DB::select('select sum(Price * Quantity) as totalprice from order_list_product where CodeOrder=' . $data[$i]);
+                $product = DB::select('select * from order_list_product where CodeOrder=' . $data[$i]);
                 $p[] = $product;
                 $li[] = $list[0];
             }
             for ($i = 0; $i < count($order); $i++) {
-                $order[$i]->totalprice = $li[$i]->totalprice;
-                $order[$i]->productlist = $p[$i];
+                // if($order[$i]->CodeOrder) {
+                    $order[$i]->totalprice = $li[$i]->totalprice;
+                    $order[$i]->productlist = $p[$i];
+                // }
             }
         }
-
         // $order[0]->test = '1';
-        // dd($check);
+        // dd($order);
         return view('admin.order.ordertable')->with(['orders'=>$order,'check'=>$check]);
     }
 

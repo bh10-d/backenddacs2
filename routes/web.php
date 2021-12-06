@@ -46,7 +46,7 @@ Route::post('/update-cart-ajax', 'AjaxController@update_cart_ajax')->name('updat
 Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.ajax');
 
 // Route::get('/show-cart-ajax','AjaxController@show_cart_ajax');
-//thanh toán
+//route thanh toán
 Route::post('/purchase','AjaxController@purchase');
 Route::get('/thanhtoan', 'Pay\PaymentController@index')->name('thanhtoan');
 Route::get('/loadpayment','Pay\PaymentController@payment')->name('loadpayment');
@@ -62,7 +62,9 @@ Route::post('/search-block', 'AjaxController@search_dropdown');
 // Route::get('/data-bill','AjaxController@contentPDF');
 Route::get('/render-bill','AjaxController@createPDF');
 
-
+//route user check
+Route::get('thongtinnguoidung','User\UserInfoController@index')->name('thongtinnguoidung')->middleware('auth');
+Route::get('kiemtradonhang','User\UserOrderController@index')->name('kiemtradonhang')->middleware('auth');
 //test
 
 /*
@@ -135,7 +137,8 @@ Route::post('upload','AdminProductController@Upload')->name('ckeditor.upload');
 // Route::resource('ckeditor','CkeditorController');
 Route::get('test/{id}','AdminProductController@test')->name('test');
 Route::get('editproduct/{id}','AdminProductController@edit')->name('editproduct');
-Route::get('delete/{id}','AdminProductController@delete')->name('delete');
+Route::post('editproductaccept','AdminProductController@editaccept')->name('editproductaccept');
+Route::get('deletep/{id}','AdminProductController@delete')->name('deletep');
 
 //                                  Oder
 Route::get('order', function() { return view('admin.order.order');})->name('order')->middleware('auth','role:admin');

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\AdminProductModel;
+use Illuminate\Support\Facades\Redirect;
 
 class AdminProductController extends Controller
 {
@@ -130,16 +131,24 @@ class AdminProductController extends Controller
 
 
     public function edit($product_id){
-        $data = DB::table('products')->where('id',$product_id)->get();
+        $data = DB::table('admin_product_models')->where('id',$product_id)->get();
         // dd($data);
         return view('admin.product.editproduct')->with('data',$data);
     }
 
+    public function editaccept(Request $request){
+        $id = $request->id;
+        $name = $request->name;
+        $price = $request->price;
+        $quantity = $request->quantity;
+        DB::table('admin_product_models')->where('code', $id)->update(['productname' => $name, 'price' => $price, 'quantity' => $quantity]);
+        // return Redirect::to('/product');
+    }
 
-    public function delete($product_id){
-        DB::table('users')->where('id',$product_id)->delete();
-        $return = new AdminProductController();
-        return $return->index();
+    public function delete($id){
+        DB::table('admin_product_models')->where('id',$id)->delete();
+        DB::table('imagetables')->where('id_product',$id)->delete();
+        return Redirect::to('/product');
     }
 
 }

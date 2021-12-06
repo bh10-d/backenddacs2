@@ -17,7 +17,7 @@
     @include('header')
     <div class="login__page">
         <div class="login__header--option">
-            <a href="index.html">Trang chủ</a> <span>></span> <a class="redirect" href="signup.html">Đăng ký</a>
+            <a href="{{ url('/') }}">Trang chủ</a> <span>></span> <a class="redirect" href="signup.html">Đăng ký</a>
         </div>
         <div class="login__signup__page">
             <div class="login__page--block">
@@ -28,18 +28,23 @@
                         <p>Nếu bạn chưa có tài khoản, <a onclick="changetosignup();" class="link--a">đăng kí tại đây</a></h5>
                     </div>
                     <div class="login__block--form">
-                        <form class="login__form" action="">
-                            <input class="form--input" type="text" placeholder="Email">
-                            <input class="form--input" type="text" placeholder="Mật khẩu">
+                        <form class="login__form" action="{{route('login')}}" method="post">
+                            @csrf
+                            <input class="form--input" type="text" name="username" placeholder="Tài khoản">
+                            <input class="form--input" type="text" name="password" placeholder="Mật khẩu">
                             <button class="form--input btn--danger"type="submit">Đăng nhập</button>
+                            <div class="form--remem">
+                                <input type="checkbox" id="remember" name="remember">
+                                <label for="remember">Ghi nhớ mật khẩu</label>
+                            </div>
                         </form>
                         <a href="#" class="link--a forgot">Quên mật khẩu</a>
                     </div>
                     <div class="login__block--footer">
                         <p>Hoặc đăng nhập bằng</p>
                         <div style="margin-top: 10px;">
-                            <a href="#" class="btn-a facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
-                            <a href="#" class="btn-a google"><i class="fab fa-google-plus-g"></i> Google</a>
+                            <a href="{{ url('facebook/facebook') }}" class="btn-a facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            <a href="{{ url('/auth/redirect/google') }}" class="btn-a google"><i class="fab fa-google-plus-g"></i> Google</a>
                         </div>
                     </div>
                 </div>
@@ -51,12 +56,17 @@
                         <p>Đã có tài khoản, đăng nhập <a onclick="changetologin();" class="link--a">tại đây</a></h5>
                     </div>
                     <div class="login__block--form">
-                        <form class="login__form" action="">
-                            <input class="form--input" type="text" placeholder="Họ">
-                            <input class="form--input" type="text" placeholder="Tên">
-                            <input class="form--input" type="text" placeholder="Email">
-                            <input class="form--input" type="text" placeholder="Số điện thoại">
-                            <input class="form--input" type="text" placeholder="Mật khẩu">
+                        <form class="login__form" method="POST" action="{{ route('register') }}">
+                            <input class="form--input" type="text" placeholder="Họ" name="firstname" required>
+                            <input class="form--input" type="text" placeholder="Tên" name="lastname" required>
+                            <input class="form--input" type="text" placeholder="Email" name="email" required>
+                            <input class="form--input" type="text" placeholder="Số điện thoại" name="number" required>
+                            <input class="form--input @error('password') is-invalid @enderror" type="text" name="password" placeholder="Mật khẩu" required>
+                            @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
                             <button class="form--input btn--danger"type="submit">Đăng ký</button>
                         </form>
                         <a href="#" class="link--a forgot">Quên mật khẩu</a>
@@ -64,8 +74,8 @@
                     <div class="login__block--footer">
                         <p>Hoặc đăng nhập bằng</p>
                         <div style="margin-top: 10px;">
-                            <a href="#" class="btn-a facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
-                            <a href="#" class="btn-a google"><i class="fab fa-google-plus-g"></i> Google</a>
+                            <a href="{{ url('facebook/facebook') }}" class="btn-a facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+                            <a href="{{ url('/auth/redirect/google') }}" class="btn-a google"><i class="fab fa-google-plus-g"></i> Google</a>
                         </div>
                     </div>
                 </div>

@@ -17,7 +17,7 @@
             <td>{{$order->totalprice}}</td>
             <td><span class="label-show-details" onclick="showDetails(this)" data-id="{{$order->CodeOrder}}"><i class="far fa-eye"></i></span></td><!-- <td>{{$order->CodeOrder}}</td> -->
             <!-- <td>Chấp nhận | Không chấp nhận</td> -->
-            <td><button onclick="accept(this)" data-id="{{$order->CodeOrder}}" value="Chấp nhận" class="btn btn-outline-success">Chấp nhận</button> | <button onclick="notaccept(this)" data-id="{{$order->CodeOrder}}" value="Không chấp nhận" class="btn btn-outline-info">Không chấp nhận</button> | <button onclick="deleteorder(this)" data-id="{{$order->CodeOrder}}" value="Hủy đơn hàng" disabled class="btn btn-outline-danger">Hủy đơn hàng</button></td>
+            <td><button onclick="accept(this)" data-id="{{$order->CodeOrder}}" value="Chấp nhận" class="btn btn-outline-success">Chấp nhận</button> | <button onclick="notaccept(this)" data-id="{{$order->CodeOrder}}" value="Không chấp nhận" class="btn btn-outline-info">Không chấp nhận</button> | <button onclick="deleteorder(this)" data-id="{{$order->CodeOrder}}" value="Hủy đơn hàng"  class="btn btn-outline-danger">Hủy đơn hàng</button></td>
         </tr>
         <tr class="showdetail" data-id="{{$order->CodeOrder}}"><!--showdetail-->
             <td colspan="4">
