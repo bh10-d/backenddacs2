@@ -20,10 +20,15 @@
     font-size: 15px;
     border-bottom: 1px solid #e4e4e4;
     padding: 20px 0px;
-    margin: 0 250px;
+    /* margin: 0 250px; */
 }
 
-@media screen and (max-width: 1360px) {
+.custom-block {
+    width: 67%;
+}
+
+
+/* @media screen and (max-width: 1360px) {
     .login__header--option {
         margin: 0 100px;
     }
@@ -33,10 +38,10 @@
     .login__header--option {
         margin: 0 40px;
     }
-}
+} */
 
 .login__header--option a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .login__header--option span {
@@ -73,7 +78,7 @@
 
 .login__block--signup {
     width: 350px;
-    height: 630px;
+    height: 670px;
     text-align: center;
     margin-top: 30px;
     margin-bottom: 50px;
@@ -93,7 +98,7 @@
 
 .link--a {
     cursor: pointer;
-    text-decoration: none;
+    text-decoration: none !important;
     font-weight: 400;
     color: #e74c3c !important;
 }
@@ -134,10 +139,14 @@
 }
 
 .btn-a {
-    text-decoration: none;
+    text-decoration: none !important;
     font-size: 13px;
     color: white;
     padding: 5px;
+}
+
+.btn-a:hover {
+    color: white!important;
 }
 
 .login__block--footer {
@@ -153,7 +162,7 @@
 }
 
 .facebook {
-    background-color: #095bb3;
+    background-color: #007bff;
 }
 
 .show {

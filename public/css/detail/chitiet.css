@@ -1,3 +1,63 @@
+.login__header--option {
+    font-size: 15px;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 20px 0px;
+    /* margin: 0 250px; */
+}
+
+.login__header--option a {
+    text-decoration: none !important;
+}
+
+
+/* .login__header--option span:first-child {
+    font-weight: 700;
+} */
+
+.login__header--option a:first-child {
+    padding-right: 7px;
+    color: black;
+}
+
+.login__header--option a:last-child {
+    color: #e74c3c;
+    padding-left: 7px;
+}
+
+
+/*by hieu*/
+
+.container-category1 {
+    margin: 10px auto 70px;
+    display: grid;
+    grid-template-columns: repeat(5, 20%);
+    font-size: 15px;
+}
+
+.container-category1 .card-cate {
+    border: #e3e3e3 solid 1px;
+}
+
+.container-category1 .card-cate:hover {
+    /* border: #e3e3e3 solid 1px; */
+}
+
+.container-category1 .card-cate .container-img {
+    width: 100%;
+}
+
+.name_products {
+    font-size: 15px;
+}
+
+.container-category1 .card-cate .container-img img {
+    width: 100%;
+    height: auto;
+}
+
+
+/*by hieu*/
+
 .overflow-hidden {
     overflow: hidden
 }

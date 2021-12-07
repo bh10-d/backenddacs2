@@ -10,14 +10,19 @@
     <link rel="stylesheet" href="{{asset('css/style1.css')}}">
     <link rel="stylesheet" href="{{ asset('css/foot.css') }}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="shortcut icon" href="image/logo.png" type="image/x-icon">
+    
+    <!-- <script src="{{ asset('js/app.js') }}" defer></script> -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- <link rel="shortcut icon" href="image/logo.png" type="image/x-icon"> -->
     <title>Đăng nhập</title>
 </head>
 <body>
     @include('header')
     <div class="login__page">
-        <div class="login__header--option">
-            <a href="{{ url('/') }}">Trang chủ</a> <span>></span> <a class="redirect" href="signup.html">Đăng ký</a>
+        <div class="custom-block">
+            <div class="login__header--option">
+                <a href="{{ url('/') }}">Trang chủ</a> <span>></span> <a class="redirect" href="signup.html">Đăng ký</a>
+            </div>
         </div>
         <div class="login__signup__page">
             <div class="login__page--block">
@@ -56,17 +61,39 @@
                         <p>Đã có tài khoản, đăng nhập <a onclick="changetologin();" class="link--a">tại đây</a></h5>
                     </div>
                     <div class="login__block--form">
-                        <form class="login__form" method="POST" action="{{ route('register') }}">
-                            <input class="form--input" type="text" placeholder="Họ" name="firstname" required>
-                            <input class="form--input" type="text" placeholder="Tên" name="lastname" required>
-                            <input class="form--input" type="text" placeholder="Email" name="email" required>
-                            <input class="form--input" type="text" placeholder="Số điện thoại" name="number" required>
-                            <input class="form--input @error('password') is-invalid @enderror" type="text" name="password" placeholder="Mật khẩu" required>
+                        <form class="login__form" action="{{ route('register') }}" method="post">
+                            @csrf
+                            <input class="form--input @error('firstname') is-invalid @enderror" type="text" placeholder="Họ" name="firstname" required>
+                            @error('firstname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                            @enderror
+                            <input class="form--input @error('lastname') is-invalid @enderror" type="text" placeholder="Tên" name="lastname" required>
+                            @error('lastname')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            <input class="form--input @error('email') is-invalid @enderror" type="text" placeholder="Email" name="email" required>
+                            @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            <input class="form--input @error('number') is-invalid @enderror" type="text" placeholder="Số điện thoại" name="number" required>
+                            @error('number')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            <input class="form--input @error('password') is-invalid @enderror" type="password" name="password" placeholder="Mật khẩu" required>
                             @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
+                            <!-- <input class="form--input" type="password" name="password_confirmation" placeholder="Nhập lại mật khẩu" required> -->
                             <button class="form--input btn--danger"type="submit">Đăng ký</button>
                         </form>
                         <a href="#" class="link--a forgot">Quên mật khẩu</a>

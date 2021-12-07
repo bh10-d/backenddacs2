@@ -13,78 +13,71 @@
 @section('body')
 
 
-<div style="width:67% !important; margin:20px auto 0 !important;">
-    <h3 style="font-size:20px;"><a style="color:black !important;" href="{{URL::to('/')}}">trang chu</a> > gio hang</h3>
+<div style="width:67% !important; margin:0 auto 0 !important;">
+    <div style="font: size 15px;border-bottom: 1px solid #e4e4e4;padding:20px 0;">
+        <a href="{{ url('/') }}" style="text-decoration:none;color:black;">Trang chủ</a> <span style="font-weight:700;"><i class="fas fa-angle-right"></i></span> <a class="redirect" style="text-decoration:none;color:#e74c3c;" href="{{ route('login') }}">Giỏ hàng</a>
+    </div>
 </div>
 
 <div>
-<table style="width:67% !important; margin:0 auto !important;" id="cart" class="table table-hover table-condensed">
-    <thead>
-        <tr>
-            <th style="width:30%">Product</th>
-            <th style="width:10%">Name</th>
-            <th style="width:10%">Price</th>
-            <th style="width:8%">Quantity</th>
-            <th style="width:22%" class="text-center">Subtotal</th>
-            <th style="width:10%"></th>
-        </tr>
-    </thead>
-    
-    <form action="">
-        @csrf
-        <tbody>
-
-
-            @php $total = 0 @endphp
-            @if(Session::get('cart'))
-            @foreach(Session::get('cart') as $id => $details)
-            @php $total = $details['product_price'] @endphp
-
-
-
-
-            <input data-id_cart="{{ $details['product_id'] }}" type="hidden" value="{{ $details['product_price'] }}" id="cart_two_product_price" class="cart_two_product_price_{{ $details['product_id'] }}">
-            {{-- $id --}}
-
-
-
-            <tr class="tr-select" data-id="{{ $details['product_id'] }}">
-                <td data-th="Product">
-                    <div class="row">
-                        <div class="col-sm-3 hidden-xs"><img src="{{ $details['product_image'] }}" width="100" height="100" class="img-responsive" /></div>
-                        <div class="col-sm-9">
-                            <h4 class="nomargin"> </h4>
-                        </div>
-                    </div>
-                </td>
-                <td data-th="Title"> {{ $details['product_title'] }} </td>
-                <td id="price-cart" data-th="Price" class="price">{{ $details['product_price'] }}</td>
-
-                <input class="rest-qty" data-th="restQty" type="hidden" value="{{ $details['product_rest_qty'] }}">
-
-                <td data-th="Quantity">
-                    <input min="1" max="100" type="number" value="{{ $details['product_qty'] }}" class="form-control quantity update-cart" />{{--cho nay co value 1--}}
-                </td>
-                <td data-th="Subcart" class="text-center sub-cart">{{$details['product_price'] * $details['product_qty']}}</td>
-                <td class="actions" data-th="Remove-cart">
-                    <button id="remove-from-cart" class="btn btn-outline-danger btn-sm btn-test" value="{{$id}}"><i class="fas fa-trash-alt"></i></button>{{-- class cua i fa fa-trash-o--}}
-                </td>
+    <table style="width:67% !important; margin:0 auto !important;" id="cart" class="table table-hover table-condensed">
+        <thead>
+            <tr>
+                <th style="width:30%">Product</th>
+                <th style="width:10%">Name</th>
+                <th style="width:10%">Price</th>
+                <th style="width:8%">Quantity</th>
+                <th style="width:22%" class="text-center">Subtotal</th>
+                <th style="width:10%"></th>
             </tr>
+        </thead>
 
-            @endforeach
-            @endif
+        <form action="">
+            @csrf
+            <tbody>
+                @php $total = 0 @endphp
+                @if(Session::get('cart'))
+                @foreach(Session::get('cart') as $id => $details)
+                @php $total = $details['product_price'] @endphp
+                <input data-id_cart="{{ $details['product_id'] }}" type="hidden" value="{{ $details['product_price'] }}" id="cart_two_product_price" class="cart_two_product_price_{{ $details['product_id'] }}">
+                {{-- $id --}}
+                <tr class="tr-select" data-id="{{ $details['product_id'] }}">
+                    <td data-th="Product">
+                        <div class="row">
+                            <div class="col-sm-3 hidden-xs"><img src="{{ $details['product_image'] }}" width="100" height="100" class="img-responsive" /></div>
+                            <div class="col-sm-9">
+                                <h4 class="nomargin"> </h4>
+                            </div>
+                        </div>
+                    </td>
+                    <td data-th="Title"> {{ $details['product_title'] }} </td>
+                    <td id="price-cart" data-th="Price" class="price">{{ $details['product_price'] }}</td>
 
-        </tbody>
-    </form>
-    
-    
-</table>
+                    <input class="rest-qty" data-th="restQty" type="hidden" value="{{ $details['product_rest_qty'] }}">
 
-<!-- <input type="button" value="Đi tới thanh toán" onclick="topurchase()"> -->
-<!-- <a class="btn" href="#">kfjdkfjkdj</a> -->
-<div style="width:67% !important; margin:30px auto 40px !important; display:flex !important; justify-content: flex-end !important;">
-    <button style="width: 20rem !important;" type="button" class="btn btn-outline-danger btn-lg" onclick="topurchase()">Thanh toan</button>
-</div>
+                    <td data-th="Quantity">
+                        <input min="1" max="100" type="number" value="{{ $details['product_qty'] }}" class="form-control quantity update-cart" />{{--cho nay co value 1--}}
+                    </td>
+                    <td data-th="Subcart" class="text-center sub-cart">{{$details['product_price'] * $details['product_qty']}}</td>
+                    <td class="actions" data-th="Remove-cart">
+                        <button id="remove-from-cart" class="btn btn-outline-danger btn-sm btn-test" value="{{$id}}"><i class="fas fa-trash-alt"></i></button>{{-- class cua i fa fa-trash-o--}}
+                    </td>
+                </tr>
+                @endforeach
+                @else
+                <tr><td colspan="6" class="text-center">Chưa có sản phẩm nào, vui lòng chọn sản phẩm</td></tr>
+                @endif
+            </tbody>
+        </form>
+
+
+    </table>
+
+    <!-- <input type="button" value="Đi tới thanh toán" onclick="topurchase()"> -->
+    <!-- <a class="btn" href="#">kfjdkfjkdj</a> -->
+    <div style="width:67% !important; margin:300px auto 40px !important; display:flex !important; justify-content: flex-end !important;">
+        <button style="width: 20rem !important;" type="button" class="btn btn-outline-danger btn-lg" onclick="topurchase()">Thanh toán</button>
+    </div>
 
 
 
@@ -98,7 +91,7 @@
 
         var ele = $(this);
 
-        if (confirm("Are you sure want to remove?")) {
+        if (confirm("Bạn có chắc chắn hủy sản phẩm này không?")) {
             $.ajax({
                 url: "{{ route('remove.from.cart') }}",
                 method: "GET",

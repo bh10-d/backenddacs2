@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{asset('css/detail/chitiet.css')}}">{{--khong co class modal--}}
     <link rel="stylesheet" href="{{asset('css/detail/chitiet2.css')}}">
     <!-- <link rel="stylesheet" href="{{asset('css/detail/chitiet4.css')}}"> -->{{--bootstrap--}}
-    <link rel="stylesheet" href="{{asset('css/detail/chitiet7.css')}}">{{--tac dong den anh--}}
+    <!-- <link rel="stylesheet" href="{{asset('css/detail/chitiet7.css')}}">{{--tac dong den anh--}} -->
     <link rel="stylesheet" href="{{asset('css/detail/chitiet8.css')}}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -30,10 +30,13 @@
         <section class="bread-crumb">
             <span class="crumb-border"></span>
             <div class="container">
-                <div class="rows">
+                <!-- <div class="rows">
                     <div class="col-xs-12 a-left">
                         <a href="{{ url('/') }}">Trang chủ</a> <span>></span> <a class="redirect" href="{{ url('/') }}">Điện thoại</a>
                     </div>
+                </div> -->
+                <div class="login__header--option">
+                    <a href="{{ url('/') }}">Trang chủ</a> <span style="font-weight: 700;"><i class="fas fa-angle-right"></i></span> <span>Điện thoại</span> <span style="font-weight: 700;"><i class="fas fa-angle-right"></i></span> <a class="redirect" href="{{ url('/') }}">{{ $details[0]->productname }}</a>
                 </div>
             </div>
         </section>
@@ -216,6 +219,22 @@
                 </div>
             </div>
 
+        </section>
+        <section>
+            <div class="container">
+                <h4 style="font-weight:700; border-top: 1px solid #e4e4e4;padding:15px 0;">XEM THÊM</h4>
+                <div class="container-category1">
+                    <div class="card-cate" >
+                        <div class="container-img">
+                            <img src="{{asset('image/ipad-pro.jpg')}}" alt="Avatar" style="width:100%">
+                        </div>
+                        <div class="container">
+                            <p class="name_products"><a href="##" style="text-decoration: none; font-weight: 500;font-size:15px;">IPhone 4 8GB</a></p>
+                            <h5 style="color: #dc3545; font-weight:500">10000đ</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </div>
     @endsection

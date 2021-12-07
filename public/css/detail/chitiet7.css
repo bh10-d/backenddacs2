@@ -256,7 +256,8 @@ label[for] {
     cursor: pointer
 }
 
-input[type=email],
+
+/* input[type=email],
 input[type=file],
 input[type=number],
 input[type=password],
@@ -265,7 +266,7 @@ input[type=tel],
 input[type=text],
 textarea {
     color: red
-}
+} */
 
 .hidden {
     display: none
