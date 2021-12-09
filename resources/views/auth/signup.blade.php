@@ -64,8 +64,8 @@
                     <div class="login__block--form">
                         <form class="login__form" action="{{ route('register') }}" method="post">
                             @csrf
-                            <input class="form--input @error('lastname') is-invalid @enderror" type="text" placeholder="Tên tài khoản" name="lastname" required>
-                            @error('lastname')
+                            <input class="form--input @error('username') is-invalid @enderror" type="text" placeholder="Tên tài khoản" name="username" required>
+                            @error('username')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

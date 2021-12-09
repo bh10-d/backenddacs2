@@ -229,15 +229,22 @@
                     <div id="comment_show"></div>
                 </form>
                 <form action="#">
-                    <span>
-                        <input style="width: 100%" type="text" class="comment_name" placeholder="Tên bình luận"><br>
-                    </span><br>
-                    <textarea name="comment" class="comment_content" placeholder="Nhap noi dung" style="width: 100%"></textarea><br>
+                    <!-- <span> -->
+                    @if (Route::has('login'))
+                    @auth
+                    <input hidden style="width: 100%" type="text" class="comment_name" placeholder="Tên bình luận" value="{{ Auth::user()->username }}">
+                    <input hidden style="width: 100%" type="text" class="id_user" value="{{ Auth::user()->id }}">
+                    @else
+                    <input hidden style="width: 100%" type="text" class="id_user" value="">
+                    @endauth
+                    @endif
+                    <!-- </span><br> -->
+                    <textarea name="comment" class="comment_content" placeholder="Nhap noi dung" rows="10" style="width: 100%"></textarea><br>
                     <div id="notify_comment"></div>
                     <!-- <b>Đánh giá sao</b><img src="" alt=""> -->
                     <button type="button" class="btn btn-primary send-comment" style="float: right">Bình luận</button>
                 </form>
-                <hr>
+                <!-- <hr> -->
                 <br>
                 <!-- <h3>Cac binh luan</h3><br> -->
                 <style>
@@ -250,7 +257,7 @@
             </div>
         </section>
         <section>
-            <div class="container">
+            <div class="container mt-4">
                 <h4 style="font-weight:700; border-top: 1px solid #e4e4e4;padding:15px 0;">XEM THÊM</h4>
                 <div class="container-category1">
                     <div class="card-cate">
@@ -302,9 +309,10 @@
         //comment --tan
         $(document).ready(function() {
             load_comment();
-            
+
             function load_comment() {
                 var id = $('.id_product').val();
+
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
                     url: "{{url('/load-comment')}}",
@@ -320,30 +328,38 @@
             }
             $('.send-comment').click(function() {
                 var id = $('.id_product').val();
+                var id_user = $('.id_user').val();
                 var comment_name = $('.comment_name').val();
                 var comment_content = $('.comment_content').val();
                 var _token = $('input[name="_token"]').val();
-                $.ajax({
-                    url: "{{url('/send-comment')}}",
-                    method: "POST",
-                    data: {
-                        id: id,
-                        comment_name: comment_name,
-                        comment_content: comment_content,
-                        _token: _token
-                    },
-                    success: function(data) {
+                if (id_user != '') {
+                    $.ajax({
+                        url: "{{url('/send-comment')}}",
+                        method: "POST",
+                        data: {
+                            id: id,
+                            id_user: id_user,
+                            comment_name: comment_name,
+                            comment_content: comment_content,
+                            _token: _token
+                        },
+                        success: function(data) {
 
-                        $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công</span>');
-                        load_comment();
-                        $('#notify_comment').fadeOut(7000);
-                        $('.comment_name').val('');
-                        $('.comment_content').val('');
-                    },
-                    error: function(data){
-                        console.log(data);
-                    }
-                });
+                            $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công</span>');
+                            load_comment();
+                            $('#notify_comment').fadeOut(7000);
+                            $('.comment_name').val('');
+                            $('.comment_content').val('');
+                        },
+                        error: function(data) {
+                            console.log(data);
+                        }
+                    });
+                }else{
+                    alert('bạn phải đăng nhập để bình luận');
+                    window.location.href="/login";
+                }
+                console.log(id_user);
             });
         });
     </script>

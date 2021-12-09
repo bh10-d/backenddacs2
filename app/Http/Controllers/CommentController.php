@@ -16,12 +16,12 @@ class CommentController extends Controller
         $output = '';
         foreach ($comment as $key => $comm) {
             $output .= '
-            <div class="comment">
+            <div class="comment mb-4">
                         <div class="media style_comment">
                             <a class="pull-left mr-2" href="#">
                                   <img class="media-object" src="https://1.bp.blogspot.com/-m3UYn4_PEms/Xnch6mOTHJI/AAAAAAAAZkE/GuepXW9p7MA6l81zSCnmNaFFhfQASQhowCLcBGAsYHQ/s1600/Cach-Lam-Avatar-Dang-Hot%2B%25281%2529.jpg" alt="Image" width="60">
                             </a>
-                            <div class="media-body">
+                            <div class="media-body" style="background-color:#f9f9f9">
                                 <h5><b>' . $comm->comment_name . '</b></h5>
                                 <p>' . $comm->comment_date . '</p>
                                 <p>' . $comm->comment . '</p>
@@ -46,12 +46,14 @@ class CommentController extends Controller
     public function send_comment(Request $request)
     {
         $id_product = $request->id;
+        $id_user = $request->id_user;
         $comment_name = $request->comment_name;
         $comment_content = $request->comment_content;
         $comment = new Comment();
         $comment->comment = $comment_content;
         $comment->comment_name = $comment_name;
         $comment->id_product = $id_product;
+        $comment->id_user = $id_user;
         $comment->save();
         // DB::insert('insert into comment (comment, comment_name, id_product) values (?, ?, ?)', [$comment_content, $comment_name, $id_product]);
         // dd($request);

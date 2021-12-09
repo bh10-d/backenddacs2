@@ -15,5 +15,6 @@ class Comment extends Model
         'comment_name',
         'comment_date',
         'id_product',
+        'id_user'
     ];
 }
