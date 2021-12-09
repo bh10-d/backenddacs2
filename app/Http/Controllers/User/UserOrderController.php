@@ -32,7 +32,14 @@ class UserOrderController extends Controller
             }
             for ($i = 0; $i < $check; $i++) {
                 // if($order[$i]->CodeOrder) {
-                    $order[$i]->totalprice = $li[$i]->totalprice;
+                    $coupon = DB::table('coupon')->where('coupon',$order[$i]->Coupon)->first();
+                    if($coupon->condition == 0) {
+                        $order[$i]->totalprice = $li[$i]->totalprice - ($li[$i]->totalprice*$coupon->price)/100;
+                    }elseif($coupon->condition == 1) {
+                        $order[$i]->totalprice = $li[$i]->totalprice - $coupon->price;
+                    }else{
+                        $order[$i]->totalprice = $li[$i]->totalprice;
+                    }
                     $order[$i]->productlist = $p[$i];
                 // }
             }
@@ -41,7 +48,7 @@ class UserOrderController extends Controller
 
 
 
-        // dd($order);
+        // dd($coupon);
         return view('user.userorder')->with(['orders'=>$order,'check'=>$check]);
     }
 }

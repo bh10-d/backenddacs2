@@ -17,9 +17,10 @@
             <td>{{$order->totalprice}}</td>
             <td><span class="label-show-details" onclick="showDetails(this)" data-id="{{$order->CodeOrder}}"><i class="far fa-eye"></i></span></td><!-- <td>{{$order->CodeOrder}}</td> -->
             <!-- <td>Chấp nhận | Không chấp nhận</td> -->
-            <td><button onclick="accept(this)" data-id="{{$order->CodeOrder}}" value="Chấp nhận" class="btn btn-outline-success">Chấp nhận</button> | <button onclick="notaccept(this)" data-id="{{$order->CodeOrder}}" value="Không chấp nhận" class="btn btn-outline-info">Không chấp nhận</button> | <button onclick="deleteorder(this)" data-id="{{$order->CodeOrder}}" value="Hủy đơn hàng"  class="btn btn-outline-danger">Hủy đơn hàng</button></td>
+            <td><button onclick="accept(this)" data-id="{{$order->CodeOrder}}" value="Chấp nhận" class="btn btn-outline-success">Chấp nhận</button> | <button onclick="notaccept(this)" data-id="{{$order->CodeOrder}}" value="Không chấp nhận" class="btn btn-outline-info">Không chấp nhận</button> | <button onclick="deleteorder(this)" data-id="{{$order->CodeOrder}}" value="Hủy đơn hàng" class="btn btn-outline-danger">Hủy đơn hàng</button></td>
         </tr>
-        <tr class="showdetail" data-id="{{$order->CodeOrder}}"><!--showdetail-->
+        <tr class="showdetail" data-id="{{$order->CodeOrder}}">
+            <!--showdetail-->
             <td colspan="4">
                 <div class="text-left ">
                     <p>Mã đơn hàng: <strong>{{$order->CodeOrder}}</strong></p>
@@ -47,6 +48,10 @@
                             <tr>
                                 <td class="text-right ">Tổng tiền:</td>
                                 <td class="text-left "><strong>{{$order->totalprice}}</strong></td>
+                            </tr>
+                            <tr>
+                                <td class="text-right">Mã giảm giá:</td>
+                                <td class="text-left"><strong>{{ $order->Coupon }}</strong></td>
                             </tr>
                             <tr>
                                 <td class="text-right ">Phương thức thanh toán:</td>
@@ -197,8 +202,8 @@
 </script> -->
 <script>
     function showDetails(animal) {
-            var animalType = animal.getAttribute("data-id");
-            var hieu = document.querySelector("tr[data-id='" + animalType + "']");
-            hieu.classList.toggle("showdetail");
-        }
+        var animalType = animal.getAttribute("data-id");
+        var hieu = document.querySelector("tr[data-id='" + animalType + "']");
+        hieu.classList.toggle("showdetail");
+    }
 </script>

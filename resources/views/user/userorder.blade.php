@@ -73,6 +73,10 @@
                                                 @endif
                                             </tr>
                                             <tr>
+                                                <td class="text-right">Mã giảm giá:</td>
+                                                <td class="text-left"><strong>{{ $order->Coupon }}</strong></td>
+                                            </tr>
+                                            <tr>
                                                 <td class="text-right ">Tổng tiền:</td>
                                                 <td class="text-left "><strong>{{$order->totalprice}}</strong></td>
                                             </tr>

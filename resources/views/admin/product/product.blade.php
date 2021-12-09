@@ -20,7 +20,7 @@
     @include('admin.sidebar')
     <!-- <div id="product"> -->
     <section class="home-section">
-        <div class="text"><span><i class="far fa-folder-open"></i> Inventory</span></div>
+        <div class="text"><span><i class="far fa-folder-open"></i> Danh sách sản phẩm</span></div>
         <div class="block">
             <div class="card mb-3">
                 <div class="card-body">

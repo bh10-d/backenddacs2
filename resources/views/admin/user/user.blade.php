@@ -17,7 +17,7 @@
 <body>
     @include('admin.sidebar')
     <section class="home-section">
-        <div class="text"><span><i class="fas fa-user"></i> Manager Users</span></div>
+        <div class="text"><span><i class="fas fa-user"></i> Quản lý người dùng</span></div>
         <div class="block">
             <div class="card mb-3">
                 <div class="card-body">
@@ -60,7 +60,7 @@
         </div>
     </section>
     <section class="home-section">
-        <div class="text"><span><i class="fas fa-user"></i> Manager Staffs</span></div>
+        <div class="text"><span><i class="fas fa-user"></i> Quản lý nhân viên</span></div>
         <div class="block">
             <div class="card mb-3">
                 <div class="card-body">

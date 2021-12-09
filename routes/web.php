@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Homepage;
@@ -45,11 +46,16 @@ Route::post('/add-cart-ajax', 'AjaxController@add_cart_ajax');
 Route::post('/update-cart-ajax', 'AjaxController@update_cart_ajax')->name('update.cart.ajax');
 Route::get('/show-cart-ajax', 'AjaxController@show_cart_ajax')->name('show.cart.ajax');
 
+//route comments
+Route::post('/load-comment', 'CommentController@load_comment')->name('load-comment');
+Route::post('/send-comment', 'CommentController@send_comment')->name('send-comment');
+
 // Route::get('/show-cart-ajax','AjaxController@show_cart_ajax');
 //route thanh toán
 Route::post('/purchase','AjaxController@purchase');
 Route::get('/thanhtoan', 'Pay\PaymentController@index')->name('thanhtoan');
 Route::get('/loadpayment','Pay\PaymentController@payment')->name('loadpayment');
+Route::post('/addcoupon','Pay\PaymentController@addcoupon')->name('addcoupon');
 Route::get('/success', 'Pay\PaymentController@success')->name('success');
 
 //route search
@@ -139,7 +145,13 @@ Route::get('test/{id}','AdminProductController@test')->name('test');
 Route::get('editproduct/{id}','AdminProductController@edit')->name('editproduct');
 Route::post('editproductaccept','AdminProductController@editaccept')->name('editproductaccept');
 Route::get('deletep/{id}','AdminProductController@delete')->name('deletep');
-
+//                                  Coupon
+Route::get('coupon','AdminCouponController@index')->name('coupon');
+Route::get('coupontable','AdminCouponController@show')->name('coupontable');
+Route::get('couponcreate',function(){return view('admin.coupon.couponcreate');})->name('couponcreate');
+Route::post('couponcreatef','AdminCouponController@create')->name('couponcreatef');
+Route::get('couponeditf/{id}','AdminCouponController@edit')->name('couponeditf');
+Route::get('coupondeletef/{id}','AdminCouponController@delete')->name('coupondeletef');
 //                                  Oder
 Route::get('order', function() { return view('admin.order.order');})->name('order')->middleware('auth','role:admin');
 Route::get('ordershow', 'AdminOrderController@index')->name('ordershow')->middleware('auth','role:admin');

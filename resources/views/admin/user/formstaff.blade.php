@@ -1,5 +1,5 @@
 <section class="home-section">
-    <div class="text"><span onclick="showstaffsign();"><i class="fas fa-user-plus"></i> Create account for Staff</span></div>
+    <div class="text"><span onclick="showstaffsign();"><i class="fas fa-user-plus"></i> Tạo tài khoản cho nhân viên</span></div>
     <div class="block staff--signup hidden">
         <div class="text-left mt-3 mb-5 staff">
             <div style="display: block;">

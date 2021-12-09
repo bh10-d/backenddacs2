@@ -54,7 +54,17 @@
                                         <td>Tổng tiền:</td>
                                         <td></td>
                                         <td>{{ $total_qty }}</td>
+                                        @if(Session::get('coupon'))
+                                        @php $coupon = Session::get('coupon'); @endphp
+                                        @if($coupon['condition']==0)
+                                        <td id="totalprice">{{ $total_price-$total_price*$coupon['price']/100 }}</td>
+                                        @else
+                                        <td id="totalprice">{{ $total_price-$coupon['price'] }}</td>
+                                        @endif
+                                        @else
                                         <td id="totalprice">{{ $total_price }}</td>
+                                        @endif
+                                        <td hidden id="totalpricehidden">{{ $total_price }}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -139,7 +149,24 @@
                                 <label for="addressdetail">Địa chỉ chi tiết</label>
                             </div>
                         </div>
+                        @if(Session::get('coupon'))
                         <div class="form-group">
+                            <div class="form-label-group">
+                                <input type="text" class="form-control text-uppercase" id="coupon" placeholder="Mã giảm giá" name="coupon" value="{{Session::get('coupon')['coupon']}}">
+                                <label for="coupon">Mã giảm giá</label>
+                            </div>
+                            <div id="expired"></div>
+                        </div>
+                        @else
+                        <div class="form-group">
+                            <div class="form-label-group">
+                                <input type="text" class="form-control text-uppercase" id="coupon" placeholder="Mã giảm giá" name="coupon">
+                                <label for="coupon">Mã giảm giá</label>
+                            </div>
+                            <div id="expired"></div>
+                        </div>
+                        @endif
+                        <!-- <div class="form-group">
                             <div class="content-box">
                                 <div class="content-box__row">
                                     <div class="radio-wrapper">
@@ -166,7 +193,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col text-center">
                                 <button type="submit" class="btn btn-success">Xác nhận đơn hàng</button>
@@ -268,6 +295,42 @@
     </script>
     <script>
         $(document).ready(function() {
+            let total_price = $('#totalpricehidden')[0].innerHTML;
+            // console.log(total_price);
+            $('#coupon').keyup(function() {
+                // console.log($(this).val());
+                let data = $(this).val().toUpperCase();
+                // console.log('data: ',data);
+                let _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{ route('addcoupon') }}",
+                    method: "post",
+                    cache: false,
+                    data: {
+                        _token: _token,
+                        'coupon': data,
+                    },
+                    success: function(response) {
+                        if (response != '') {
+                            if (response['quantity'] > 0) {
+                                if (response['condition'] == 0) {
+                                    $('#totalprice').html(total_price - total_price * response['price'] / 100);
+                                } else if (response['condition'] == 1) {
+                                    $('#totalprice').html(total_price - response['price']);
+                                } else {
+                                    $('#totalprice').html(total_price);
+                                }
+                            }
+                        }else{
+                            $('#expired').html(`<p class="text-danger">Mã giảm giá sai</p>`);
+                        }
+                        console.log('add coupon successfully');
+                    },
+                    error: function(response) {
+                        console.log(response);
+                    }
+                });
+            })
             $("#hieu-form").validate({
                 rules: {
                     username: "required",
@@ -275,7 +338,7 @@
                     calc_shipping_provinces: "required",
                     calc_shipping_district: "required",
                     addressdetail: "required",
-                    paymentMethod: "required"
+                    // paymentMethod: "required"
                 },
                 messages: {
                     username: "Vui lòng nhập tên",
@@ -283,7 +346,7 @@
                     calc_shipping_provinces: "Vui lòng nhập Tỉnh/Thành phố",
                     calc_shipping_district: "Vui lòng nhập Quận/Huyện",
                     addressdetail: "Vui lòng nhập địa chỉ chi tiết",
-                    paymentMethod: "Vui lòng chọn phương thức thanh toán"
+                    // paymentMethod: "Vui lòng chọn phương thức thanh toán"
                 },
                 errorElement: "div",
                 submitHandler: function(form) {
@@ -305,6 +368,7 @@
                         },
                         success: function(response) {
                             window.location.href = "{{url('/success')}}";
+                            // console.log(response);
                         },
                         error: function(data) {
                             console.log('an error occurred.');

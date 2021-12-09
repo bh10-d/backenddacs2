@@ -20,7 +20,7 @@
 <body>
     @include('admin.sidebar')
     <section class="home-section">
-        <div class="text"><span><i class="fas fa-shopping-cart"></i> Manager Oders</span></div>
+        <div class="text"><span><i class="fas fa-shopping-cart"></i> Quản lý đơn hàng</span></div>
         <div class="block">
             <div class="card mb-3">
                 <div class="card-body">

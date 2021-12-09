@@ -218,13 +218,42 @@
                     </div>
                 </div>
             </div>
-
+        </section>
+        <!-- comment--tan -->
+        <section>
+            <div class="container">
+                <h3>Bình luận sản phẩm</h3>
+                <form action="#">
+                    @csrf
+                    <input type="hidden" name="id_product" class="id_product" value="{{ $details[0]->id }}">
+                    <div id="comment_show"></div>
+                </form>
+                <form action="#">
+                    <span>
+                        <input style="width: 100%" type="text" class="comment_name" placeholder="Tên bình luận"><br>
+                    </span><br>
+                    <textarea name="comment" class="comment_content" placeholder="Nhap noi dung" style="width: 100%"></textarea><br>
+                    <div id="notify_comment"></div>
+                    <!-- <b>Đánh giá sao</b><img src="" alt=""> -->
+                    <button type="button" class="btn btn-primary send-comment" style="float: right">Bình luận</button>
+                </form>
+                <hr>
+                <br>
+                <!-- <h3>Cac binh luan</h3><br> -->
+                <style>
+                    .style_comment {
+                        border: 1px solid #ddd;
+                        border-radius: 10px;
+                        background: #F0F0E9;
+                    }
+                </style>
+            </div>
         </section>
         <section>
             <div class="container">
                 <h4 style="font-weight:700; border-top: 1px solid #e4e4e4;padding:15px 0;">XEM THÊM</h4>
                 <div class="container-category1">
-                    <div class="card-cate" >
+                    <div class="card-cate">
                         <div class="container-img">
                             <img src="{{asset('image/ipad-pro.jpg')}}" alt="Avatar" style="width:100%">
                         </div>
@@ -269,6 +298,53 @@
                 }, 200);
             }
             jQuery(".tab-content .rte").toggleClass("expand");
+        });
+        //comment --tan
+        $(document).ready(function() {
+            load_comment();
+            
+            function load_comment() {
+                var id = $('.id_product').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{url('/load-comment')}}",
+                    method: "POST",
+                    data: {
+                        id: id,
+                        _token: _token
+                    },
+                    success: function(data) {
+                        $('#comment_show').html(data);
+                    }
+                });
+            }
+            $('.send-comment').click(function() {
+                var id = $('.id_product').val();
+                var comment_name = $('.comment_name').val();
+                var comment_content = $('.comment_content').val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: "{{url('/send-comment')}}",
+                    method: "POST",
+                    data: {
+                        id: id,
+                        comment_name: comment_name,
+                        comment_content: comment_content,
+                        _token: _token
+                    },
+                    success: function(data) {
+
+                        $('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công</span>');
+                        load_comment();
+                        $('#notify_comment').fadeOut(7000);
+                        $('.comment_name').val('');
+                        $('.comment_content').val('');
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
+                });
+            });
         });
     </script>
     @endsection

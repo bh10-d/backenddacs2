@@ -23,6 +23,7 @@ class CreatePaymentModelsTable extends Migration
             $table->string('TypePayment',20);
             $table->integer('Time');
             $table->string('Status',50);
+            $table->string('Coupon',10);
         });
     }
     

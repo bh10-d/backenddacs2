@@ -16,7 +16,7 @@
 <body>
     @include('admin.sidebar')
     <section class="home-section">
-        <div class="text"><span><i class="fas fa-chart-line"></i> Chart</span></div>
+        <div class="text"><span><i class="fas fa-chart-line"></i> Biểu đồ</span></div>
         <div class="block">
             <div class="row ml-1 mr-1">
                 <div class="chart chart--page mt-3 col-xl-7 col-md-12">

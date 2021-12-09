@@ -46,6 +46,13 @@
             <span class="tooltip">Products</span>
         </li>
         <li>
+            <a href="{{route('coupon')}}">
+                <i class='bx bxs-discount'></i>
+                <span class="links_name">Coupons</span>
+            </a>
+            <span class="tooltip">Coupons</span>
+        </li>
+        <li>
             <a href="{{route('order')}}">
                 <i class='bx bx-cart-alt'></i>
                 <span class="links_name">Order</span>
