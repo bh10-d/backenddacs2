@@ -4,7 +4,7 @@
         <div class="header__wrap--p1">
             <!--edit-->
             <div class="header__wrap--p1e">
-                <a href="{{ url('/') }}" class="header__logo"><img class="logo" src="{{asset('image/logo.png')}}" alt="logo"></a>
+                <a href="{{ url('/') }}"><img class="logo" src="{{asset('image/logo.png')}}" alt="logo"></a>
                 <div class="header__search">
                     <!--edit-->
                     <div class="header__search--listt">{{--cai nay co height--}}
@@ -18,16 +18,15 @@
                                 <a href="#">Phụ kiện</a>
                             </div>
                         </div>
-                        <form action="" method="post">
+                        <form class="sear" action="" method="post">
                             @csrf
                             {{--de anh hiu them div de boc input dropdown data search--}}
                             <div>
                                 <input id="search-input" autocomplete="off" type="text" placeholder="> Nhập sản phẩm">
-                                <div id="search-block"></div>
                             </div>
+                            <div id="search-block"></div>
                             {{--<button type="submit" class="btn"><i class="fas fa-search"></i></button>--}}
                         </form>
-        
                     </div>
                 </div>
                 <p class="header__hotline">
@@ -198,14 +197,11 @@
         let query = $(this).val();
         if(query != "") {
             let _token = $('input[name="_token"]').val();
-            
-            
             $.ajax({
                 url:"{{ url('/search-block') }}",
                 method: "POST",
                 data: {query:query, _token:_token},
                 success: function(data) {
-                    
                     // $('#search-block').fadeIn();
                     $('#search-block').html(data);
                     console.log(data);
@@ -213,13 +209,10 @@
                 error: function(response){
                     console.log(response)
                 }
-
-
             });
         }else{
             // $('#search-block').fadeOut();
         }
-
     });
 </script>
 

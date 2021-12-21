@@ -100,7 +100,9 @@
     </div>
 
     <div class="container-category1">
+        @php $i=0 @endphp
         @foreach($allproduct as $product)
+        @if($i < 10)
         <div class="card-cate" onclick="window.location.href='{{URL::to('/detail-product/'.$product->id)}}'" style="cursor:pointer">
             <div class="container-img">
                 <img src="{{asset('image/ipad-pro.jpg')}}" alt="Avatar" style="width:100%">
@@ -111,6 +113,8 @@
                 <h5 style="color: #dc3545; font-weight:500">{{$product->price}}đ</h5>
             </div>
         </div>
+        @php $i++ @endphp
+        @endif
         @endforeach
     </div>
 </section>

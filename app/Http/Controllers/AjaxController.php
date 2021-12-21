@@ -125,7 +125,7 @@ class AjaxController extends Controller
         if ($data['query']) {
             $products = AdminProductModel::where('productname', 'like', '%' . $data['query'] . '%');
             //class dropdown-menu cua ul
-            $output = '<ul class="" style="position: absolute; min-width: 600px; z-index:2; background-color: #fff">';
+            $output = '<ul class="search-result">';
             if ($products->exists()) {
                 foreach ($products->get() as $key => $value) {
                     $output .= '<li><a class="btn text-left" style="width:100%" href="' . '/detail-product/' . $value->id . '">' . $value->productname . '</a></li>';

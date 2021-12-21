@@ -320,6 +320,7 @@
                                 } else {
                                     $('#totalprice').html(total_price);
                                 }
+                                $('#expired').html(`<p class="text-success">Mã giảm giá có thể sử dụng</p>`);
                             }
                         }else{
                             $('#expired').html(`<p class="text-danger">Mã giảm giá sai</p>`);

@@ -1,5 +1,5 @@
 <footer class="footer">
-    <div class="container">
+    <div class="custom-container">
         <!-- 1 -->
         <div style="display:block;width:100%;margin-bottom: 20px;">
             <div class="block__footer--head">
