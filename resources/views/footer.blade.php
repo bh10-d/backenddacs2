@@ -75,5 +75,5 @@
         </div>
         <!-- 3 -->
     </div>
-    <div style="text-align:center">4 chu linh chi</div>
+    <div style="text-align:center">2 chú lính chì (web design by hiếu + dũng)</div>
 </footer>

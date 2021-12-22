@@ -148,22 +148,24 @@ class AjaxController extends Controller
 
         if ($data['query']) {
             $products = AdminProductModel::where('productname', 'like', '%' . $data['query'] . '%');
-            $output = '<div style="width:90% !important;margin:80px auto; display: flex !important; flex-direction:row !important; flex-wrap: wrap !important;" >';
+            $output = '<div class="container-category1 list">';
 
             if ($products->exists()) {
                 foreach ($products->get() as $key => $value) {
                     // $output .=  $value->title;
 
                     $output .=
-                        '<div style="width: 250px !important; border: 1px solid #000 !important;">
-                            <div style="width: 100%;">
-                                <img style="width:100%; height: auto;" 
-                                src="image/ipad-pro.jpg" alt="Avatar">
+                        '<div class="card-cate list-element" style="display:none;">
+                            <div class="container-img">
+                                <img src="image/ipad-pro.jpg" alt="Avatar">
                             </div>
-                            
-                            <h4><a href="{{URL::to(' . '/detail-product/$value->id' . ')}}">' . $value->productname . '</a></h4> 
-                            <p>' . $value->price . 'd</p> 
-                        </div>';
+                            <div class="container">
+                                <p><a href="detail-product/{{$value->id}}"
+                                        style="text-decoration: none;">'.$value->productname.'</a></p>
+                                <h5 style="color:#e74c3c">'.$value->price.'đ</h5>
+                            </div>
+                        </div>
+                        ';
                 }
             } else {
                 $output .= "<p><strong>Không tìm thấy sản phẩm vui lòng kiểm tra lại từ khóa</strong></p>";
@@ -178,18 +180,20 @@ class AjaxController extends Controller
         $data = $request->all();
         $products = AdminProductModel::all();
 
-        $output = '<div style="width:90% !important;margin:80px auto; display: flex !important; flex-direction:row !important; flex-wrap:wrap !important">';
+        $output = '<div class="container-category1 list">';
         foreach ($products as $product) {
             $output .=
-                '<div style="width: 250px !important; border: 1px solid #000 !important;">
-                            <div style="width: 100%;">
-                                <img style="width:100%; height: auto;" 
-                                src="image/ipad-pro.jpg" alt="Avatar">
+                        '<div class="card-cate list-element" style="display:none;">
+                            <div class="container-img">
+                                <img src="image/ipad-pro.jpg" alt="Avatar">
                             </div>
-                            
-                            <h4><a href="{{URL::to(' . '/detail-product/$value->id' . ')}}">' . $product->productname . '</a></h4> 
-                            <p>' . $product->price . 'd</p> 
-                        </div>';
+                            <div class="container">
+                                <p><a href="detail-product/{{$value->id}}"
+                                        style="text-decoration: none;">'.$product->productname.'</a></p>
+                                <h5 style="color:#e74c3c">'.$product->price.'đ</h5>
+                            </div>
+                        </div>
+                        ';
         }
 
         $output .= '</div>';
