@@ -66,7 +66,7 @@ class PaymentController extends Controller
         if (Session::get('coupon')) {
             DB::insert('insert into payment (IdUser, NameUser, PhoneUser, AddressUser,TypePayment,Time,Status,Coupon) values (?, ?, ?, ?, ?, ?, ?, ?)', [$iduser, $name, $phone, $address, 'cod', date('m'), 'Đang xử lý', Session::get('coupon')['coupon']]);
         } else {
-            DB::insert('insert into payment (IdUser, NameUser, PhoneUser, AddressUser,TypePayment,Time,Status,Coupon) values (?, ?, ?, ?, ?, ?, ?, ?)', [$iduser, $name, $phone, $address, 'cod', date('m'), 'Đang xử lý', 'Không có mã giảm giá']);
+            DB::insert('insert into payment (IdUser, NameUser, PhoneUser, AddressUser,TypePayment,Time,Status,Coupon) values (?, ?, ?, ?, ?, ?, ?, ?)', [$iduser, $name, $phone, $address, 'cod', date('m'), 'Đang xử lý', 'Không']);
         }
         $dataid = DB::table('payment')->orderBy('CodeOrder', 'desc')->limit(1)->get();
 
@@ -77,9 +77,11 @@ class PaymentController extends Controller
                     ['CodeOrder' => $dataid[0]->CodeOrder, 'IdProduct' => $details['product_id'], 'NameProduct' => $details['product_title'], 'Quantity' => $details['product_qty'], 'Price' => $details['product_price'], "Time" => date('m')]
                 );
                 $quan = DB::table('admin_product_models')->where('id', $details['product_id'])->get();
-                $coupon = DB::table('coupon')->where('coupon', Session::get('coupon')['coupon'])->get();
                 DB::table('admin_product_models')->where('id', $details['product_id'])->update(['quantity' => $quan[0]->quantity - $details['product_qty']]);
-                DB::table('coupon')->where('coupon', Session::get('coupon')['coupon'])->update(['quantity' => $coupon[0]->quantity - 1]);
+                if(Session::get('coupon')){
+                    $coupon = DB::table('coupon')->where('coupon', Session::get('coupon')['coupon'])->get();
+                    DB::table('coupon')->where('coupon', Session::get('coupon')['coupon'])->update(['quantity' => $coupon[0]->quantity - 1]);
+                }
             };
             // dd(DB::table('admin_product_models')->where('id',$dataid[0]->CodeOrder)->get());
             // dd($coupon);
