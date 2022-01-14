@@ -68,9 +68,9 @@
                             <div class="card-body-icon">
                                 <i class="fas fa-fw fa-life-ring"></i>
                             </div>
-                            <div class="text-left">13 Voucher mới!</div>
+                            <div class="text-left">{{ $couponcount }} Voucher mới!</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="#">
+                        <a class="card-footer text-white clearfix small z-1" href="{{url('/coupon')}}">
                             <span class="float-left">Xem chi tiết</span>
                             <span class="float-right"><i class="fas fa-angle-right"></i></span>
                         </a>

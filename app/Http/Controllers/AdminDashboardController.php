@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Pay\PaymentModel;
+use App\Models\AdminCouponModel;
 
 class AdminDashboardController extends Controller
 {
@@ -19,7 +20,9 @@ class AdminDashboardController extends Controller
             $total[$i] = DB::select('select sum(Price * Quantity) as totalprice from order_list_product where Time = '.$i);
         }
 
+        $couponcount = AdminCouponModel::get()->count();
+
         // dd($total[1][0]->totalprice);
-        return view('admin.dashboard.dashboard')->with(['order'=>$countorder,'price'=>$total]);
+        return view('admin.dashboard.dashboard')->with(['order'=>$countorder,'couponcount'=>$couponcount,'price'=>$total]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AdminProductModel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Products;
 
@@ -18,7 +19,16 @@ class HomepageController extends Controller
         //
         
         $allproduct = AdminProductModel::all();
-        return view('homepage')->with('allproduct',$allproduct);
+        $getimages = DB::table('admin_product_models')->select('id')->get();
+        // $images = [];
+        // foreach ($getimages[0] as $id => $image) {
+            
+        // }
+
+        for($i = 0; $i < count($getimages); $i++) {
+            $images[$i] = DB::table('imagetables')->select('image')->where('id_product',$getimages[$i]->id)->get();   
+        }
+        return view('homepage')->with(['allproduct'=>$allproduct]);
         
     }
 

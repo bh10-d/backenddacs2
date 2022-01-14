@@ -121,7 +121,6 @@ class AjaxController extends Controller
     public function search_dropdown(Request $request)
     {
         $data = $request->all();
-
         if ($data['query']) {
             $products = AdminProductModel::where('productname', 'like', '%' . $data['query'] . '%');
             //class dropdown-menu cua ul

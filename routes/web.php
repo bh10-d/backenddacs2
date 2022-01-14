@@ -151,6 +151,7 @@ Route::get('coupontable','AdminCouponController@show')->name('coupontable');
 Route::get('couponcreate',function(){return view('admin.coupon.couponcreate');})->name('couponcreate');
 Route::post('couponcreatef','AdminCouponController@create')->name('couponcreatef');
 Route::get('couponeditf/{id}','AdminCouponController@edit')->name('couponeditf');
+Route::post('couponeditaccept','AdminCouponController@accept')->name('couponeditaccept');
 Route::get('coupondeletef/{id}','AdminCouponController@delete')->name('coupondeletef');
 //                                  Oder
 Route::get('order', function() { return view('admin.order.order');})->name('order')->middleware('auth','role:admin');

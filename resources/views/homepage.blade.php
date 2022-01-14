@@ -271,6 +271,7 @@
         </div>
 
     </div>
+    
 </section>
 
 <script src="{{asset('js/glider.min.js')}}"></script>

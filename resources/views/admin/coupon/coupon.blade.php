@@ -61,7 +61,6 @@
                     success: function(data) {
                         coupon();
                         console.log('submission was successful.');
-                        // console.log(data);
                     },
                     error: function(data) {
                         console.log('an error occurred.');

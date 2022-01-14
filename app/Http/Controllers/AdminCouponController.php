@@ -36,6 +36,17 @@ class AdminCouponController extends Controller
         // dd($data);
     }
 
+    public function accept(Request $request){
+        $id = $request->id;
+        $code = $request->code;
+        $name = $request->name;
+        $condition = $request->condition;
+        $quantity = $request->quantity;
+        $price = $request->price;
+        DB::table('coupon')->where('id', $id)->update(['coupon'=>$code,'name'=>$name,'condition'=>$condition,'quantity'=>$quantity,'price'=>$price]);
+        dd($request);
+    }
+
     public function delete($id){
         AdminCouponModel::find($id)->delete();
         return Redirect::to('/coupon');

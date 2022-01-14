@@ -21,6 +21,7 @@
     <section class="home-section">
         <div class="text"><span><i class="fas fa-tags"></i> Chỉnh sửa mã giảm giá</span></div>
         <div class="block pt-3 uploadpro">
+            <!-- <input type="text" disabled id="idcoupon" value="{{ $coupons['id'] }}"> test data -->
             <form class="needs-validation" id="myForm" novalidate>
                 @csrf
                 <div class="text-left">
@@ -70,31 +71,29 @@
                 </div>
             </form>
         </div>
+        <!-- <div id="test"></div> dung de test data -->
     </section>
     <script>
         $('#myForm').submit(function(e) {
-            for (instance in CKEDITOR.instances) {
-                CKEDITOR.instances[instance].updateElement();
-            }
             e.preventDefault();
-
             $.ajax({
                 type: "POST",
                 cache: false,
-                url: "{{route('editproductaccept')}}",
+                url: "{{route('couponeditaccept')}}",
                 data: {
                     "_token": '{{csrf_token()}}',
-                    "id": $("#code").val(),
-                    "name": $("#pname").val(),
-                    "price": $("#pprice").val(),
-                    "category": $("#pcate").val(),
-                    "quantity": $("#pquan").val(),
-                    "description": $("#editor").val(),
+                    "id": <?php echo $coupons['id']?>,
+                    "code": $("#code").val(),
+                    "name": $("#namecoupon").val(),
+                    "condition":$("#condicoupon").val(),
+                    "quantity":$("#quancoupon").val(),
+                    "price": $("#pricecoupon").val()
                 },
                 success: function(data) {
-                    window.location.href = `{{url('/product')}}`;
+                    window.location.href = `{{url('/coupon')}}`;
                     console.log('submission was successful.');
-                    // console.log(data);
+                    // $("#test").html(data); test data
+                    // console.log(data); test data
                 },
                 error: function(data) {
                     console.log('an error occurred.');
@@ -103,7 +102,6 @@
             });
         });
     </script>
-    <!-- <script src="{{ asset('js/script.js') }}"></script> -->
     <script src="{{ asset('js/admin/admin.js') }}"></script>
 </body>
 
